@@ -74,14 +74,25 @@
         update = "home-manager switch --flake ~/nix-config/#ada@ada-machine";
     };
 
-    oh-my-zsh = {
-        enable = true;
-        plugins = [
-                "git"
-                "zsh-vi-mode"
-                ];
-        theme = "sunaku";
+    zplug = {
+      enable = true;
+      plugins = [
+        { name = "jeffreytse/zsh-vi-mode"; }
+        { name = "plugins/git"; tags = [ from:oh-my-zsh ]; }
+      ];
     };
+
+    plugins = [
+        {
+            name = "powerlevel10k";
+            src = pkgs.zsh-powerlevel10k;
+            file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+        }
+    ];
+
+    initExtra = ''
+        source ~/nix-config/.p10k.zsh
+        '';
   };
 
   systemd.user.startServices = "sd-switch";
