@@ -102,6 +102,21 @@
         '';
   };
 
+    programs.tmux = {
+        enable = true;
+        escapeTime = 0;
+        terminal = "screen-256color";
+        historyLimit = 100000;
+        keyMode = "vi";
+
+        plugins = with pkgs;
+        [
+            tmuxPlugins.sensible
+            tmuxPlugins.resurrect
+            tmuxPlugins.yank
+        ];
+    };
+
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
