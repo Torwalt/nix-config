@@ -29,19 +29,19 @@ local on_attach = function(_, bufnr)
     buf_set_keymap('n', '<leader>F', '<cmd>lua vim.lsp.buf.format { async = true }<CR>', opts)
 end
 
-require("nvim-lsp-installer").setup {}
 local lspconfig = require("lspconfig")
 
 vim.lsp.set_log_level("debug")
 
-lspconfig.sumneko_lua.setup {
+
+lspconfig.lua_ls.setup {
     on_attach = on_attach,
+	cmd = { "lua-lsp" },
     settings = {
         Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        }
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+        },
     }
 }
 
@@ -84,3 +84,4 @@ lspconfig.terraformls.setup { on_attach = on_attach }
 lspconfig.yamlls.setup { on_attach = on_attach }
 lspconfig.jsonls.setup { on_attach = on_attach }
 lspconfig.eslint.setup { on_attach = on_attach }
+lspconfig.nil_ls.setup { on_attach = on_attach }

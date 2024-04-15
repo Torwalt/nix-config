@@ -10,6 +10,9 @@
         url = "github:nix-community/home-manager/release-23.05";
         inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    plugin-vim-delve.url = "github:sebdah/vim-delve";
+    plugin-vim-delve.flake = false;
   };
 
   outputs = {

@@ -37,10 +37,27 @@
         "type": "github"
       }
     },
+    "plugin-vim-delve": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1670926188,
+        "narHash": "sha256-wMDTMMvtjkPaWtlV6SWlQ5B7YVsJ4gjPZKPactW8HAE=",
+        "owner": "sebdah",
+        "repo": "vim-delve",
+        "rev": "41d6ad294fb6dd5090f5f938318fc4ed73b6e1ea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sebdah",
+        "repo": "vim-delve",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "plugin-vim-delve": "plugin-vim-delve"
       }
     }
   },
