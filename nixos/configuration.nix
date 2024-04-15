@@ -11,6 +11,9 @@
 
   networking.hostName = "nixos"; # Define your hostname.
 
+  hardware.opengl.enable = true;
+  hardware.opengl.extraPackages = [ pkgs.mesa.drivers ];
+
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -63,8 +66,6 @@
     pulse.enable = true;
   };
 
-  programs.zsh.enable = true;
-
   users.users.ada = {
     isNormalUser = true;
     description = "alex";
@@ -80,6 +81,7 @@
 
   environment.systemPackages = with pkgs; [
    home-manager
+   alacritty
    ];
 
   system.stateVersion = "23.11";

@@ -60,6 +60,11 @@
     userEmail = "alexdadiani1994@gmail.com";
   };
 
+    # In order for .profile being updated.
+    programs.bash = {
+      enable = true;
+    };
+
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
