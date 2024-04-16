@@ -11,6 +11,7 @@
 
   networking.hostName = "nixos"; # Define your hostname.
 
+  # OpenGL stuff to make alacritty work.
   hardware.opengl.enable = true;
   hardware.opengl.extraPackages = [ pkgs.mesa.drivers ];
 
@@ -75,12 +76,23 @@
     ];
     shell = pkgs.zsh;
   };
+  programs.zsh.enable = true;
+
+    # docker
+    virtualisation.docker = {
+        enable = true;
+        rootless = {
+            enable = true;
+            setSocketVariable = true;
+        };
+    };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
    home-manager
+   # alacritty does not work when installed through home-manager.
    alacritty
    ];
 

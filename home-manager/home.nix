@@ -41,6 +41,7 @@
         pkgs.zsh-vi-mode
         pkgs.ripgrep
         pkgs.delve
+        pkgs.gnumake
     ];
 
     sessionVariables = {
