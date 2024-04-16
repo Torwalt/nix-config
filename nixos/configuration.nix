@@ -1,10 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  imports = [ ./hardware-configuration.nix ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -71,30 +68,28 @@
     isNormalUser = true;
     description = "alex";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      firefox
-    ];
+    packages = with pkgs; [ firefox ];
     shell = pkgs.zsh;
   };
   programs.zsh.enable = true;
 
-    # docker
-    virtualisation.docker = {
-        enable = true;
-        rootless = {
-            enable = true;
-            setSocketVariable = true;
-        };
+  # docker
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
     };
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-   home-manager
-   # alacritty does not work when installed through home-manager.
-   alacritty
-   ];
+    home-manager
+    # alacritty does not work when installed through home-manager.
+    alacritty
+  ];
 
   system.stateVersion = "23.11";
 
