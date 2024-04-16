@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [ ./hardware-configuration.nix ];
@@ -34,15 +34,13 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.xkbOptions = "caps:swapescape";
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
   services.xserver = {
+    enable = true;
+    displayManager.sddm.enable = true;
+    displayManager.sddm.wayland.enable = true;
+    displayManager.sddm.theme = "where_is_my_sddm_theme";
+
+    xkbOptions = "caps:swapescape";
     layout = "de";
     xkbVariant = "";
   };
@@ -68,10 +66,21 @@
     isNormalUser = true;
     description = "alex";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ firefox ];
     shell = pkgs.zsh;
   };
   programs.zsh.enable = true;
+
+  # wayland and hyperland related stuff
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 
   # docker
   virtualisation.docker = {
@@ -87,8 +96,23 @@
 
   environment.systemPackages = with pkgs; [
     home-manager
+
+    networkmanagerapplet
+
     # alacritty does not work when installed through home-manager.
     alacritty
+
+    # notifier
+    dunst
+    # dependency for all notifiers
+    libnotify
+    # wallpapers
+    swww
+    # actually better than alacritty lets see
+    kitty
+    # app launcher
+    rofi-wayland
+
   ];
 
   system.stateVersion = "23.11";
