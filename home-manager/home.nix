@@ -53,6 +53,7 @@ in {
       nixfmt
       firefox
       pavucontrol
+      telegram-desktop
 
       # Fonts
       fira-code
@@ -359,6 +360,7 @@ in {
         "hyprland/mode" = { format = "<span style=italic>{}</span>"; };
         tray = { spacing = 10; };
         clock = {
+          format = "{:%R %d-%m-%Y}";
           "tooltip-format" = ''
             <big>{:%Y %B}</big>
             <tt><small>{calendar}</small></tt>'';
