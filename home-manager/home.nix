@@ -126,7 +126,10 @@
     shellAliases = {
       gs = "git status";
       gg = "git checkout";
-      ga = "git commit --amend";
+      ga = "git add .";
+      gc = "git commit";
+      gam = "git commit --amend";
+      gfp = "git push --force-with-lease";
       v = "nvim";
       nix-switch = "home-manager switch --flake ~/nix-config/#ada@ada-machine";
       nix-upgrade = "sudo nixos-rebuild --flake ~/nix-config/#adasys switch";
