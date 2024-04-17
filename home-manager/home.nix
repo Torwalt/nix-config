@@ -261,10 +261,13 @@ in {
       "$mainMod" = "ALT_L";
 
       bind = [
+        # Program shortcuts
         "$mainMod, RETURN, exec, kitty"
         "$mainMod, Q, killactive, "
         "$mainMod, X, exit, "
         "$mainMod, D, exec, rofi -show drun -show-icons"
+        "$mainMod, L, exec, swaylock"
+
         # Window manipulation"
         "$mainMod, V, togglefloating, "
         "$mainMod, T, togglegroup, "
@@ -309,6 +312,18 @@ in {
       ];
 
       exec-once = "${startupScript}/bin/start";
+    };
+  };
+
+  programs.swaylock = {
+    enable = true;
+    settings = {
+      color = "262626";
+      font-size = 24;
+      indicator-idle-visible = false;
+      indicator-radius = 100;
+      line-color = "ffffff";
+      show-failed-attempts = true;
     };
   };
 

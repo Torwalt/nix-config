@@ -83,6 +83,8 @@
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
   };
 
+  security.pam.services.swaylock = { };
+
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
