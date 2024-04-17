@@ -122,6 +122,7 @@
     enableAutosuggestions = true;
     enableCompletion = true;
     defaultKeymap = "viins";
+    autocd = true;
 
     shellAliases = {
       gs = "git status";
@@ -152,9 +153,16 @@
       file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
     }];
 
+    # Profiling
+    # initExtraFirst = "zmodload zsh/zprof";
     initExtra = ''
-      source ~/nix-config/.p10k.zsh
+      source ~/nix-config/.p10k.zsh \n
     '';
+
+    # initExtra = ''
+    #   source ~/nix-config/.p10k.zsh \n
+    #   zprof
+    # '';
   };
 
   programs.tmux = {
