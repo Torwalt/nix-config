@@ -10,4 +10,10 @@
     enable = true;
     enableZshIntegration = true;
   };
+
+  programs.go = {
+    enable = true;
+    goBin = "go/bin";
+    goPath = "go";
+  };
 }

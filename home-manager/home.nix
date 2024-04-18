@@ -73,6 +73,8 @@
       EDITOR = "nvim";
       VISUAL = "nvim";
     };
+
+    sessionPath = [ "$HOME/go/bin" ];
   };
 
   systemd.user.startServices = "sd-switch";
