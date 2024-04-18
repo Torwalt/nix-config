@@ -56,6 +56,7 @@
       firefox
       pavucontrol
       telegram-desktop
+      ffmpeg
 
       # Fonts
       fira-code

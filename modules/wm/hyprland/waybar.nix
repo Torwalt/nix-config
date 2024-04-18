@@ -31,7 +31,8 @@
         "hyprland/mode" = { format = "<span style=italic>{}</span>"; };
         tray = { spacing = 10; };
         clock = {
-          format = "{:%R %d-%m-%Y}";
+          # https://manpages.ubuntu.com/manpages/focal/en/man3/strftime.3.html
+          format = "{:%a %R %d-%m-%Y}";
           "tooltip-format" = ''
             <big>{:%Y %B}</big>
             <tt><small>{calendar}</small></tt>'';
