@@ -4,6 +4,8 @@
     enable = true;
     userName = "Alexander Dadiani";
     userEmail = "alexdadiani1994@gmail.com";
+
+    delta.enable = true;
   };
 
   programs.fzf = {
