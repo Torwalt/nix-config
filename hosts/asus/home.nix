@@ -2,16 +2,16 @@
 
 {
   imports = [
-    ../modules/nvim/nvim.nix
+    ../../modules/nvim/nvim.nix
 
-    ../modules/cli/all.nix
+    ../../modules/cli/all.nix
 
-    ../modules/shell/shell.nix
-    ../modules/shell/tmux.nix
+    ../../modules/shell/shell.nix
+    ../../modules/shell/tmux.nix
 
-    ../modules/wm/hyprland/hyprland.nix
-    ../modules/wm/hyprland/waybar.nix
-    ../modules/wm/hyprland/swaylock.nix
+    ../../modules/wm/hyprland/hyprland.nix
+    ../../modules/wm/hyprland/waybar.nix
+    ../../modules/wm/hyprland/swaylock.nix
   ];
 
   nixpkgs = {
