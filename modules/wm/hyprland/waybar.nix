@@ -87,5 +87,8 @@
         };
       };
     };
+
+    style = ./waybar-style.css;
+
   };
 }
