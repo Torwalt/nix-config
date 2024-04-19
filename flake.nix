@@ -24,17 +24,17 @@
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
-        adasys = nixpkgs.lib.nixosSystem {
+        asusSys = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           # > Our main nixos configuration file <
-          modules = [ ./hosts/asus/configuration.nix  ];
+          modules = [ ./hosts/asus/configuration.nix ];
         };
       };
 
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#your-username@your-hostname'
       homeConfigurations = {
-        "ada@ada-machine" = home-manager.lib.homeManagerConfiguration {
+        asusHome = home-manager.lib.homeManagerConfiguration {
           pkgs =
             nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = { inherit inputs outputs; };

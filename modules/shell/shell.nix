@@ -17,8 +17,6 @@
       gam = "git commit --amend";
       gfp = "git push --force-with-lease";
       v = "nvim";
-      nix-switch = "home-manager switch --flake ~/nix-config/#ada@ada-machine";
-      nix-upgrade = "sudo nixos-rebuild --flake ~/nix-config/#adasys switch";
     };
 
     zplug = {
