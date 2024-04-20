@@ -14,7 +14,9 @@ in {
 
     settings = {
 
-      monitor = ",preferred,auto,auto";
+      monitor = [
+        ",preferred,auto,auto"
+      ];
 
       env = "XCURSOR_SIZE,24";
 
@@ -82,6 +84,10 @@ in {
         "$mainMod, X, exit, "
         "$mainMod, D, exec, rofi -show drun -show-icons"
         "$mainMod, L, exec, swaylock"
+
+        # Screenshotting
+        '' $mainMod SHIFT, P, exec, wl-paste | swappy -f - ''
+        '' $mainMod SHIFT, S, exec, grim -g "$(slurp)" -  | wl-copy''
 
         # Window manipulation"
         "$mainMod, V, togglefloating, "

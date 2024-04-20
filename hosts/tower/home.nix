@@ -58,6 +58,17 @@
       pavucontrol
       telegram-desktop
       ffmpeg
+      spotify
+
+      # Monitor config
+      nwg-displays
+      wlr-randr
+
+      # Screenshots
+      grim
+      slurp
+      wl-clipboard
+      swappy
 
       # Fonts
       fira-code
@@ -78,6 +89,16 @@
     };
 
     sessionPath = [ "$HOME/go/bin" ];
+  };
+
+  wayland.windowManager.hyprland = {
+    settings = {
+
+      monitor = [
+        "DP-1,2560x1440@59.951,0x0,1.0"
+        "HDMI-A-3,2560x1440@99.945999,2560x0,1.0"
+      ];
+    };
   };
 
   systemd.user.startServices = "sd-switch";

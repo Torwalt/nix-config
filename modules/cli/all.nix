@@ -5,7 +5,16 @@
     userName = "Alexander Dadiani";
     userEmail = "alexdadiani1994@gmail.com";
 
-    delta.enable = true;
+    delta = {
+      enable = true;
+      options = { line-numbers = true; };
+    };
+
+    extraConfig = {
+      delta = { navigate = true; };
+      merge = { conflictstyle = "diff3"; };
+      diff = { colorMoved = "default"; };
+    };
   };
 
   programs.fzf = {
