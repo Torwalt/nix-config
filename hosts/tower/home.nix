@@ -12,6 +12,7 @@
     ../../modules/wm/hyprland/hyprland.nix
     ../../modules/wm/hyprland/waybar.nix
     ../../modules/wm/hyprland/swaylock.nix
+    ../../modules/wm/hyprland/gammastep.nix
   ];
 
   nixpkgs = {
@@ -73,7 +74,7 @@
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
-      WLR_NO_HARDWARE_CURSORS=1;
+      WLR_NO_HARDWARE_CURSORS = 1;
     };
 
     sessionPath = [ "$HOME/go/bin" ];
