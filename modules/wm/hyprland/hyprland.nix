@@ -14,9 +14,7 @@ in {
 
     settings = {
 
-      monitor = [
-        ",preferred,auto,auto"
-      ];
+      monitor = [ ",preferred,auto,auto" ];
 
       env = "XCURSOR_SIZE,24";
 
@@ -86,8 +84,8 @@ in {
         "$mainMod, L, exec, swaylock"
 
         # Screenshotting
-        '' $mainMod SHIFT, P, exec, wl-paste | swappy -f - ''
-        '' $mainMod SHIFT, S, exec, grim -g "$(slurp)" -  | wl-copy''
+        "$mainMod SHIFT, P, exec, wl-paste | swappy -f - "
+        ''$mainMod SHIFT, S, exec, grim -g "$(slurp)" -  | wl-copy''
 
         # Window manipulation"
         "$mainMod, V, togglefloating, "
@@ -132,7 +130,10 @@ in {
         "$mainMod, mouse:273, resizewindow"
       ];
 
-      exec-once = "${startupScript}/bin/start";
+      exec-once = [
+        "${startupScript}/bin/start"
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+      ];
     };
   };
 }

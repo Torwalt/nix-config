@@ -59,6 +59,9 @@
       telegram-desktop
       ffmpeg
       spotify
+      chromium
+      htop
+      btop
 
       # Monitor config
       nwg-displays
@@ -95,8 +98,8 @@
     settings = {
 
       monitor = [
-        "DP-1,2560x1440@59.951,0x0,1.0"
-        "HDMI-A-3,2560x1440@99.945999,2560x0,1.0"
+        "DP-1,2560x1440@59.951,0x0,1.0,bitdepth,10"
+        "HDMI-A-3,2560x1440@99.945999,2560x0,1.0,bitdepth,10"
       ];
     };
   };

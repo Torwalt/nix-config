@@ -106,6 +106,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
   };
 
   users.users.ada = {
@@ -127,6 +128,7 @@
     enable = true;
     xwayland.enable = true;
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+    portalPackage = inputs.xdg-desktop-portal-hyprland.packages."${pkgs.system}".xdg-desktop-portal-hyprland;
   };
 
   security.pam.services.swaylock = { };
@@ -168,6 +170,9 @@
     rofi-wayland
 
     os-prober
+
+    qt6.qtwayland
+    libsForQt5.qt5.qtwayland
   ];
 
   system.stateVersion = "23.11";
