@@ -9,6 +9,7 @@
     grub.useOSProber = true;
     grub.efiSupport = true;
     efi.canTouchEfiVariables = true;
+    timeout = 30;
   };
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -128,7 +129,8 @@
     enable = true;
     xwayland.enable = true;
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-    portalPackage = inputs.xdg-desktop-portal-hyprland.packages."${pkgs.system}".xdg-desktop-portal-hyprland;
+    portalPackage =
+      inputs.xdg-desktop-portal-hyprland.packages."${pkgs.system}".xdg-desktop-portal-hyprland;
   };
 
   security.pam.services.swaylock = { };
