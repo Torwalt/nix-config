@@ -2,6 +2,10 @@
   # In order for .profile being updated.
   programs.bash = { enable = true; };
 
+  home.packages = with pkgs; [
+    zsh-vi-mode
+  ];
+
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;

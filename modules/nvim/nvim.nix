@@ -1,4 +1,34 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
+  nixpkgs = {
+    overlays = [
+      (final: prev: {
+        vimPlugins = prev.vimPlugins // {
+          vim-delve-nvim = prev.vimUtils.buildVimPlugin {
+            name = "vim-delve";
+            src = inputs.plugin-vim-delve;
+          };
+        };
+      })
+    ];
+
+    # Configure your nixpkgs instance
+    config = {
+      allowUnfree = true;
+      # Workaround for https://github.com/nix-community/home-manager/issues/2942
+      allowUnfreePredicate = _: true;
+    };
+  };
+
+  home = {
+    packages = with pkgs; [ ripgrep ];
+    sessionPath = [ "$HOME/go/bin" ];
+
+    sessionVariables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
+  };
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
