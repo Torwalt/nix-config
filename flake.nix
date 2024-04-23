@@ -61,7 +61,7 @@
       };
 
       devShells.x86_64-linux.rust =
-        (import ./shells/rust.nix { inherit pkgs; });
+        (import ./shells/rust/rust.nix { inherit pkgs; });
 
     };
 }

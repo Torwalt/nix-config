@@ -43,8 +43,13 @@
 
     # Profiling
     # initExtraFirst = "zmodload zsh/zprof";
+
+    initExtraBeforeCompInit = ''
+      fpath+=$HOME/nix-config/shells/rust/comp
+    '';
+
     initExtra = ''
-      source ~/nix-config/modules/shell/.p10k.zsh \n
+      source ~/nix-config/modules/shell/.p10k.zsh
     '';
 
     # initExtra = ''
