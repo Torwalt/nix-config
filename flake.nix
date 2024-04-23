@@ -7,7 +7,8 @@
 
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
-    xdg-desktop-portal-hyprland.url = "github:hyprwm/xdg-desktop-portal-hyprland";
+    xdg-desktop-portal-hyprland.url =
+      "github:hyprwm/xdg-desktop-portal-hyprland";
 
     # Home manager
     home-manager = {
@@ -21,6 +22,8 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let inherit (self) outputs;
+        system = "x86_64-linux";
+        pkgs = nixpkgs.legacyPackages.${system};
     in {
       # 'sudo nixos-rebuild --flake .#asusSys switch'
       nixosConfigurations = {
@@ -33,8 +36,7 @@
       # 'home-manager switch --flake .#asusHome'
       homeConfigurations = {
         asusHome = home-manager.lib.homeManagerConfiguration {
-          pkgs =
-            nixpkgs.legacyPackages.x86_64-linux;
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./hosts/asus/home.nix ];
         };
@@ -52,11 +54,14 @@
       # 'home-manager switch --flake .#towerHome'
       homeConfigurations = {
         towerHome = home-manager.lib.homeManagerConfiguration {
-          pkgs =
-            nixpkgs.legacyPackages.x86_64-linux;
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./hosts/tower/home.nix ];
         };
       };
+
+      devShells.x86_64-linux.rust =
+        (import ./shells/rust.nix { inherit pkgs; });
+
     };
 }
