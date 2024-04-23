@@ -25,11 +25,11 @@
       # Monitor config
       nwg-displays
       wlr-randr
+
+      telegram-desktop
     ];
 
-    sessionVariables = {
-      WLR_NO_HARDWARE_CURSORS = 1;
-    };
+    sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
   };
 
   wayland.windowManager.hyprland = {
