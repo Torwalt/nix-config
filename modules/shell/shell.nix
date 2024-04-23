@@ -21,6 +21,7 @@
       gam = "git commit --amend";
       gfp = "git push --force-with-lease";
       v = "nvim";
+      rustshell = "nix develop ~/nix-config#rust  --command zsh";
     };
 
     zplug = {

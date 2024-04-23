@@ -1,39 +1,43 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [
-    gcc
-    jq
-    python3
-    gnumake
-    nixfmt
-    ffmpeg
-    htop
-    btop
+  home = {
+    packages = with pkgs; [
+      gcc
+      jq
+      python3
+      gnumake
+      nixfmt
+      ffmpeg
+      htop
+      btop
 
-    # GUI
-    keepassxc
-    firefox
-    pavucontrol
-    spotify
-    chromium
-    maestral-gui
+      # GUI
+      keepassxc
+      firefox
+      pavucontrol
+      spotify
+      chromium
+      maestral-gui
 
-    # Screenshots
-    grim
-    slurp
-    wl-clipboard
-    swappy
+      # Screenshots
+      grim
+      slurp
+      wl-clipboard
+      swappy
 
-    # Fonts
-    fira-code
-    fira-code-symbols
-    font-awesome
-    liberation_ttf
-    mplus-outline-fonts.githubRelease
-    nerdfonts
-    noto-fonts
-    noto-fonts-emoji
-    proggyfonts
-  ];
+      # Fonts
+      fira-code
+      fira-code-symbols
+      font-awesome
+      liberation_ttf
+      mplus-outline-fonts.githubRelease
+      nerdfonts
+      noto-fonts
+      noto-fonts-emoji
+      proggyfonts
+    ];
+
+    sessionVariables = { LESS = "-CR"; };
+  };
 
   programs.home-manager.enable = true;
 

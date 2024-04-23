@@ -40,4 +40,9 @@
       ];
     };
   };
+
+  programs.zsh.shellAliases = {
+    sysswitch = "sudo nixos-rebuild --flake .#towerSys switch";
+    homeswitch = "home-manager switch --flake .#towerHome";
+  };
 }

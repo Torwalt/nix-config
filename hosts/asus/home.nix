@@ -20,4 +20,9 @@
     username = "ada";
     homeDirectory = "/home/ada";
   };
+
+  programs.zsh.shellAliases = {
+    sysswitch = "sudo nixos-rebuild --flake .#asusHome switch";
+    homeswitch = "home-manager switch --flake .#asusHome";
+  };
 }
