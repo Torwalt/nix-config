@@ -2,17 +2,20 @@
   home.packages = with pkgs; [
     gcc
     jq
-    keepassxc
     python3
     gnumake
     nixfmt
-    firefox
-    pavucontrol
     ffmpeg
-    spotify
-    chromium
     htop
     btop
+
+    # GUI
+    keepassxc
+    firefox
+    pavucontrol
+    spotify
+    chromium
+    maestral-gui
 
     # Screenshots
     grim
