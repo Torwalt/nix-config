@@ -13,6 +13,8 @@
       };
     };
 
+    ignores = [ ".git" ];
+
     extraConfig = {
       delta = { navigate = true; };
       merge = { conflictstyle = "diff3"; };
