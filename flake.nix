@@ -16,14 +16,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Nvim plugin packaging
     plugin-vim-delve.url = "github:sebdah/vim-delve";
     plugin-vim-delve.flake = false;
+
+    # nix-colors
+    nix-colors.url = "github:misterio77/nix-colors";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
-    let inherit (self) outputs;
-        system = "x86_64-linux";
-        pkgs = nixpkgs.legacyPackages.${system};
+    let
+      inherit (self) outputs;
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
     in {
       # 'sudo nixos-rebuild --flake .#asusSys switch'
       nixosConfigurations = {

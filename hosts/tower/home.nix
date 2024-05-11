@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   imports = [
@@ -15,6 +15,8 @@
     ../../modules/wm/hyprland/waybar.nix
     ../../modules/wm/hyprland/swaylock.nix
     ../../modules/wm/hyprland/gammastep.nix
+
+    inputs.nix-colors.homeManagerModules.default
   ];
 
   home = {
@@ -45,4 +47,6 @@
     sysswitch = "sudo nixos-rebuild --flake .#towerSys switch";
     homeswitch = "home-manager switch --flake .#towerHome";
   };
+
+  colorScheme = inputs.nix-colors.colorSchemes.tokyo-city-dark;
 }

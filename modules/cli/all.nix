@@ -37,4 +37,9 @@
     goBin = "go/bin";
     goPath = "go";
   };
+
+  programs.kitty = {
+    enable = true;
+    theme = "Tokyo Night";
+  };
 }
