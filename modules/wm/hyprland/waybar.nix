@@ -29,7 +29,10 @@
           };
         };
         "hyprland/mode" = { format = "<span style=italic>{}</span>"; };
-        tray = { spacing = 10; };
+        tray = {
+          spacing = 8;
+          icon-size = 20;
+        };
         clock = {
           # https://manpages.ubuntu.com/manpages/focal/en/man3/strftime.3.html
           format = "{:%a %R %d-%m-%Y}";
