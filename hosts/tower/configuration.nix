@@ -12,7 +12,14 @@
     timeout = 30;
   };
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking = {
+    hostName = "nixos";
+
+    networkmanager = {
+      enable = true;
+      wifi.powersave = false;
+    };
+  };
 
   # Enable OpenGL
   hardware.opengl = {
@@ -56,9 +63,6 @@
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-
-  # Enable networking
-  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
