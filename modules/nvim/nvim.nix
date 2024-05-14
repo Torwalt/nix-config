@@ -47,6 +47,7 @@
       ${builtins.readFile ./nvim/plugin/telescope.lua}
       ${builtins.readFile ./nvim/plugin/nvim-lspconfig.lua}
       ${builtins.readFile ./nvim/plugin/telekasten.lua}
+      ${builtins.readFile ./nvim/plugin/telescope-media-files.lua}
     '';
 
     plugins = with pkgs.vimPlugins; [
@@ -63,10 +64,11 @@
       markdown-preview-nvim
       vim-delve-nvim
       telekasten-nvim
+      telescope-media-files-nvim
 
       nvim-treesitter.withAllGrammars
     ];
 
-    extraPackages = with pkgs; [ nil luajitPackages.lua-lsp python3 gopls ];
+    extraPackages = with pkgs; [ nil luajitPackages.lua-lsp python3 gopls chafa ];
   };
 }
