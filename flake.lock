@@ -187,6 +187,23 @@
         "type": "github"
       }
     },
+    "mpvpaper16": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1714672447,
+        "narHash": "sha256-/A2C6T7gP+VGON3Peaz2Y4rNC63UT+zYr4RNM2gdLUY=",
+        "owner": "GhostNaN",
+        "repo": "mpvpaper",
+        "rev": "d8164bb6bd2960d2f7f6a9573e086d07d440f037",
+        "type": "github"
+      },
+      "original": {
+        "owner": "GhostNaN",
+        "ref": "1.6",
+        "repo": "mpvpaper",
+        "type": "github"
+      }
+    },
     "nix-colors": {
       "inputs": {
         "base16-schemes": "base16-schemes",
@@ -289,6 +306,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "hyprland": "hyprland",
+        "mpvpaper16": "mpvpaper16",
         "nix-colors": "nix-colors",
         "nixpkgs": "nixpkgs_2",
         "plugin-vim-delve": "plugin-vim-delve",

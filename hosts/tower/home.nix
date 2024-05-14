@@ -1,6 +1,19 @@
 { pkgs, inputs, ... }:
 
 {
+  nixpkgs.overlays = [
+    (final: prev: {
+      mpvpaper = prev.mpvpaper.overrideAttrs (oldAttrs: {
+        src = prev.fetchFromGitHub {
+          owner = "GhostNaN";
+          repo = "mpvpaper";
+          rev = "d8164bb6bd2960d2f7f6a9573e086d07d440f037";
+          hash = "sha256-/A2C6T7gP+VGON3Peaz2Y4rNC63UT+zYr4RNM2gdLUY=";
+        };
+      });
+    })
+  ];
+
   imports = [
     ../../modules/base.nix
 
@@ -29,6 +42,7 @@
       wlr-randr
 
       telegram-desktop
+      mpvpaper
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };

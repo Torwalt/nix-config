@@ -20,6 +20,10 @@
     plugin-vim-delve.url = "github:sebdah/vim-delve";
     plugin-vim-delve.flake = false;
 
+    # Newest mpvpaper
+    mpvpaper16.url = "github:GhostNaN/mpvpaper/1.6";
+    mpvpaper16.flake = false;
+
     # nix-colors
     nix-colors.url = "github:misterio77/nix-colors";
   };
