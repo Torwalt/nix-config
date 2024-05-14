@@ -36,6 +36,10 @@ in {
         allow_tearing = false;
       };
 
+      windowrulev2 = [
+        "opacity 0.9 0.8,class:.*" # Set opacity of active and inactive windows for all types of windows.
+      ];
+
       decoration = {
         rounding = 10;
         blur = {
