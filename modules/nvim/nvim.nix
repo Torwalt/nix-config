@@ -46,6 +46,7 @@
       ${builtins.readFile ./nvim/plugin/nvim-treesitter.lua}
       ${builtins.readFile ./nvim/plugin/telescope.lua}
       ${builtins.readFile ./nvim/plugin/nvim-lspconfig.lua}
+      ${builtins.readFile ./nvim/plugin/telekasten.lua}
     '';
 
     plugins = with pkgs.vimPlugins; [
@@ -61,6 +62,7 @@
       comment-nvim
       markdown-preview-nvim
       vim-delve-nvim
+      telekasten-nvim
 
       nvim-treesitter.withAllGrammars
     ];
