@@ -65,6 +65,7 @@
       vim-delve-nvim
       telekasten-nvim
       telescope-media-files-nvim
+      calendar-vim
 
       nvim-treesitter.withAllGrammars
     ];

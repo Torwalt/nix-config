@@ -1,5 +1,6 @@
 require('telekasten').setup({
-  home = vim.fn.expand("~/notes/zettelkasten"), -- Put the name of your notes directory here
+  home = vim.fn.expand("~/repos/notes/zettelkasten"), -- Put the name of your notes directory here
+  plug_into_calendar = true,
 })
 
 -- Launch panel if nothing is typed after <leader>z
