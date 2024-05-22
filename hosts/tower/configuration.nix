@@ -21,6 +21,13 @@
     };
   };
 
+  stylix = {
+    base16Scheme =
+      "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+    image = ./wp.jpg;
+    polarity = "dark";
+  };
+
   # Enable OpenGL
   hardware.opengl = {
     enable = true;

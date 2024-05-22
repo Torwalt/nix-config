@@ -26,6 +26,11 @@
 
     # nix-colors
     nix-colors.url = "github:misterio77/nix-colors";
+
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
@@ -55,8 +60,11 @@
       nixosConfigurations = {
         towerSys = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          # > Our main nixos configuration file <
-          modules = [ ./hosts/tower/configuration.nix ];
+          modules = [
+            inputs.stylix.nixosModules.stylix
+            home-manager.nixosModules.home-manager
+            ./hosts/tower/configuration.nix
+          ];
         };
       };
 
