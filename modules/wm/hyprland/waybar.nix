@@ -90,8 +90,5 @@
         };
       };
     };
-
-    style = ./waybar-style.css;
-
   };
 }

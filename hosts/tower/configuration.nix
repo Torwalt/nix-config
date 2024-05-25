@@ -1,7 +1,7 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [ ./hardware-configuration.nix ../../modules/stylix/default.nix ];
 
   boot.loader = {
     grub.enable = true;
@@ -19,13 +19,6 @@
       enable = true;
       wifi.powersave = false;
     };
-  };
-
-  stylix = {
-    base16Scheme =
-      "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
-    image = ./wp.jpg;
-    polarity = "dark";
   };
 
   # Enable OpenGL

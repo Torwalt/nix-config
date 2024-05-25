@@ -28,7 +28,7 @@
     nix-colors.url = "github:misterio77/nix-colors";
 
     stylix = {
-      url = "github:danth/stylix";
+      url = "github:danth/stylix/release-23.11";
       inputs.home-manager.follows = "home-manager";
     };
   };
@@ -73,7 +73,10 @@
         towerHome = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/tower/home.nix ];
+          modules = [
+            inputs.stylix.homeManagerModules.stylix
+            ./hosts/tower/home.nix
+            ];
         };
       };
 

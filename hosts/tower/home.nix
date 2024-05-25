@@ -16,6 +16,7 @@
 
   imports = [
     ../../modules/base.nix
+    ../../modules/stylix/default.nix
 
     ../../modules/nvim/nvim.nix
 
