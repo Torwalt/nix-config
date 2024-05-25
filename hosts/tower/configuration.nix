@@ -29,9 +29,6 @@
     extraPackages = [ pkgs.mesa.drivers ];
   };
 
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = [ "nvidia" ];
-
   hardware.nvidia = {
 
     # Modesetting is required.
@@ -85,13 +82,19 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    displayManager.sddm.enable = true;
-    displayManager.sddm.wayland.enable = true;
-    displayManager.sddm.theme = "where_is_my_sddm_theme";
+
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+      theme = "where_is_my_sddm_theme";
+    };
 
     xkbOptions = "caps:swapescape";
     layout = "de";
     xkbVariant = "";
+
+    # Load nvidia driver for Xorg and Wayland
+    videoDrivers = [ "nvidia" ];
   };
 
   # Configure console keymap

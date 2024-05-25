@@ -6,7 +6,13 @@ let
 
     ${pkgs.waybar}/bin/waybar &
 
-    ${pkgs.dunst}/bin/dunst
+    ${pkgs.dunst}/bin/dunst &
+
+    ${pkgs.swww}/bin/swww init &
+
+    sleep 1
+
+    ${pkgs.swww}/bin/swww img ${../../../wp.jpg} &
   '';
 in {
   wayland.windowManager.hyprland = {
@@ -72,9 +78,7 @@ in {
 
       gestures = { workspace_swipe = "off"; };
 
-      misc = {
-        force_default_wallpaper = 0;
-      };
+      misc = { force_default_wallpaper = 0; };
 
       "$mainMod" = "ALT_L";
 
