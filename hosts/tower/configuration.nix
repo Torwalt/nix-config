@@ -1,6 +1,9 @@
 { config, pkgs, inputs, ... }:
 
-{
+let
+  tokyo-night-sddm =
+    pkgs.libsForQt5.callPackage ../../modules/tokyo-night-sddm/default.nix { };
+in {
   imports = [ ./hardware-configuration.nix ../../modules/stylix/default.nix ];
 
   boot.loader = {
@@ -86,7 +89,7 @@
     displayManager.sddm = {
       enable = true;
       wayland.enable = true;
-      theme = "where_is_my_sddm_theme";
+      theme = "tokyo-night-sddm";
     };
 
     xkbOptions = "caps:swapescape";
@@ -177,6 +180,8 @@
     rofi-wayland
 
     os-prober
+
+    tokyo-night-sddm
   ];
 
   system.stateVersion = "23.11";
