@@ -161,24 +161,19 @@
 
     networkmanagerapplet
 
-    # alacritty does not work when installed through home-manager.
-    alacritty
-
     # notifier
     dunst
     # dependency for all notifiers
     libnotify
     # wallpapers
     swww
-    # actually better than alacritty lets see
+
+    # terminal
     kitty
     # app launcher
     rofi-wayland
 
     os-prober
-
-    qt6.qtwayland
-    libsForQt5.qt5.qtwayland
   ];
 
   system.stateVersion = "23.11";

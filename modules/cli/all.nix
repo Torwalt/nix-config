@@ -38,7 +38,7 @@
     goPath = "go";
   };
 
-  programs.kitty = {
-    enable = true;
-  };
+  programs.kitty = { enable = true; };
+
+  services.dunst = { enable = true; };
 }
