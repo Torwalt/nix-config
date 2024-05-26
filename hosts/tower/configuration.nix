@@ -104,7 +104,16 @@ in {
   console.keyMap = "de";
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [ cnijfilter2 ];
+  };
+  # Enable Printer autodiscovery.
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    openFirewall = true;
+  };
 
   # Enable sound with pipewire.
   sound.enable = true;
