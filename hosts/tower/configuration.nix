@@ -4,7 +4,10 @@ let
   tokyo-night-sddm =
     pkgs.libsForQt5.callPackage ../../modules/tokyo-night-sddm/default.nix { };
 in {
-  imports = [ ./hardware-configuration.nix ../../modules/stylix/default.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ../../modules/stylix/default.nix
+  ];
 
   boot.loader = {
     grub.enable = true;
@@ -113,6 +116,12 @@ in {
     enable = true;
     nssmdns = true;
     openFirewall = true;
+  };
+  # Enable scanning.
+  hardware.sane = {
+    enable = true;
+    extraBackends = [ pkgs.sane-airscan ];
+    disabledDefaultBackends = [ "escl" ];
   };
 
   # Enable sound with pipewire.
