@@ -41,7 +41,7 @@ in {
       };
 
       windowrulev2 = [
-        "opacity 0.9 0.8,class:.*" # Set opacity of active and inactive windows for all types of windows.
+        "opacity 0.95 0.8,class:.*" # Set opacity of active and inactive windows for all types of windows.
       ];
 
       decoration = {
