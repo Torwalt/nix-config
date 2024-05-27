@@ -1,3 +1,5 @@
+local util = require "lspconfig/util"
+
 local on_attach = function(_, bufnr)
     local function buf_set_keymap(...)
         vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -96,8 +98,16 @@ lspconfig.jsonls.setup {on_attach = on_attach}
 lspconfig.eslint.setup {on_attach = on_attach}
 lspconfig.nil_ls.setup {on_attach = on_attach}
 
+local rust_on_attach = function(client, bufnr)
+    require"lsp-format".on_attach(client)
+    on_attach(client, bufnr)
+end
+
 lspconfig.rust_analyzer.setup {
-    on_attach = on_attach,
+    on_attach = rust_on_attach,
+    capabilities = capabilities,
+    filetypes = {"rust"},
+    root_dir = util.root_pattern("Cargo.toml"),
     settings = {
         ["rust-analyzer"] = {cargo = {allFeatures = true}},
         diagnostics = {enable = true}
