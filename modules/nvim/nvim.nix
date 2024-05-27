@@ -70,6 +70,13 @@
       nvim-treesitter.withAllGrammars
     ];
 
-    extraPackages = with pkgs; [ nil luajitPackages.lua-lsp python3 gopls chafa ];
+    extraPackages = with pkgs; [
+      nil
+      luajitPackages.lua-lsp
+      luaformatter
+      python3
+      gopls
+      chafa
+    ];
   };
 }
