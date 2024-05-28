@@ -38,10 +38,12 @@
     goPath = "go";
   };
 
-
   programs.kitty = { enable = true; };
 
-  services.dunst = { enable = true; };
+  services.dunst = {
+    enable = true;
+    settings.global.monitor = 1;
+  };
 
   programs.btop = { enable = true; };
 }
