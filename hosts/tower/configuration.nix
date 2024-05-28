@@ -1,12 +1,11 @@
-{ config, lib, ... }:
-
-{
+{ config, lib, ... }: {
   imports = [
     ./hardware-configuration.nix
     ../../modules/stylix/default.nix
     ../../modules/system/default.nix
     ../../modules/system/printing.nix
     ../../modules/system/hyprland.nix
+    ../../modules/system/gaming.nix
   ];
 
   boot.loader = {
