@@ -4,7 +4,7 @@ require('telekasten').setup({
 })
 
 -- Launch panel if nothing is typed after <leader>z
-NMap("<leader>z", [[<cmd>Telekasten panel<CR>]])
+NMap("<leader>Z", [[<cmd>Telekasten panel<CR>]])
 
 -- Most used functions
 NMap("<leader>zf", [[<cmd>Telekasten find_notes<CR>]])
