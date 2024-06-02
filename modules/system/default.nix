@@ -11,7 +11,6 @@
       enable = true;
       wifi = {
         powersave = false;
-        backend = "iwd";
       };
     };
   };
