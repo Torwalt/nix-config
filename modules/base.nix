@@ -17,6 +17,7 @@
       spotify
       chromium
       maestral-gui
+      gwenview
 
       # Screenshots
       grim
