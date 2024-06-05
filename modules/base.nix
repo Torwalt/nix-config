@@ -12,7 +12,7 @@
 
       # GUI
       keepassxc
-      firefox
+      # firefox
       pavucontrol
       spotify
       chromium
@@ -48,4 +48,25 @@
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.11";
+
+  # pkgs.firefox.override {
+  #   # See nixpkgs' firefox/wrapper.nix to check which options you can use
+  #   cfg = {
+  #     # Gnome shell native connector
+  #     enableGnomeExtensions = true;
+  #     # Tridactyl native connector
+  #     enableTridactylNative = true;
+  #   };
+  # };
+
+  programs.firefox = {
+    enable = true;
+    package = pkgs.firefox.override {
+      # See nixpkgs' firefox/wrapper.nix to check which options you can use
+      cfg = {
+        # Tridactyl native connector
+        enableTridactylNative = true;
+      };
+    };
+  };
 }
