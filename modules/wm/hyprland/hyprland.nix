@@ -44,6 +44,7 @@ in {
 
       windowrulev2 = [
         "opacity 0.95 0.8,class:.*" # Set opacity of active and inactive windows for all types of windows.
+        "stayfocused, class:(Rofi)$" # Autofocus rofi to fix bug
       ];
 
       decoration = {

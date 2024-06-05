@@ -28,7 +28,7 @@
     nix-colors.url = "github:misterio77/nix-colors";
 
     stylix = {
-      url = "github:danth/stylix/release-23.11";
+      url = "github:danth/stylix";
       inputs.home-manager.follows = "home-manager";
     };
   };

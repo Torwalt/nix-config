@@ -32,8 +32,8 @@ in {
   ];
 
   # Wayland needed for hyprland.
-  services.xserver = {
-    displayManager.sddm = {
+  services.displayManager = {
+    sddm = {
       enable = true;
       wayland.enable = true;
       theme = "tokyo-night-sddm";

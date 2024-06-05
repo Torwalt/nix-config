@@ -9,9 +9,7 @@
 
     networkmanager = {
       enable = true;
-      wifi = {
-        powersave = false;
-      };
+      wifi = { powersave = false; };
     };
   };
 
@@ -43,9 +41,12 @@
   services.xserver = {
     enable = true;
 
-    xkbOptions = "caps:swapescape";
-    layout = "de";
-    xkbVariant = "";
+    xkb = {
+      options = "caps:swapescape";
+      variant = "";
+      layout = "de";
+    };
+
   };
 
   # Configure console keymap

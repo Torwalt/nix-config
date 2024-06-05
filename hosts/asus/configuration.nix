@@ -33,16 +33,21 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
+  services.displayManager = {
+    sddm.enable = true;
+    sddm.wayland.enable = true;
+    sddm.theme = "where_is_my_sddm_theme";
+  };
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    displayManager.sddm.enable = true;
-    displayManager.sddm.wayland.enable = true;
-    displayManager.sddm.theme = "where_is_my_sddm_theme";
 
-    xkbOptions = "caps:swapescape";
-    layout = "de";
-    xkbVariant = "";
+    xkb = {
+      options = "caps:swapescape";
+      variant = "";
+      layout = "de";
+    };
   };
 
   # Configure console keymap

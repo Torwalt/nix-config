@@ -5,7 +5,7 @@
       jq
       python3
       gnumake
-      nixfmt
+      nixfmt-classic
       ffmpeg
       htop
       btop
@@ -51,12 +51,6 @@
 
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox.override {
-      # See nixpkgs' firefox/wrapper.nix to check which options you can use
-      cfg = {
-        # Tridactyl native connector
-        enableTridactylNative = true;
-      };
-    };
+    nativeMessagingHosts = [ pkgs.tridactyl-native ];
   };
 }
