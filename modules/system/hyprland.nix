@@ -17,6 +17,8 @@ in {
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
+  environment.sessionVariables = { XDG_SESSION_TYPE = "wayland"; };
+
   environment.systemPackages = with pkgs; [
     # notifier
     dunst
