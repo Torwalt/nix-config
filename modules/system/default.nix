@@ -101,6 +101,7 @@
     kitty
 
     os-prober
+    gparted
   ];
 
   system.stateVersion = "24.05";
