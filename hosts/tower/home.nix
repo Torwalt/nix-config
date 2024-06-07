@@ -23,6 +23,8 @@
 
     ../../modules/cli/all.nix
 
+    ../../modules/gaming/default.nix
+
     ../../modules/shell/shell.nix
     ../../modules/shell/tmux.nix
 

@@ -4,7 +4,7 @@
     gamescopeSession.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [ mangohud protonup ];
+  environment.systemPackages = with pkgs; [ mangohud protonup bottles wine winetricks ];
 
   environment.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS =
