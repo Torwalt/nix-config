@@ -38,7 +38,7 @@ in {
     sddm = {
       enable = true;
       wayland.enable = true;
-      # theme = "tokyo-night-sddm";
+      theme = "tokyo-night-sddm";
     };
   };
 }
