@@ -102,7 +102,10 @@
 
     os-prober
     gparted
+    at
   ];
+
+  services.atd.enable = true;
 
   system.stateVersion = "24.05";
 
