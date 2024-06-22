@@ -60,6 +60,42 @@
         "HDMI-A-3,2560x1440@99.945999,2560x0,1.0,bitdepth,10"
         "Unknown-1,disabled"
       ];
+
+      workspace = [
+        "1, monitor:HDMI-A-3"
+        "3, monitor:HDMI-A-3"
+        "4, monitor:HDMI-A-3"
+        "5, monitor:HDMI-A-3"
+        "6, monitor:HDMI-A-3"
+        "7, monitor:HDMI-A-3"
+
+        "2, monitor:DP-1"
+      ];
+
+      windowrulev2 = [
+        "workspace 1,class:^(kitty)$"
+        "workspace 2,title:^(Spotify Premium)$"
+        "workspace 3,class:^(firefox)$"
+        "workspace 4,class:^(org.telegram.desktop)$"
+
+        "workspace 5,class:^(com.usebottles.bottles)$"
+        "workspace 5,class:^(battle.net.exe)$"
+        "workspace 5,class:^(wow.exe)$"
+
+        "workspace 6,class:^(org.keepassxc.KeePassXC)$"
+        "workspace 7,class:^(WowUpCf)$"
+      ];
+
+      exec-once = [
+        "kitty"
+        "firefox"
+        "telegram-desktop"
+        "bottles"
+        "keepassxc"
+        "wowup-cf"
+        "spotify"
+      ];
+
     };
   };
 
