@@ -73,12 +73,34 @@
         towerHome = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            inputs.stylix.homeManagerModules.stylix
-            ./hosts/tower/home.nix
-            ];
+          modules =
+            [ inputs.stylix.homeManagerModules.stylix ./hosts/tower/home.nix ];
         };
       };
+
+      # 'sudo nixos-rebuild --flake .#workSys switch'
+      nixosConfigurations = {
+        workSys = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            inputs.stylix.nixosModules.stylix
+            home-manager.nixosModules.home-manager
+            ./hosts/work/configuration.nix
+          ];
+        };
+      };
+
+      # 'home-manager switch --flake .#workHome'
+      homeConfigurations = {
+        workHome = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules =
+            [ inputs.stylix.homeManagerModules.stylix ./hosts/work/home.nix ];
+        };
+      };
+
+      ### Shells ###
 
       devShells.x86_64-linux.rust =
         (import ./shells/rust/rust.nix { inherit pkgs; });
