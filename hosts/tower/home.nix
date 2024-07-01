@@ -94,6 +94,7 @@
         "keepassxc"
         "wowup-cf"
         "spotify"
+        "xrandr --output HDMI-A-3 --primary"
       ];
 
     };

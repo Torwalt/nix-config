@@ -12,9 +12,7 @@ let
 
     sleep 1
 
-    ${pkgs.swww}/bin/swww img ${../../../wp.jpg} &
-
-    xrandr --output HDMI-A-3 --primary
+    ${pkgs.swww}/bin/swww img ${../../../wp.jpg}
   '';
 in {
   wayland.windowManager.hyprland = {
