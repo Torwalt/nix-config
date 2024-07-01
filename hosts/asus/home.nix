@@ -1,7 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   imports = [
     ../../modules/base.nix
     ../../modules/stylix/default.nix
+    ../../modules/rofi/default.nix
 
     ../../modules/nvim/nvim.nix
 
@@ -13,6 +14,9 @@
     ../../modules/wm/hyprland/hyprland.nix
     ../../modules/wm/hyprland/waybar.nix
     ../../modules/wm/hyprland/swaylock.nix
+    ../../modules/wm/hyprland/gammastep.nix
+
+    inputs.nix-colors.homeManagerModules.default
   ];
 
   home.packages = with pkgs; [ telegram-desktop ];
