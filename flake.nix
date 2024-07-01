@@ -43,7 +43,11 @@
       nixosConfigurations = {
         asusSys = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/asus/configuration.nix ];
+          modules = [
+            inputs.stylix.nixosModules.stylix
+            home-manager.nixosModules.home-manager
+            ./hosts/asus/configuration.nix
+          ];
         };
       };
 
@@ -52,7 +56,8 @@
         asusHome = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/asus/home.nix ];
+          modules =
+            [ inputs.stylix.homeManagerModules.stylix ./hosts/asus/home.nix ];
         };
       };
 

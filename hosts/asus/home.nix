@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ../../modules/base.nix
+    ../../modules/stylix/default.nix
 
     ../../modules/nvim/nvim.nix
 
@@ -22,7 +23,7 @@
   };
 
   programs.zsh.shellAliases = {
-    sysswitch = "sudo nixos-rebuild --flake .#asusHome switch";
+    sysswitch = "sudo nixos-rebuild --flake .#asusSys switch";
     homeswitch = "home-manager switch --flake .#asusHome";
   };
 }
