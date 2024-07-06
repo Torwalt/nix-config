@@ -75,7 +75,7 @@ in {
         preserve_split = "yes";
       };
 
-      master = { new_is_master = true; };
+      master = { new_status="master"; };
 
       gestures = { workspace_swipe = "off"; };
 
