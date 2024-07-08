@@ -51,9 +51,15 @@
     homeswitch = "home-manager switch --flake .#workHome";
   };
 
+  programs.git = { userEmail = lib.mkForce "dadiani@talon.one"; };
 
-  programs.git = {
-    userEmail = lib.mkForce "dadiani@talon.one";
+  programs.ssh = {
+    enable = true;
+    extraConfig = ''
+      Host github.com
+        User git
+        IdentityFile ~/.ssh/id_ed25519
+    '';
   };
 
   colorScheme = inputs.nix-colors.colorSchemes.tokyo-city-dark;
