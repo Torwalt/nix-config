@@ -31,5 +31,5 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [ distrobox dpkg ];
+  environment.systemPackages = with pkgs; [ distrobox dpkg osquery ];
 }
