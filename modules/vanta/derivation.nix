@@ -1,9 +1,9 @@
-{ stdenv, dpkg, glibc, gcc-unwrapped, autoPatchelfHook, osquery }:
+{ stdenv, dpkg, glibc, gcc-unwrapped, autoPatchelfHook, osquery, }:
 let
 
-  version = "2.7.1";
+  version = "2.8.1";
 
-  src = ~/vanta-agent/vanta-amd64.deb;
+  src = /home/ada/vanta-agent/vanta-amd64.deb;
 
 in stdenv.mkDerivation {
   name = "Vanta-Agent-${version}";
@@ -25,10 +25,18 @@ in stdenv.mkDerivation {
 
   # Extract and copy executable in $out/bin
   installPhase = ''
-        export $(cat .env | xargs)
-        mkdir -p $out
-        env
-        dpkg -x $src $out
+            export $(cat .env | xargs)
+            mkdir $out
+            dpkg -x $src $out
+            mv $out/var/vanta/* $out
+            mkdir $out/log
+            touch $out/log/2024-7-8-0
+
+            # cp -av $out/etc/* /etc
+            # cp $out/var/vanta/* /var/vanta
+            # cp -av $out/usr/* /usr
+            # rm $out/osqueryd
+            # ln -s /run/current-system/sw/bin/osqueryd $out/osqueryd
   '';
 
   meta = {
