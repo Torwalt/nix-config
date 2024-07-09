@@ -64,5 +64,12 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [ distrobox dpkg osquery ];
+  environment.systemPackages = with pkgs; [
+    distrobox
+    dpkg
+    osquery
+    lm_sensors
+    dmidecode
+    libsmbios
+  ];
 }
