@@ -63,5 +63,11 @@
     '';
   };
 
+  programs.git = {
+    extraConfig = {
+      url = { "ssh://git@github.com/" = { insteadOf = "https://github.com/"; }; };
+    };
+  };
+
   colorScheme = inputs.nix-colors.colorSchemes.tokyo-city-dark;
 }
