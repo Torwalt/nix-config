@@ -9,6 +9,7 @@
       ffmpeg
       htop
       btop
+      file
 
       # GUI
       keepassxc

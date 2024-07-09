@@ -64,6 +64,32 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  # Required for vanta-agent.
+  services.osquery = {
+    enable = true;
+    flags = {
+      extensions_autoload = ''
+        /var/vanta/osquery-vanta.ext
+      '';
+    };
+
+    settings = {
+      options = {
+        logger_path = "/var/log/osquery";
+        disable_logging = false;
+        schedule_splay_percent = 10;
+      };
+
+      schedule = {
+        system_info = {
+          query =
+            "SELECT hostname, cpu_brand, physical_memory FROM system_info;";
+          interval = 3600;
+        };
+      };
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     distrobox
     dpkg

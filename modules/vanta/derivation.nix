@@ -23,27 +23,18 @@ in stdenv.mkDerivation {
 
   unpackPhase = "true";
 
-  # Extract and copy executable in $out/bin
   installPhase = ''
             export $(cat .env | xargs)
             mkdir $out
             dpkg -x $src $out
             mv $out/var/vanta/* $out
             mkdir $out/log
-            touch $out/log/2024-7-8-0
-
-            # cp -av $out/etc/* /etc
-            # cp $out/var/vanta/* /var/vanta
-            # cp -av $out/usr/* /usr
-            # rm $out/osqueryd
-            # ln -s /run/current-system/sw/bin/osqueryd $out/osqueryd
+            touch $out/log/$(date +"%Y-%-m-%-d-0")
   '';
 
   meta = {
     description = "Vanta-Agent";
     homepage = "https://app.vanta.com/employee/onboarding";
-    # license = licenses.mit;
-    # maintainers = with maintainers; [ ];
     platforms = [ "x86_64-linux" ];
   };
 }
