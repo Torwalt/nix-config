@@ -1,10 +1,10 @@
 # Vanta agent
 
-## build
+Right now a lot of manual stuff. But it works and I will improve it [later](https://de.wiktionary.org/wiki/morgen,_morgen,_nur_nicht_heute,_sagen_alle_faulen_Leute).
 
-run from root
+## build derivation
 
-    nix-build modules/vanta -o ~/vanta-agent/agent
+    sudo nix-build modules/vanta -o /var/vanta
 
 ## Env VARS
 
@@ -14,11 +14,7 @@ VANTA_REGION=
 
 get from https://app.vanta.com/employee/onboarding
 
-adjust config in ~/vanta-agent/etc/vanta.conf
-
-## use
-
-    sudo ./agent/var/vanta/vanta-cli doctor
+adjust config in /etc/vanta.conf
 
 ## full notes
 
@@ -26,8 +22,9 @@ adjust config in ~/vanta-agent/etc/vanta.conf
 - use the derivation from `modules/vanta/derivation.nix`
 - build using `sudo nix-build modules/vanta -o /var/vanta`
 - enable osquery sys pkg see `hosts/work/configuration.nix`
-  - make sure to autoload the osquery-vanta.ext
+  - make sure to autoload the `osquery-vanta.ext`
 - also, the osquery log must exist
+- create and update `/etc/vanta.conf` with the Env VARS
 - now you have to "manually" register, you could write a script tho aswell
   - cd into vanta agent install dir
   - run sudo ./vanta-cli doctor
