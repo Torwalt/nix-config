@@ -33,7 +33,7 @@
       libreoffice
       slack
       google-cloud-sdk
-      pgadmin4-desktopmode
+      beekeeper-studio
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
