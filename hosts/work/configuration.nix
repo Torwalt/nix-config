@@ -27,6 +27,31 @@
     driSupport32Bit = true;
   };
 
+# This is required in order to pull some moby images as they have high uid/guid set.
+# See https://github.com/moby/moby/issues/43576#issuecomment-1136056638.
+  users.users.ada = {
+    subUidRanges = [
+      {
+        count = 65536;
+        startUid = 100000;
+      }
+      {
+        count = 1000000;
+        startUid = 1000000;
+      }
+    ];
+    subGidRanges = [
+      {
+        count = 65536;
+        startGid = 100000;
+      }
+      {
+        count = 1000000;
+        startGid = 1000000;
+      }
+    ];
+  };
+
   environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
 
   nixpkgs.config.allowUnfree = true;

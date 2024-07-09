@@ -32,6 +32,7 @@
 
       libreoffice
       slack
+      google-cloud-sdk
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
