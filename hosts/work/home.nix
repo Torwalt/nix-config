@@ -33,6 +33,7 @@
       libreoffice
       slack
       google-cloud-sdk
+      pgadmin4-desktopmode
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
@@ -65,7 +66,9 @@
 
   programs.git = {
     extraConfig = {
-      url = { "ssh://git@github.com/" = { insteadOf = "https://github.com/"; }; };
+      url = {
+        "ssh://git@github.com/" = { insteadOf = "https://github.com/"; };
+      };
     };
   };
 

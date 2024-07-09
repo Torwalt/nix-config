@@ -76,6 +76,7 @@
       luaformatter
       python3
       gopls
+      yaml-language-server
       chafa
     ];
   };
