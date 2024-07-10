@@ -54,6 +54,7 @@
       tokyonight-nvim
       plenary-nvim
       telescope-nvim
+      telescope-live-grep-args-nvim
       nvim-lspconfig
       null-ls-nvim
       lsp-format-nvim
