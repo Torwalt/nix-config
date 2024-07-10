@@ -17,4 +17,4 @@ require('telescope').setup {
 NMap("<leader>ff",
      [[<Cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>]])
 NMap("<leader>fw", [[<Cmd>lua require('telescope.builtin').live_grep()<CR>]])
-NMap("<leader>fb", [[<Cmd>lua require('telescope.builtin').buffers()<CR>]])
+NMap("<leader>fb", [[<Cmd>lua require('telescope.builtin').buffers({ sort_lastused = true, ignore_current_buffer = true })<CR>]])
