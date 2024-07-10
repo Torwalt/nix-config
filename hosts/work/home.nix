@@ -1,6 +1,7 @@
 { pkgs, inputs, lib, ... }:
 
-{
+let homeDirectory = "/home/ada";
+in {
   imports = [
     ../../modules/base.nix
     ../../modules/stylix/default.nix
@@ -23,7 +24,7 @@
 
   home = {
     username = "ada";
-    homeDirectory = "/home/ada";
+    homeDirectory = homeDirectory;
 
     packages = with pkgs; [
       # Monitor config
@@ -36,7 +37,10 @@
       beekeeper-studio
     ];
 
-    sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
+    sessionVariables = {
+      WLR_NO_HARDWARE_CURSORS = 1;
+      TALONSERVICEPATH = "${homeDirectory}/repos/talon-service";
+    };
   };
 
   wayland.windowManager.hyprland = {
@@ -45,7 +49,36 @@
         "eDP-1,1920x1200@59.95000,0x0,1.0"
         "DP-3,2560x1440@59.95Hz,2560x0,1.0,bitdepth,10"
       ];
+
+      workspace = [
+        "1, monitor:DP-3"
+        "3, monitor:DP-3"
+        "4, monitor:DP-3"
+        "5, monitor:DP-3"
+        "6, monitor:DP-3"
+        "7, monitor:DP-3"
+
+        "2, monitor:eDP-1"
+      ];
+
+      windowrulev2 = [
+        "workspace 1,class:^(kitty)$"
+        "workspace 2,title:^(Spotify Premium)$"
+        "workspace 3,class:^(firefox)$"
+        "workspace 4,class:^(Slack)$"
+        "workspace 6,class:^(org.keepassxc.KeePassXC)$"
+      ];
+
+      exec-once = [
+        "kitty"
+        "firefox"
+        "slack"
+        "keepassxc"
+        "spotify"
+        "xrandr --output DP-1 --primary"
+      ];
     };
+
   };
 
   programs.zsh.shellAliases = {
