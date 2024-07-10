@@ -69,7 +69,7 @@ end
 
 lspconfig.gopls.setup {
     on_attach = go_on_attach,
-    init_options = {buildFlags = {"-tags=wireinject"}}
+    init_options = {buildFlags = {"-tags=clickhouse,integration"}}
 }
 
 lspconfig.solargraph.setup {
