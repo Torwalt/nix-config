@@ -44,4 +44,4 @@ NMap("<leader>ff",
 NMap("<leader>fw", [[<Cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>]])
 
 NMap("<leader>fb",
-     [[<Cmd>lua require('telescope.builtin').buffers({ sort_lastused = true })<CR>]])
+     [[<Cmd>lua require('telescope.builtin').buffers({ sort_mru = true })<CR>]])
