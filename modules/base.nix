@@ -10,6 +10,7 @@
       htop
       btop
       file
+      ruplacer
 
       # GUI
       keepassxc
