@@ -27,6 +27,7 @@
 
     ../../modules/shell/shell.nix
     ../../modules/shell/tmux.nix
+    ../../modules/shell/ssh.nix
 
     ../../modules/wm/hyprland/hyprland.nix
     ../../modules/wm/hyprland/waybar.nix

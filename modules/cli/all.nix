@@ -5,6 +5,12 @@
     userName = "Alexander Dadiani";
     userEmail = "alexdadiani1994@gmail.com";
 
+    extraConfig = {
+      url = {
+        "ssh://git@github.com/" = { insteadOf = "https://github.com/"; };
+      };
+    };
+
     delta = {
       enable = true;
       options = {

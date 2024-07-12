@@ -13,6 +13,7 @@ in {
 
     ../../modules/shell/shell.nix
     ../../modules/shell/tmux.nix
+    ../../modules/shell/ssh.nix
 
     ../../modules/wm/hyprland/hyprland.nix
     ../../modules/wm/hyprland/waybar.nix
@@ -91,23 +92,6 @@ in {
   };
 
   programs.git = { userEmail = lib.mkForce "dadiani@talon.one"; };
-
-  programs.ssh = {
-    enable = true;
-    extraConfig = ''
-      Host github.com
-        User git
-        IdentityFile ~/.ssh/id_ed25519
-    '';
-  };
-
-  programs.git = {
-    extraConfig = {
-      url = {
-        "ssh://git@github.com/" = { insteadOf = "https://github.com/"; };
-      };
-    };
-  };
 
   colorScheme = inputs.nix-colors.colorSchemes.tokyo-city-dark;
 }
