@@ -66,6 +66,7 @@ in {
         "workspace 2,title:^(Spotify Premium)$"
         "workspace 3,class:^(firefox)$"
         "workspace 4,class:^(Slack)$"
+        "workspace 5,class:^(beekeeper-studio)$"
         "workspace 6,class:^(org.keepassxc.KeePassXC)$"
       ];
 
@@ -73,6 +74,7 @@ in {
         "kitty"
         "firefox"
         "slack"
+        "beekeeper-studio --use-gl=desktop"
         "keepassxc"
         "spotify"
         "xrandr --output DP-1 --primary"
