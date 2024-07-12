@@ -4,6 +4,7 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Hyprland
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
@@ -33,11 +34,22 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, ... }:
     let
       inherit (self) outputs;
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      extraSpecialArgs = {
+        inherit inputs outputs;
+        pkgs-unstable = import nixpkgs-unstable {
+          # Refer to the `system` parameter from
+          # the outer scope recursively
+          inherit system;
+          # To use Chrome, we need to allow the
+          # installation of non-free software.
+          config.allowUnfree = true;
+        };
+      };
     in {
       # 'sudo nixos-rebuild --flake .#asusSys switch'
       nixosConfigurations = {
@@ -55,7 +67,7 @@
       homeConfigurations = {
         asusHome = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
+          extraSpecialArgs = extraSpecialArgs;
           modules =
             [ inputs.stylix.homeManagerModules.stylix ./hosts/asus/home.nix ];
         };
@@ -64,7 +76,7 @@
       # 'sudo nixos-rebuild --flake .#towerSys switch'
       nixosConfigurations = {
         towerSys = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = extraSpecialArgs;
           modules = [
             inputs.stylix.nixosModules.stylix
             home-manager.nixosModules.home-manager
@@ -77,7 +89,7 @@
       homeConfigurations = {
         towerHome = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
+          extraSpecialArgs = extraSpecialArgs;
           modules =
             [ inputs.stylix.homeManagerModules.stylix ./hosts/tower/home.nix ];
         };
@@ -86,7 +98,7 @@
       # 'sudo nixos-rebuild --flake .#workSys switch'
       nixosConfigurations = {
         workSys = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = extraSpecialArgs;
           modules = [
             inputs.stylix.nixosModules.stylix
             home-manager.nixosModules.home-manager
@@ -99,7 +111,7 @@
       homeConfigurations = {
         workHome = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
+          extraSpecialArgs = extraSpecialArgs;
           modules =
             [ inputs.stylix.homeManagerModules.stylix ./hosts/work/home.nix ];
         };

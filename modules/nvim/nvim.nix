@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, pkgs-unstable, ... }: {
   nixpkgs = {
     overlays = [
       (final: prev: {
@@ -20,7 +20,7 @@
   };
 
   home = {
-    packages = with pkgs; [ ripgrep ];
+    packages = [ pkgs.ripgrep pkgs-unstable.gopls ];
 
     sessionVariables = {
       EDITOR = "nvim";
@@ -75,7 +75,6 @@
       luajitPackages.lua-lsp
       luaformatter
       python3
-      gopls
       yaml-language-server
       chafa
     ];
