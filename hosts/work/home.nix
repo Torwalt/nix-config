@@ -35,6 +35,8 @@ in {
       slack
       google-cloud-sdk
       beekeeper-studio
+      go-task
+      postgresql
     ];
 
     sessionVariables = {

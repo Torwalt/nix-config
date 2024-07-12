@@ -21,7 +21,6 @@
 
   home = {
     packages = with pkgs; [ ripgrep ];
-    sessionPath = [ "$HOME/go/bin" ];
 
     sessionVariables = {
       EDITOR = "nvim";
