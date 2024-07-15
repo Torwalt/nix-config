@@ -38,6 +38,7 @@ in {
       beekeeper-studio
       go-task
       postgresql
+      golangci-lint
     ];
 
     sessionVariables = {
