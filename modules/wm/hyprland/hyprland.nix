@@ -89,7 +89,7 @@ in {
         "$mainMod, Q, killactive, "
         "$mainMod, X, exit, "
         "$mainMod, D, exec, rofi -show drun -show-icons"
-        "$mainMod, L, exec, swaylock"
+        "$mainMod SHIFT, L, exec, swaylock"
 
         # Screenshotting
         "$mainMod SHIFT, P, exec, wl-paste | swappy -f - "
