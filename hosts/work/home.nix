@@ -39,6 +39,7 @@ in {
       go-task
       postgresql
       golangci-lint
+      clickhouse
     ];
 
     sessionVariables = {
