@@ -40,6 +40,9 @@ in {
       postgresql
       golangci-lint
       clickhouse
+
+      kubectl
+      kubectx
     ];
 
     sessionVariables = {
