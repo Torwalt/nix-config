@@ -59,3 +59,4 @@ nmap("<leader>du", ':DlvTestCurrent --build-flags="-tags=integration,clickhouse 
 nmap("<leader>dc", ":DlvClearAll<cr>")
 nmap("<leader>E", ":Explore<cr>")
 tnoremap("<Esc>", "<C-\\><C-n>")
+nnoremap("<leader>jf", ":%!jq .<cr>")
