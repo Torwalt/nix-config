@@ -34,7 +34,8 @@ in {
 
       libreoffice
       slack
-      (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
+      (google-cloud-sdk.withExtraComponents
+        [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
       beekeeper-studio
       go-task
       postgresql
@@ -48,6 +49,7 @@ in {
     sessionVariables = {
       WLR_NO_HARDWARE_CURSORS = 1;
       TALONSERVICEPATH = "${homeDirectory}/repos/talon-service";
+      TALON_CH_ENABLED = "true";
     };
   };
 
