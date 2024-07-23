@@ -11,6 +11,7 @@
       btop
       file
       ruplacer
+      tree
 
       # GUI
       keepassxc
