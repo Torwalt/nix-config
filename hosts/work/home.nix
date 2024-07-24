@@ -57,7 +57,7 @@ in {
     settings = {
       monitor = [
         "eDP-1,1920x1200@59.95000,0x0,1.0"
-        "DP-3,2560x1440@59.95Hz,2560x0,1.0,bitdepth,10"
+        "DP-3,2560x1440@59.95Hz,2560x0,1.0"
       ];
 
       workspace = [
