@@ -12,6 +12,7 @@
       file
       ruplacer
       tree
+      unzip
 
       # GUI
       keepassxc
