@@ -9,6 +9,14 @@
           };
         };
       })
+      (final: prev: {
+        vimPlugins = prev.vimPlugins // {
+          sqls-nvim = prev.vimUtils.buildVimPlugin {
+            name = "sqls-nvim";
+            src = inputs.plugin-sqls-nvim;
+          };
+        };
+      })
     ];
 
     # Configure your nixpkgs instance
@@ -20,7 +28,7 @@
   };
 
   home = {
-    packages = [ pkgs.ripgrep pkgs-unstable.gopls pkgs.sqls ];
+    packages = [ pkgs.ripgrep pkgs-unstable.gopls pkgs.sqls];
 
     sessionVariables = {
       EDITOR = "nvim";
@@ -62,10 +70,14 @@
       git-blame-nvim
       comment-nvim
       markdown-preview-nvim
-      vim-delve-nvim
       telekasten-nvim
       telescope-media-files-nvim
       calendar-vim
+      text-case-nvim
+
+      # From overlay
+      vim-delve-nvim
+      sqls-nvim
 
       nvim-treesitter.withAllGrammars
     ];

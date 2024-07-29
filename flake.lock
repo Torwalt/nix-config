@@ -601,6 +601,22 @@
         "type": "github"
       }
     },
+    "plugin-sqls-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1684697500,
+        "narHash": "sha256-jKFut6NZAf/eIeIkY7/2EsjsIhvZQKCKAJzeQ6XSr0s=",
+        "owner": "nanotee",
+        "repo": "sqls.nvim",
+        "rev": "4b1274b5b44c48ce784aac23747192f5d9d26207",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nanotee",
+        "repo": "sqls.nvim",
+        "type": "github"
+      }
+    },
     "plugin-vim-delve": {
       "flake": false,
       "locked": {
@@ -625,6 +641,7 @@
         "nix-colors": "nix-colors",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "plugin-sqls-nvim": "plugin-sqls-nvim",
         "plugin-vim-delve": "plugin-vim-delve",
         "stylix": "stylix",
         "xdg-desktop-portal-hyprland": "xdg-desktop-portal-hyprland"

@@ -101,7 +101,7 @@ lspconfig.nil_ls.setup {on_attach = on_attach}
 local sqls_on_attach = function(client, bufnr)
     require"lsp-format".on_attach(client)
     on_attach(client, bufnr)
-    require('sqls').on_attach(client, bufnr) -- require sqls.nvim
+    require('sqls').on_attach(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
 end

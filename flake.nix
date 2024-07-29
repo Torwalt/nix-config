@@ -20,6 +20,8 @@
     # Nvim plugin packaging
     plugin-vim-delve.url = "github:sebdah/vim-delve";
     plugin-vim-delve.flake = false;
+    plugin-sqls-nvim.url = "github:nanotee/sqls.nvim";
+    plugin-sqls-nvim.flake = false;
 
     # Newest mpvpaper
     mpvpaper16.url = "github:GhostNaN/mpvpaper/1.6";
