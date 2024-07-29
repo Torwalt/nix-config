@@ -98,6 +98,22 @@ lspconfig.jsonls.setup {on_attach = on_attach}
 lspconfig.eslint.setup {on_attach = on_attach}
 lspconfig.nil_ls.setup {on_attach = on_attach}
 
+local sqls_on_attach = function(client, bufnr)
+    require"lsp-format".on_attach(client)
+    on_attach(client, bufnr)
+    require('sqls').on_attach(client, bufnr) -- require sqls.nvim
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+end
+
+lspconfig.sqls.setup {
+    cmd = {
+        "/home/ada/.nix-profile/bin/sqls", "-config",
+        "~/.config/sqls/config.yml"
+    },
+    on_attach = sqls_on_attach
+}
+
 local rust_on_attach = function(client, bufnr)
     require"lsp-format".on_attach(client)
     on_attach(client, bufnr)

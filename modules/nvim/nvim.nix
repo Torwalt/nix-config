@@ -20,7 +20,7 @@
   };
 
   home = {
-    packages = [ pkgs.ripgrep pkgs-unstable.gopls ];
+    packages = [ pkgs.ripgrep pkgs-unstable.gopls pkgs.sqls ];
 
     sessionVariables = {
       EDITOR = "nvim";
@@ -77,6 +77,7 @@
       python3
       yaml-language-server
       chafa
+      pgformatter
     ];
   };
 }
