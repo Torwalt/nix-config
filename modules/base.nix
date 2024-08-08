@@ -14,6 +14,7 @@
       tree
       unzip
       cloc
+      dig
 
       # GUI
       keepassxc

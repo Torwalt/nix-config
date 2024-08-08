@@ -31,6 +31,7 @@ in {
       # Monitor config
       nwg-displays
       wlr-randr
+      openvpn
 
       libreoffice
       slack
