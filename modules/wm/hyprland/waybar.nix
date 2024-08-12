@@ -91,6 +91,8 @@
         disk = {
           interval = 30;
           format = "{percentage_free}% free on {path}";
+          path = "/";
+          unit = "GB";
         };
       };
     };
