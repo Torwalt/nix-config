@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }: {
   imports = [
     ../../modules/base.nix
-    ../../modules/stylix/default.nix
+    ../../modules/stylix/home.nix
     ../../modules/rofi/default.nix
 
     ../../modules/nvim/nvim.nix
