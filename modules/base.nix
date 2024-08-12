@@ -15,6 +15,7 @@
       unzip
       cloc
       dig
+      nap
 
       # GUI
       keepassxc

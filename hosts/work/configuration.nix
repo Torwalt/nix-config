@@ -28,6 +28,17 @@
     driSupport32Bit = true;
   };
 
+  services.resolved.enable = true;
+
+  # services.openvpn.servers = {
+  #   officeVPN = {
+  #     config = "config /home/ada/client.ovpn.bkp";
+  #     updateResolvConf = true;
+  #     autoStart = false;
+  #   };
+  # };
+  # networking.networkmanager.dns = "systemd-resolved";
+
   # This is required in order to pull some moby images as they have high uid/guid set.
   # See https://github.com/moby/moby/issues/43576#issuecomment-1136056638.
   users.users.ada = {

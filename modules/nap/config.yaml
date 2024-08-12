@@ -1,0 +1,5 @@
+# Configuration
+home: /home/ada/repos/notes/snippets
+default_language: go
+theme: nord
+

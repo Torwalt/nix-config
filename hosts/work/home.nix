@@ -6,6 +6,7 @@ in {
     ../../modules/base.nix
     ../../modules/stylix/default.nix
     ../../modules/rofi/default.nix
+    ../../modules/nap/default.nix
 
     ../../modules/nvim/nvim.nix
 
