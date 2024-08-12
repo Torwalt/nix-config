@@ -18,6 +18,7 @@
     ../../modules/base.nix
     ../../modules/stylix/home.nix
     ../../modules/rofi/default.nix
+    ../../modules/nap/default.nix
 
     ../../modules/nvim/nvim.nix
 
