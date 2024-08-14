@@ -134,6 +134,8 @@ in {
         # Spotify controls
         "$mainMod SHIFT, N, exec, dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
         "$mainMod SHIFT, P, exec, dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+        # Connect to Headset.
+        "$mainMod SHIFT, V, exec, bluetoothctl power on && bluetoothctl connect 14:3F:A6:98:D8:9F"
       ];
 
       bindm = [
