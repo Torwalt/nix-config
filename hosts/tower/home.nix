@@ -47,9 +47,13 @@
       nwg-displays
       wlr-randr
 
-      telegram-desktop
       mpvpaper
       libreoffice
+
+      # Non programming
+      telegram-desktop
+      discord
+
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
