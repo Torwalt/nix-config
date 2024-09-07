@@ -11,8 +11,10 @@ in pkgs.mkShell rec {
     # Replace llvmPackages with llvmPackages_X, where X is the latest LLVM version (at the time of writing, 16)
     llvmPackages.bintools
     rustup
+    openssl.dev
   ];
   RUSTC_VERSION = overrides.toolchain.channel;
+  PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
   # https://github.com/rust-lang/rust-bindgen#environment-variables
   LIBCLANG_PATH =
     pkgs.lib.makeLibraryPath [ pkgs.llvmPackages_latest.libclang.lib ];
