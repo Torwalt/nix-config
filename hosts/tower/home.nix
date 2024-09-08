@@ -87,6 +87,7 @@
         "workspace 5,class:^(com.usebottles.bottles)$"
         "workspace 5,class:^(battle.net.exe)$"
         "workspace 5,class:^(wow.exe)$"
+        "workspace 5,class:^(steam)$"
 
         "workspace 6,class:^(org.keepassxc.KeePassXC)$"
         "workspace 7,class:^(WowUpCf)$"
@@ -96,10 +97,9 @@
         "kitty"
         "firefox"
         "telegram-desktop"
-        "bottles"
         "keepassxc"
-        "wowup-cf"
         "spotify"
+        "steam"
         "xrandr --output HDMI-A-3 --primary"
       ];
 
