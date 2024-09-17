@@ -43,6 +43,7 @@ in {
       postgresql
       golangci-lint
       clickhouse
+      yarn
 
       kubectl
       kubectx
