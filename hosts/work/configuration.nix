@@ -28,7 +28,7 @@
     driSupport32Bit = true;
   };
 
-  services.resolved.enable = true;
+  # services.resolved.enable = true;
 
   # services.openvpn.servers = {
   #   officeVPN = {
