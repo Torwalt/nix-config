@@ -80,8 +80,7 @@
         towerSys = nixpkgs.lib.nixosSystem {
           specialArgs = extraSpecialArgs;
           modules = [
-            inputs.stylix.nixosModules.stylix
-            home-manager.nixosModules.home-manager
+            # inputs.stylix.nixosModules.stylix
             ./hosts/tower/configuration.nix
           ];
         };
@@ -103,7 +102,6 @@
           specialArgs = extraSpecialArgs;
           modules = [
             inputs.stylix.nixosModules.stylix
-            home-manager.nixosModules.home-manager
             ./hosts/work/configuration.nix
           ];
         };
