@@ -1,7 +1,7 @@
 { stdenv, dpkg, glibc, gcc-unwrapped, autoPatchelfHook, osquery, }:
 let
 
-  version = "2.8.1";
+  version = "2.10.0";
 
   src = /home/ada/vanta-agent/vanta-amd64.deb;
 

@@ -5,7 +5,7 @@
     ../../modules/system/default.nix
     ../../modules/system/printing.nix
     ../../modules/system/hyprland.nix
-    ../../modules/vanta/module.nix
+    # ../../modules/vanta/module.nix
   ];
 
   boot.initrd.luks.devices."luks-7467625b-5d73-418d-9dcc-ade392ca09c9".device =
@@ -78,7 +78,7 @@
 
   # Required for vanta-agent.
   services.osquery = {
-    enable = true;
+    enable = false;
     flags = {
       extensions_autoload = ''
         /var/vanta/osquery-vanta.ext
