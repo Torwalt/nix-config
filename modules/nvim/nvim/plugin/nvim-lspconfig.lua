@@ -106,13 +106,13 @@ local sqls_on_attach = function(client, bufnr)
     client.server_capabilities.documentRangeFormattingProvider = false
 end
 
-lspconfig.sqls.setup {
-    cmd = {
-        "/home/ada/.nix-profile/bin/sqls", "-config",
-        "~/.config/sqls/config.yml"
-    },
-    on_attach = sqls_on_attach
-}
+-- lspconfig.sqls.setup {
+--     cmd = {
+--         "/home/ada/.nix-profile/bin/sqls", "-config",
+--         "~/.config/sqls/config.yml"
+--     },
+--     on_attach = sqls_on_attach
+-- }
 
 local rust_on_attach = function(client, bufnr)
     require"lsp-format".on_attach(client)
