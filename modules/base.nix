@@ -3,7 +3,10 @@
     packages = with pkgs; [
       gcc
       jq
+
       python3
+      python312Packages.ipython
+
       gnumake
       nixfmt-classic
       ffmpeg

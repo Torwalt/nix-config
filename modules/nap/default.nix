@@ -13,5 +13,4 @@
       NAP_HOME = "/home/ada/repos/notes/snippets";
     };
   };
-
 }

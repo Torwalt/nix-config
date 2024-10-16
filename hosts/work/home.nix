@@ -7,6 +7,7 @@ in {
     ../../modules/stylix/home.nix
     ../../modules/rofi/default.nix
     ../../modules/nap/default.nix
+    ../../modules/python/default.nix
 
     ../../modules/nvim/nvim.nix
 
