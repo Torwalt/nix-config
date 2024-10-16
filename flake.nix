@@ -31,8 +31,9 @@
     nix-colors.url = "github:misterio77/nix-colors";
 
     stylix = {
-      url = "github:danth/stylix";
+      url = "github:danth/stylix/release-24.05";
       inputs.home-manager.follows = "home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -80,7 +81,7 @@
         towerSys = nixpkgs.lib.nixosSystem {
           specialArgs = extraSpecialArgs;
           modules = [
-            # inputs.stylix.nixosModules.stylix
+            inputs.stylix.nixosModules.stylix
             ./hosts/tower/configuration.nix
           ];
         };
