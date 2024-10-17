@@ -102,7 +102,7 @@
         workSys = nixpkgs.lib.nixosSystem {
           specialArgs = extraSpecialArgs;
           modules = [
-            # inputs.stylix.nixosModules.stylix
+            inputs.stylix.nixosModules.stylix
             ./hosts/work/configuration.nix
           ];
         };
