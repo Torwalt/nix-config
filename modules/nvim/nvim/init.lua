@@ -60,6 +60,7 @@ tnoremap("<Esc>", "<C-\\><C-n>")
 nnoremap("<leader>jf", ":%!jq .<cr>")
 
 nmap("<leader>dt", ":lua require'dap-go'.debug_test()<cr> :lua require'dap'.repl.open()<cr>")
-nmap("<leader>dc", ":lua require'dap'.clear_breakpoints()<cr>")
+nmap("<leader>dC", ":lua require'dap'.clear_breakpoints()<cr>")
 nmap("<leader>db", ":lua require'dap'.toggle_breakpoint()<cr>")
 nmap("<leader>dr", ":lua require'dap'.repl.open()<cr>")
+nmap("<leader>dc", ":lua require'dap'.continue()<cr>")

@@ -1,4 +1,6 @@
-require('dap-go').setup {
+local dap_go = require('dap-go')
+
+dap_go.setup {
   -- Additional dap configurations can be added.
   -- dap_configurations accepts a list of tables where each entry
   -- represents a dap configuration. For more details do:
@@ -49,5 +51,39 @@ require('dap-go').setup {
   tests = {
     -- enables verbosity when running the test.
     verbose = true,
+  },
+}
+
+local dap = require("dap")
+dap.adapters.lldb = {
+  type = 'executable',
+  command = '/home/ada/.nix-profile/bin/lldb-vscode',
+  name = 'lldb'
+}
+
+dap.configurations.rust = {
+  {
+    name = 'Launch',
+    type = 'lldb',
+    request = 'launch',
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+    args = {},
+
+    -- 💀
+    -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
+    --
+    --    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+    --
+    -- Otherwise you might get the following error:
+    --
+    --    Error on launch: Failed to attach to the target process
+    --
+    -- But you should be aware of the implications:
+    -- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
+    -- runInTerminal = false,
   },
 }

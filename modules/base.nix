@@ -19,6 +19,7 @@
       cloc
       dig
       nap
+      lldb
 
       # GUI
       keepassxc

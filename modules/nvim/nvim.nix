@@ -17,6 +17,14 @@
           };
         };
       })
+      (final: prev: {
+        vimPlugins = prev.vimPlugins // {
+          neotest-golang-nvim = prev.vimUtils.buildVimPlugin {
+            name = "neotest-golang-nvim";
+            src = inputs.plugin-neotest-golang-nvim;
+          };
+        };
+      })
     ];
 
     # Configure your nixpkgs instance
@@ -56,6 +64,7 @@
       ${builtins.readFile ./nvim/plugin/telekasten.lua}
       ${builtins.readFile ./nvim/plugin/telescope-media-files.lua}
       ${builtins.readFile ./nvim/plugin/dap.lua}
+      ${builtins.readFile ./nvim/plugin/neotest.lua}
     '';
 
     plugins = with pkgs.vimPlugins; [
@@ -76,6 +85,11 @@
       calendar-vim
       text-case-nvim
 
+      # testing
+      nvim-nio
+      neotest
+      FixCursorHold-nvim
+
       # debugging
       nvim-dap
       nvim-dap-go
@@ -83,6 +97,7 @@
       # From overlay
       vim-delve-nvim
       sqls-nvim
+      neotest-golang-nvim
 
       nvim-treesitter.withAllGrammars
     ];
