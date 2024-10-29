@@ -75,13 +75,18 @@ in {
         preserve_split = "yes";
       };
 
-      master = { new_status="master"; };
+      master = { new_status = "master"; };
 
       gestures = { workspace_swipe = "off"; };
 
       misc = { force_default_wallpaper = 0; };
 
       "$mainMod" = "ALT_L";
+
+      binds = {
+        workspace_back_and_forth = true;
+        allow_workspace_cycles = true;
+      };
 
       bind = [
         # Program shortcuts
@@ -106,6 +111,8 @@ in {
         "$mainMod, r, movefocus, r"
         "$mainMod, k, movefocus, u"
         "$mainMod, j, movefocus, d"
+        # Last workspace
+        "$mainMod, Tab, workspace, previous"
         # Switch workspaces with mainMod + [0-9]
         "$mainMod, 1, workspace, 1"
         "$mainMod, 2, workspace, 2"
