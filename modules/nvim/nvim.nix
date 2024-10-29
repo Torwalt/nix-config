@@ -28,7 +28,7 @@
   };
 
   home = {
-    packages = [ pkgs.ripgrep pkgs-unstable.gopls pkgs.sqls];
+    packages = [ pkgs.ripgrep pkgs-unstable.gopls pkgs.sqls ];
 
     sessionVariables = {
       EDITOR = "nvim";
@@ -55,6 +55,7 @@
       ${builtins.readFile ./nvim/plugin/nvim-lspconfig.lua}
       ${builtins.readFile ./nvim/plugin/telekasten.lua}
       ${builtins.readFile ./nvim/plugin/telescope-media-files.lua}
+      ${builtins.readFile ./nvim/plugin/dap.lua}
     '';
 
     plugins = with pkgs.vimPlugins; [
@@ -74,6 +75,10 @@
       telescope-media-files-nvim
       calendar-vim
       text-case-nvim
+
+      # debugging
+      nvim-dap
+      nvim-dap-go
 
       # From overlay
       vim-delve-nvim
