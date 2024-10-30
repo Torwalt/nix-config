@@ -56,6 +56,7 @@
     extraLuaConfig = ''
       ${builtins.readFile ./nvim/init.lua}
       ${builtins.readFile ./nvim/plugin/map.lua}
+      ${builtins.readFile ./nvim/plugin/remap.lua}
       ${builtins.readFile ./nvim/plugin/color.lua}
       ${builtins.readFile ./nvim/plugin/comment.lua}
       ${builtins.readFile ./nvim/plugin/coq_nvim.lua}
