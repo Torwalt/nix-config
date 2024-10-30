@@ -87,3 +87,9 @@ dap.configurations.rust = {
     -- runInTerminal = false,
   },
 }
+
+nmap("<leader>dC", ":lua require'dap'.clear_breakpoints()<cr>")
+nmap("<leader>db", ":lua require'dap'.toggle_breakpoint()<cr>")
+nmap("<leader>dr", ":lua require'dap'.repl.open()<cr>")
+nmap("<leader>dc", ":lua require'dap'.continue()<cr>")
+

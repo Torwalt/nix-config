@@ -1,10 +1,3 @@
-function Map(mode, shortcut, command)
-    vim.api.nvim_set_keymap(mode, shortcut, command,
-                            {noremap = true, silent = true})
-end
-
-function NMap(shortcut, command) Map('n', shortcut, command) end
-
 local telescope = require("telescope")
 local lga_actions = require("telescope-live-grep-args.actions")
 
@@ -38,10 +31,14 @@ telescope.setup {
 -- don't forget to load the extension
 telescope.load_extension("live_grep_args")
 
-NMap("<leader>ff",
-     [[<Cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>]])
+local tele_builtin = require('telescope.builtin')
 
-NMap("<leader>fw", [[<Cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>]])
+nmap("<leader>ff",
+     function() tele_builtin.find_files({hidden = true}) end)
 
-NMap("<leader>fb",
-     [[<Cmd>lua require('telescope.builtin').buffers({ sort_mru = true })<CR>]])
+nmap("<leader>fw", function()
+    telescope.extensions.live_grep_args.live_grep_args()
+end)
+
+nmap("<leader>fb",
+     function() tele_builtin.buffers({sort_mru = true}) end)

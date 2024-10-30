@@ -1,21 +1,3 @@
-local function bind(op, outer_opts)
-    outer_opts = outer_opts or { noremap = true }
-    return function(lhs, rhs, opts)
-        opts = vim.tbl_extend("force",
-            outer_opts,
-            opts or {}
-        )
-        vim.keymap.set(op, lhs, rhs, opts)
-    end
-end
-
-local nmap = bind("n", { noremap = false })
-local nnoremap = bind("n")
-local vnoremap = bind("v")
-local xnoremap = bind("x")
-local inoremap = bind("i")
-local tnoremap = bind("t")
-
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.scrolloff = 8
@@ -51,25 +33,3 @@ vim.api.nvim_create_user_command(
   {bang = false}
 )
 
-nnoremap("<leader>s", ":update<cr>")
-nmap("<leader>bb", "<c-^><cr>")
-nmap("<leader>h", ":wincmd h<cr>")
-nmap("<leader>l", ":wincmd l<cr>")
-nmap("<leader>E", ":Explore<cr>")
-tnoremap("<Esc>", "<C-\\><C-n>")
-nnoremap("<leader>jf", ":%!jq .<cr>")
-
-local function run_test_and_open_debug()
-    -- Run the test with the desired settings
-    require('neotest').run.run({ suite = false, strategy = 'dap' })
-
-    -- Open the REPL and automatically switch to insert mode
-    require('dap').repl.toggle(nil, 'vsplit')
-    vim.cmd("wincmd p")  -- Switch back to the previous window
-end
-
-nmap("<leader>dt", run_test_and_open_debug)
-nmap("<leader>dC", ":lua require'dap'.clear_breakpoints()<cr>")
-nmap("<leader>db", ":lua require'dap'.toggle_breakpoint()<cr>")
-nmap("<leader>dr", ":lua require'dap'.repl.open()<cr>")
-nmap("<leader>dc", ":lua require'dap'.continue()<cr>")
