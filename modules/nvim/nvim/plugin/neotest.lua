@@ -7,7 +7,8 @@ local goconf = {
 
 require("neotest").setup({
     adapters = {
-        require("neotest-golang")(goconf)
+      require("neotest-golang")(goconf),
+      require('rustaceanvim.neotest'),
     }
 })
 

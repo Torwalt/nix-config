@@ -88,6 +88,9 @@
       calendar-vim
       text-case-nvim
 
+      # language specific
+      rustaceanvim
+
       # testing
       nvim-nio
       neotest

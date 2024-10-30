@@ -17,11 +17,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      flake = true;
-    };
-
     # Nvim plugin packaging
     plugin-vim-delve.url = "github:sebdah/vim-delve";
     plugin-vim-delve.flake = false;
@@ -31,6 +26,10 @@
     plugin-neotest-golang-nvim.url =
       "github:fredrikaverpil/neotest-golang/ea1c3a7";
     plugin-neotest-golang-nvim.flake = false;
+    nvim-rustaceanvim = {
+      url = "github:mrcjkb/rustaceanvim";
+      flake = false;
+    };
 
     # Newest mpvpaper
     mpvpaper16.url = "github:GhostNaN/mpvpaper/1.6";
