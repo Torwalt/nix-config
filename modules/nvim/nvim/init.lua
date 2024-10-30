@@ -59,7 +59,16 @@ nmap("<leader>E", ":Explore<cr>")
 tnoremap("<Esc>", "<C-\\><C-n>")
 nnoremap("<leader>jf", ":%!jq .<cr>")
 
-nmap("<leader>dt", ":lua require'neotest'.run.run({ suite = false, strategy = 'dap' })<cr> :lua require'dap'.repl.open()<cr>")
+local function run_test_and_open_debug()
+    -- Run the test with the desired settings
+    require('neotest').run.run({ suite = false, strategy = 'dap' })
+
+    -- Open the REPL and automatically switch to insert mode
+    require('dap').repl.toggle(nil, 'vsplit')
+    vim.cmd("wincmd p")  -- Switch back to the previous window
+end
+
+nmap("<leader>dt", run_test_and_open_debug)
 nmap("<leader>dC", ":lua require'dap'.clear_breakpoints()<cr>")
 nmap("<leader>db", ":lua require'dap'.toggle_breakpoint()<cr>")
 nmap("<leader>dr", ":lua require'dap'.repl.open()<cr>")
