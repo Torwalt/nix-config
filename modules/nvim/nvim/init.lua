@@ -33,3 +33,4 @@ vim.api.nvim_create_user_command(
   {bang = false}
 )
 
+vim.filetype.add { extension = { pgsql = 'sql' } }
