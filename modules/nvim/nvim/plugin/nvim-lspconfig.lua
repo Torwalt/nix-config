@@ -93,7 +93,10 @@ lspconfig.intelephense.setup {on_attach = on_attach}
 lspconfig.jdtls.setup {on_attach = on_attach}
 
 lspconfig.terraformls.setup {on_attach = on_attach}
-lspconfig.yamlls.setup {on_attach = on_attach}
+lspconfig.yamlls.setup {
+    on_attach = on_attach,
+    autostart = false
+}
 lspconfig.jsonls.setup {on_attach = on_attach}
 lspconfig.eslint.setup {on_attach = on_attach}
 lspconfig.nil_ls.setup {on_attach = on_attach}
