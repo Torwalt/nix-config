@@ -89,6 +89,12 @@
     };
   };
 
+  # Make sure docker is killed first if some container has a memory leak.
+  systemd.services.docker = {
+    # The higher the value (max 1000) the higher prio for killing.
+    serviceConfig.OOMScoreAdjust = 999;
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
