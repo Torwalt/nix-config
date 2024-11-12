@@ -10,7 +10,6 @@
       gnumake
       nixfmt-classic
       ffmpeg
-      htop
       btop
       file
       ruplacer
