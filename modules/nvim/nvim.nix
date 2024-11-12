@@ -68,6 +68,7 @@
       ${builtins.readFile ./nvim/plugin/telescope-media-files.lua}
       ${builtins.readFile ./nvim/plugin/dap.lua}
       ${builtins.readFile ./nvim/plugin/neotest.lua}
+      ${builtins.readFile ./nvim/plugin/ft-rules.lua}
     '';
 
     plugins = with pkgs.vimPlugins; [
