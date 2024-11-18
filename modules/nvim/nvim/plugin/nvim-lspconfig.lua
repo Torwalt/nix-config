@@ -93,10 +93,7 @@ lspconfig.intelephense.setup {on_attach = on_attach}
 lspconfig.jdtls.setup {on_attach = on_attach}
 
 lspconfig.terraformls.setup {on_attach = on_attach}
-lspconfig.yamlls.setup {
-    on_attach = on_attach,
-    autostart = false
-}
+lspconfig.yamlls.setup {on_attach = on_attach, autostart = false}
 lspconfig.jsonls.setup {on_attach = on_attach}
 lspconfig.eslint.setup {on_attach = on_attach}
 lspconfig.nil_ls.setup {on_attach = on_attach}
@@ -136,24 +133,16 @@ end
 
 local rust_on_attach = function(_, bufnr)
     on_attach(nil, bufnr)
-    vim.keymap.set("n", "<leader>cc",
-                   function() vim.cmd.RustLsp("codeAction") end,
-                   {buffer = bufnr, desc = "rust: code actions"})
-    vim.keymap.set("n", "<leader>rr",
-                   function() vim.cmd.RustLsp({"flyCheck", "run"}) end,
-                   {buffer = bufnr, desc = "rust: run checks"})
-    vim.keymap.set("n", "<leader>rh",
-                   function() vim.cmd.RustLsp({"view", "hir"}) end,
-                   {buffer = bufnr, desc = "rust: view HIR"})
-    vim.keymap.set("n", "<leader>rm",
-                   function() vim.cmd.RustLsp({"view", "mir"}) end,
-                   {buffer = bufnr, desc = "rust: view MIR"})
-    vim.keymap.set("n", "<leader>rt",
-                   function() vim.cmd.RustLsp({"testables"}) end,
-                   {buffer = bufnr, desc = "rust: run test"})
-    vim.keymap.set("n", "<leader>rT",
-                   function() vim.cmd.RustLsp({"testables", bang = true}) end,
-                   {buffer = bufnr, desc = "rust: run last ran test"})
+
+    nbufmap("<leader>cc", function() vim.cmd.RustLsp("codeAction") end, bufnr)
+    nbufmap("<leader>rr", function() vim.cmd.RustLsp({"flyCheck", "run"}) end,
+            bufnr)
+    nbufmap("<leader>rh", function() vim.cmd.RustLsp({"view", "hir"}) end, bufnr)
+    nbufmap("<leader>rm", function() vim.cmd.RustLsp({"view", "mir"}) end, bufnr)
+    nbufmap("<leader>rt", function() vim.cmd.RustLsp({"testables"}) end, bufnr)
+    nbufmap("<leader>rT",
+            function() vim.cmd.RustLsp({"testables", bang = true}) end, bufnr)
+    nbufmap("<leader>F", ":RustFmt<cr>", bufnr)
 end
 
 local executors = require("rustaceanvim.executors")
