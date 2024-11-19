@@ -22,6 +22,8 @@
     timeout = 30;
   };
 
+  powerManagement.cpuFreqGovernor = "performance";
+
   # Enable OpenGL
   hardware.opengl = {
     driSupport = true;
