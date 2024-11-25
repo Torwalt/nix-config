@@ -12,6 +12,7 @@ in pkgs.mkShell rec {
     llvmPackages.bintools
     rustup
     openssl.dev
+    cargo-udeps
   ];
   RUSTC_VERSION = overrides.toolchain.channel;
   PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
