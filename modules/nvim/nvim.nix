@@ -69,6 +69,7 @@
       ${builtins.readFile ./nvim/plugin/dap.lua}
       ${builtins.readFile ./nvim/plugin/neotest.lua}
       ${builtins.readFile ./nvim/plugin/ft-rules.lua}
+      ${builtins.readFile ./nvim/plugin/gitblame.lua}
     '';
 
     plugins = with pkgs.vimPlugins; [
