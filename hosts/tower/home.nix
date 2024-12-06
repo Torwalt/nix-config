@@ -17,6 +17,7 @@
   imports = [
     ../../modules/base.nix
     ../../modules/stylix/default.nix
+    ../../modules/stylix/home.nix
     ../../modules/rofi/default.nix
     ../../modules/nap/default.nix
 
@@ -56,15 +57,14 @@
 
     ];
 
-    sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
+    # sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
   };
 
   wayland.windowManager.hyprland = {
     settings = {
       monitor = [
-        "DP-1,2560x1440@59.951,0x0,1.0,bitdepth,10"
-        "HDMI-A-3,2560x1440@99.945999,2560x0,1.0,bitdepth,10"
-        "Unknown-1,disabled"
+        "DP-1,2560x1440@59.95,0x0,1.0"
+        "HDMI-A-3,2560x1440@99.95,2560x0,1.0"
       ];
 
       workspace = [

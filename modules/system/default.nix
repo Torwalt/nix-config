@@ -13,10 +13,11 @@
     };
   };
 
-  # Enable OpenGL
-  hardware.opengl = {
-    enable = true;
-    extraPackages = [ pkgs.mesa.drivers ];
+  hardware = {
+    graphics = {
+      enable = true;
+      extraPackages = [ pkgs.mesa.drivers ];
+    };
   };
 
   # Set your time zone.
@@ -53,7 +54,6 @@
   console.keyMap = "de";
 
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   services.blueman.enable = true;
   hardware.bluetooth.enable = true;
@@ -113,7 +113,7 @@
 
   services.atd.enable = true;
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
