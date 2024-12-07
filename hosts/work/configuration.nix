@@ -11,7 +11,7 @@
   boot.initrd.luks.devices."luks-7467625b-5d73-418d-9dcc-ade392ca09c9".device =
     "/dev/disk/by-uuid/7467625b-5d73-418d-9dcc-ade392ca09c9";
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 
   boot.loader = {
     systemd-boot.enable = lib.mkForce false;
@@ -23,12 +23,6 @@
   };
 
   powerManagement.cpuFreqGovernor = "performance";
-
-  # Enable OpenGL
-  hardware.opengl = {
-    driSupport = true;
-    driSupport32Bit = true;
-  };
 
   # services.resolved.enable = true;
 
