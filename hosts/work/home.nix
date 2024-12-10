@@ -53,11 +53,7 @@ in {
       kubectx
     ];
 
-    sessionVariables = {
-      WLR_NO_HARDWARE_CURSORS = 1;
-      TALONSERVICEPATH = "${homeDirectory}/repos/talon-service";
-      TALON_CH_ENABLED = "true";
-    };
+    sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
   };
 
   wayland.windowManager.hyprland = {
