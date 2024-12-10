@@ -9,6 +9,7 @@ in {
     ../../modules/rofi/default.nix
     ../../modules/nap/default.nix
     ../../modules/python/default.nix
+    ../../modules/direnv/default.nix
 
     ../../modules/nvim/nvim.nix
 
