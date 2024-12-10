@@ -153,7 +153,8 @@ vim.g.rustaceanvim = function()
             test_executor = "neotest",
             crate_test_executor = "neotest",
             enable_clippy = true,
-            enable_nextest = true
+            enable_nextest = true,
+            code_actions = {ui_select_fallback = true}
         },
         server = {
             cmd = {"rust-analyzer"},
