@@ -1,2 +1,2 @@
 [whitelist]
-exact = [ "~/repos/talon-service" ]
+exact = [ "~/repos/talon-service", "~/repos/codecrafters-bittorrent-rust/" ]
