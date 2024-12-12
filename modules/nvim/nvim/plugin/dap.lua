@@ -57,7 +57,7 @@ dap_go.setup {
 local dap = require("dap")
 dap.adapters.lldb = {
   type = 'executable',
-  command = '/home/ada/.nix-profile/bin/lldb-vscode',
+  command = '/home/ada/.nix-profile/bin/lldb-dap',
   name = 'lldb'
 }
 
