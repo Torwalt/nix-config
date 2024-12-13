@@ -11,6 +11,9 @@ telescope.setup {
         vimgrep_arguments = {
             'rg', '--with-filename', '--line-number', '--column',
             '--smart-case', '-uu'
+        },
+        mappings = {
+            n = {['<c-d>'] = require('telescope.actions').delete_buffer}
         }
     },
     extensions = {
