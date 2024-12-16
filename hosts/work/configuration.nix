@@ -24,6 +24,17 @@
 
   powerManagement.cpuFreqGovernor = "performance";
 
+  hardware = {
+    graphics = {
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+        intel-media-driver
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
+    };
+  };
+
   # services.resolved.enable = true;
 
   # services.openvpn.servers = {
@@ -68,7 +79,10 @@
     value = "65536";
   }];
 
-  environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    LIBVA_DRIVER_NAME = "iHD"; # Force intel-media-driver
+  };
 
   nixpkgs.config.allowUnfree = true;
 
@@ -96,6 +110,10 @@
         };
       };
     };
+  };
+
+  services.xserver = {
+    videoDrivers = [ "intel" ];
   };
 
   environment.systemPackages = with pkgs; [
