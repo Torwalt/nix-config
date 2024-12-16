@@ -15,7 +15,8 @@
       ruplacer
       tree
       unzip
-      cloc
+      # cloc replacement - written in rust btw
+      tokei
       dig
       nap
       lldb
