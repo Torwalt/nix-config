@@ -4,6 +4,8 @@ let
   libPath = with pkgs;
     lib.makeLibraryPath [
       # load external libraries that you need in your rust project here
+      pkgs.wayland
+      libxkbcommon
     ];
 in pkgs.mkShell rec {
   buildInputs = with pkgs; [
@@ -13,6 +15,8 @@ in pkgs.mkShell rec {
     rustup
     openssl.dev
     cargo-udeps
+    pkgs.wayland
+    libxkbcommon
   ];
   RUSTC_VERSION = overrides.toolchain.channel;
   PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
