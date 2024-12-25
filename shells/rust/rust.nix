@@ -6,6 +6,11 @@ let
       # load external libraries that you need in your rust project here
       pkgs.wayland
       libxkbcommon
+
+      libGL
+      vulkan-tools
+      vulkan-headers
+      vulkan-loader
     ];
 in pkgs.mkShell rec {
   buildInputs = with pkgs; [
@@ -17,6 +22,11 @@ in pkgs.mkShell rec {
     cargo-udeps
     pkgs.wayland
     libxkbcommon
+
+    libGL
+    vulkan-tools
+    vulkan-headers
+    vulkan-loader
   ];
   RUSTC_VERSION = overrides.toolchain.channel;
   PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
