@@ -112,10 +112,6 @@
     };
   };
 
-  services.xserver = {
-    videoDrivers = [ "intel" ];
-  };
-
   environment.systemPackages = with pkgs; [
     distrobox
     dpkg
