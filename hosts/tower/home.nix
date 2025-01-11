@@ -51,6 +51,7 @@
 
       mpvpaper
       libreoffice
+      gimp-with-plugins
 
       # Non programming
       telegram-desktop
