@@ -33,6 +33,12 @@ telescope.setup {
             -- theme = { }, -- use own theme spec
             -- layout_config = { mirror=true }, -- mirror preview pane
         }
+    },
+    pickers = {
+        current_buffer_fuzzy_find = {
+            sorter = t_conf_vals.generic_sorter({}),
+            previewer = false
+        }
     }
 }
 
@@ -46,6 +52,8 @@ nmap("<leader>fw",
      function() telescope.extensions.live_grep_args.live_grep_args() end)
 
 nmap("<leader>fb", function() tele_builtin.buffers({sort_mru = true}) end)
+
+nmap("/", function() tele_builtin.current_buffer_fuzzy_find({sort_mru = true}) end)
 
 t_commands = {
     {
