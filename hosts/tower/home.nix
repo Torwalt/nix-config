@@ -56,7 +56,7 @@
       # Non programming
       telegram-desktop
       discord
-
+      libresprite
     ];
 
     # sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
