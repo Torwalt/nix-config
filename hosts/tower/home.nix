@@ -21,6 +21,7 @@
     ../../modules/rofi/default.nix
     ../../modules/nap/default.nix
     ../../modules/direnv/default.nix
+    ../../modules/delve/default.nix
 
     ../../modules/nvim/nvim.nix
 
