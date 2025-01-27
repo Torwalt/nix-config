@@ -89,6 +89,12 @@ dap.configurations.rust = {
     }
 }
 
+vim.fn.sign_define('DapBreakpoint', { text = '🔴', texthl = '', linehl = '', numhl = '' })
+vim.fn.sign_define('DapBreakpointCondition', { text = '🟡', texthl = '', linehl = '', numhl = '' })
+vim.fn.sign_define('DapLogPoint', { text = '📝', texthl = '', linehl = '', numhl = '' })
+vim.fn.sign_define('DapStopped', { text = '👉', texthl = '', linehl = '', numhl = '' })
+vim.fn.sign_define('DapBreakpointRejected', { text = '🚫', texthl = '', linehl = '', numhl = '' })
+
 nmap("<leader>dC", ":lua require'dap'.clear_breakpoints()<cr>")
 nmap("<leader>db", ":lua require'dap'.toggle_breakpoint()<cr>")
 nmap("<leader>dr", ":lua require'dap'.repl.open()<cr>")
