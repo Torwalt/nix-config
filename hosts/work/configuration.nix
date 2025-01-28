@@ -22,6 +22,9 @@
     timeout = 30;
   };
 
+  services.thermald.enable = false;
+  services.power-profiles-daemon.enable = false;
+
   powerManagement.cpuFreqGovernor = "performance";
 
   hardware = {
