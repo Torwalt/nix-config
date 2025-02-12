@@ -20,6 +20,7 @@
       dig
       nap
       lldb
+      tldr
 
       # GUI
       keepassxc
