@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   # Enable CUPS to print documents.
   services.printing = {
-    enable = true;
+    enable = false;
     drivers = with pkgs; [ cnijfilter2 ];
 
     # Due to CUPS CVE
@@ -17,7 +17,7 @@
   };
   # Enable scanning.
   hardware.sane = {
-    enable = true;
+    enable = false;
     extraBackends = [ pkgs.sane-airscan ];
     disabledDefaultBackends = [ "escl" ];
   };
