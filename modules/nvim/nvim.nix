@@ -3,22 +3,6 @@
     overlays = [
       (final: prev: {
         vimPlugins = prev.vimPlugins // {
-          vim-delve-nvim = prev.vimUtils.buildVimPlugin {
-            name = "vim-delve";
-            src = inputs.plugin-vim-delve;
-          };
-        };
-      })
-      (final: prev: {
-        vimPlugins = prev.vimPlugins // {
-          sqls-nvim = prev.vimUtils.buildVimPlugin {
-            name = "sqls-nvim";
-            src = inputs.plugin-sqls-nvim;
-          };
-        };
-      })
-      (final: prev: {
-        vimPlugins = prev.vimPlugins // {
           neotest-golang-nvim = prev.vimUtils.buildVimPlugin {
             name = "neotest-golang-nvim";
             src = inputs.plugin-neotest-golang-nvim;
@@ -60,7 +44,6 @@
       ${builtins.readFile ./nvim/plugin/color.lua}
       ${builtins.readFile ./nvim/plugin/comment.lua}
       ${builtins.readFile ./nvim/plugin/coq_nvim.lua}
-      ${builtins.readFile ./nvim/plugin/null-ls.lua}
       ${builtins.readFile ./nvim/plugin/nvim-treesitter.lua}
       ${builtins.readFile ./nvim/plugin/telescope.lua}
       ${builtins.readFile ./nvim/plugin/nvim-lspconfig.lua}
@@ -79,7 +62,6 @@
       telescope-nvim
       telescope-live-grep-args-nvim
       nvim-lspconfig
-      null-ls-nvim
       lsp-format-nvim
       coq_nvim
       coq-artifacts
@@ -110,8 +92,6 @@
       nvim-dap-go
 
       # From overlay
-      vim-delve-nvim
-      sqls-nvim
       neotest-golang-nvim
 
       nvim-treesitter.withAllGrammars
@@ -120,11 +100,9 @@
     extraPackages = with pkgs; [
       nil
       luajitPackages.lua-lsp
-      luaformatter
       python3
       yaml-language-server
       chafa
-      pgformatter
     ];
   };
 }

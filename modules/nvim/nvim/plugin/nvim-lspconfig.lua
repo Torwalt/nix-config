@@ -55,7 +55,14 @@ lspconfig.lua_ls.setup {
     settings = {
         Lua = {
             workspace = {checkThirdParty = false},
-            telemetry = {enable = false}
+            telemetry = {enable = false},
+            format = {
+                enable = true,
+                defaultConfig = {
+                indent_style = "space",
+                    indent_size = "4",
+                }
+            }
         }
     }
 }
@@ -96,7 +103,19 @@ lspconfig.terraformls.setup {on_attach = on_attach}
 lspconfig.yamlls.setup {on_attach = on_attach, autostart = false}
 lspconfig.jsonls.setup {on_attach = on_attach}
 lspconfig.eslint.setup {on_attach = on_attach}
-lspconfig.nil_ls.setup {on_attach = on_attach}
+
+lspconfig.nil_ls.setup {
+    on_attach = on_attach,
+    settings = {
+        ['nil'] = {
+          testSetting = 42,
+          formatting = {
+            command = { "nixfmt" },
+          },
+        },
+      }
+}
+
 lspconfig.wgsl_analyzer.setup({})
 
 local sqls_on_attach = function(client, bufnr)
@@ -106,31 +125,6 @@ local sqls_on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
 end
-
--- lspconfig.sqls.setup {
---     cmd = {
---         "/home/ada/.nix-profile/bin/sqls", "-config",
---         "~/.config/sqls/config.yml"
---     },
---     on_attach = sqls_on_attach
--- }
-
--- Old rust-analyzer approach
--- local rust_on_attach = function(client, bufnr)
---     require"lsp-format".on_attach(client)
---     on_attach(client, bufnr)
--- end
---
--- lspconfig.rust_analyzer.setup {
---     on_attach = rust_on_attach,
---     capabilities = capabilities,
---     filetypes = {"rust"},
---     root_dir = util.root_pattern("Cargo.toml"),
---     settings = {
---         ["rust-analyzer"] = {cargo = {allFeatures = true}},
---         diagnostics = {enable = true}
---     }
--- }
 
 local rust_on_attach = function(_, bufnr)
     on_attach(nil, bufnr)
@@ -197,3 +191,4 @@ vim.g.rustaceanvim = function()
         }
     }
 end
+
