@@ -73,7 +73,10 @@
     shell = pkgs.zsh;
   };
 
-  networking.firewall = { enable = true; };
+  networking.firewall = {
+    enable = true;
+    allowPing = false;
+  };
 
   programs.zsh = {
     enable = true;
