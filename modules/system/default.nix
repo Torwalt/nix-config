@@ -73,6 +73,8 @@
     shell = pkgs.zsh;
   };
 
+  networking.firewall = { enable = true; };
+
   programs.zsh = {
     enable = true;
     # Is true by default. If this also enabled on home-manager,
