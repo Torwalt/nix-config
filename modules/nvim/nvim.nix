@@ -70,6 +70,7 @@
       ${builtins.readFile ./nvim/plugin/neotest.lua}
       ${builtins.readFile ./nvim/plugin/ft-rules.lua}
       ${builtins.readFile ./nvim/plugin/gitblame.lua}
+      ${builtins.readFile ./nvim/plugin/avante.lua}
     '';
 
     plugins = with pkgs.vimPlugins; [
@@ -89,6 +90,12 @@
       telescope-media-files-nvim
       calendar-vim
       text-case-nvim
+
+      # ✨ AI ✨
+      avante-nvim
+      # deps for avante
+      dressing-nvim
+      nui-nvim
 
       # language specific
       rustaceanvim
