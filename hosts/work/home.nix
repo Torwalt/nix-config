@@ -48,7 +48,6 @@ in {
       golangci-lint
       clickhouse
       yarn
-      nodejs_22
 
       kubectl
       kubectx
