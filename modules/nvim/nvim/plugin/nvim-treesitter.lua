@@ -11,7 +11,7 @@ local function ts_disable(lang, bufnr)
     return false
 end
 
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
     ensure_installed = {},
     auto_install = false,
     highlight = {
@@ -19,5 +19,36 @@ require'nvim-treesitter.configs'.setup {
         disable = ts_disable,
         additional_vim_regex_highlighting = false
     },
-    indent = {enable = true, disable = ts_disable}
+    indent = {enable = true, disable = ts_disable},
+    textobjects = {
+        select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+            },
+        },
+        move = {
+            enable = true,
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next_start = {
+                ["]m"] = "@function.outer",
+                ["]]"] = "@function.outer",
+            },
+            goto_previous_start = {
+                ["[m"] = "@function.outer",
+                ["[["] = "@function.outer",
+            },
+        },
+    },
 }
+
+nmap("[[", function()
+    require('nvim-treesitter.textobjects.move').goto_previous_start('@function.outer')
+end)
+
+nmap("]]", function()
+    require('nvim-treesitter.textobjects.move').goto_next_start('@function.outer')
+end)
+

@@ -95,6 +95,7 @@
       neotest-golang-nvim
 
       nvim-treesitter.withAllGrammars
+      nvim-treesitter-textobjects
     ];
 
     extraPackages = with pkgs; [
