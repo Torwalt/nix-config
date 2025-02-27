@@ -11,10 +11,14 @@
 
   boot.loader = {
     systemd-boot.enable = lib.mkForce false;
-    grub.enable = true;
-    grub.device = "nodev";
-    grub.useOSProber = true;
-    grub.efiSupport = true;
+    grub = {
+      enable = true;
+      timeout = 30;
+      default = 0;
+      device = "nodev";
+      useOSProber = true;
+      efiSupport = true;
+    };
     timeout = 30;
   };
 
