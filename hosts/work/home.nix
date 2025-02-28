@@ -68,7 +68,7 @@ in {
         "6, monitor:HDMI-A-1"
         "7, monitor:HDMI-A-1"
 
-        "2, monitor:DP-1"
+        "2, monitor:eDP-1"
       ];
 
       windowrulev2 = [
