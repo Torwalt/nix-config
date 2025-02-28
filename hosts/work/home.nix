@@ -52,4 +52,35 @@ in {
   programs.git = { userEmail = lib.mkForce "alexdadiani1994@gmail.com"; };
 
   colorScheme = inputs.nix-colors.colorSchemes.tokyo-city-dark;
+
+  wayland.windowManager.hyprland = {
+    settings = {
+      monitor = [
+        "eDP-1,2560x1600@240.00000,0x0,1.0"
+        "HDMI-A-1,2560x1440@99.95,2560x0,1.0"
+      ];
+
+      workspace = [
+        "1, monitor:HDMI-A-1"
+        "3, monitor:HDMI-A-1"
+        "4, monitor:HDMI-A-1"
+        "5, monitor:HDMI-A-1"
+        "6, monitor:HDMI-A-1"
+        "7, monitor:HDMI-A-1"
+
+        "2, monitor:DP-1"
+      ];
+
+      windowrulev2 = [
+        "workspace 1,class:^(kitty)$"
+        "workspace 2,title:^(Spotify Premium)$"
+        "workspace 3,class:^(firefox)$"
+
+        "workspace 6,class:^(org.keepassxc.KeePassXC)$"
+      ];
+
+      exec-once = [ "kitty" "firefox" "keepassxc" "spotify" ];
+
+    };
+  };
 }
