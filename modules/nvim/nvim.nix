@@ -104,6 +104,7 @@
       python3
       yaml-language-server
       chafa
+      typescript-language-server
     ];
   };
 }
