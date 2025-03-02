@@ -49,7 +49,7 @@ in {
     homeswitch = "home-manager switch --flake .#workHome";
   };
 
-  programs.git = { userEmail = lib.mkForce "alexdadiani1994@gmail.com"; };
+  programs.git = { userEmail = lib.mkForce "alex.dadiani@scoretech.ai"; };
 
   colorScheme = inputs.nix-colors.colorSchemes.tokyo-city-dark;
 
@@ -75,11 +75,12 @@ in {
         "workspace 1,class:^(kitty)$"
         "workspace 2,title:^(Spotify Premium)$"
         "workspace 3,class:^(firefox)$"
+        "workspace 4,class:^(chromium-browser)$"
 
         "workspace 6,class:^(org.keepassxc.KeePassXC)$"
       ];
 
-      exec-once = [ "kitty" "firefox" "keepassxc" "spotify" ];
+      exec-once = [ "kitty" "firefox" "keepassxc" "spotify" "chromium-browser" ];
 
     };
   };
