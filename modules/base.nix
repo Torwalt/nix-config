@@ -4,8 +4,7 @@
       gcc
       jq
 
-      python3
-      python312Packages.ipython
+      (python312.withPackages (ps: with ps; [ ipython virtualenv ]))
 
       gnumake
       nixfmt-classic
@@ -14,6 +13,7 @@
       file
       ruplacer
       tree
+      zip
       unzip
       # cloc replacement - written in rust btw
       tokei

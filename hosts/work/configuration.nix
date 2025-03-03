@@ -37,5 +37,16 @@
 
   hardware.graphics.extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
 
-  boot.initrd.luks.devices."luks-25805164-d8bc-45c4-9918-09ffd240bc1e".device = "/dev/disk/by-uuid/25805164-d8bc-45c4-9918-09ffd240bc1e";
+  boot.initrd.luks.devices."luks-25805164-d8bc-45c4-9918-09ffd240bc1e".device =
+    "/dev/disk/by-uuid/25805164-d8bc-45c4-9918-09ffd240bc1e";
+
+  # vpn
+  services.tailscale.enable = true;
+
+  networking.firewall = {
+    enable = true;
+
+    # Always allow traffic from your Tailscale network
+    trustedInterfaces = [ "tailscale0" ];
+  };
 }

@@ -42,6 +42,14 @@ in {
 
       libreoffice
       go-task
+      pdm
+      nodejs_18
+      corepack_18
+      temporal-cli
+      tailscale
+      beekeeper-studio
+      postgresql
+      _1password-cli
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
@@ -79,12 +87,19 @@ in {
         "workspace 2,title:^(Spotify Premium)$"
         "workspace 3,class:^(firefox)$"
         "workspace 4,class:^(chromium-browser)$"
+        "workspace 5,class:^(beekeeper-studio)$"
 
         "workspace 6,class:^(org.keepassxc.KeePassXC)$"
       ];
 
-      exec-once =
-        [ "kitty" "firefox" "keepassxc" "spotify" "chromium-browser" ];
+      exec-once = [
+        "kitty"
+        "firefox"
+        "keepassxc"
+        "spotify"
+        "chromium-browser"
+        "beekeeper-studio"
+      ];
 
     };
   };
