@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ ... }: {
 
   programs.git = {
     enable = true;
@@ -31,17 +31,6 @@
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
-  };
-
-  home = {
-    packages = with pkgs; [ go delve ];
-    sessionPath = [ "$HOME/go/bin" ];
-  };
-
-  programs.go = {
-    enable = true;
-    goBin = "go/bin";
-    goPath = "go";
   };
 
   programs.kitty = { enable = true; };

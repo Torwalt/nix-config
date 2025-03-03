@@ -26,6 +26,7 @@
     ../../modules/nvim/nvim.nix
 
     ../../modules/cli/all.nix
+    ../../modules/go/default.nix
 
     ../../modules/gaming/default.nix
 

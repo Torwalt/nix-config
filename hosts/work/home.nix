@@ -1,6 +1,8 @@
 { pkgs, inputs, lib, ... }:
 
-let homeDirectory = "/home/ada";
+let
+  homeDirectory = "/home/ada";
+  goPinned = import ../../modules/go/1_21.nix { };
 in {
   imports = [
     ../../modules/base.nix
@@ -36,6 +38,7 @@ in {
       # Monitor config
       nwg-displays
       wlr-randr
+      goPinned.go
 
       libreoffice
       go-task
@@ -80,7 +83,8 @@ in {
         "workspace 6,class:^(org.keepassxc.KeePassXC)$"
       ];
 
-      exec-once = [ "kitty" "firefox" "keepassxc" "spotify" "chromium-browser" ];
+      exec-once =
+        [ "kitty" "firefox" "keepassxc" "spotify" "chromium-browser" ];
 
     };
   };
