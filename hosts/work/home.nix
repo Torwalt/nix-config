@@ -2,7 +2,7 @@
 
 let
   homeDirectory = "/home/ada";
-  goPinned = import ../../modules/go/1_21.nix { };
+  goPinned = import ../../modules/go/1_22.nix { };
 in {
   imports = [
     ../../modules/base.nix

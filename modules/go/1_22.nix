@@ -12,7 +12,7 @@ let
   pkgs = import pinnedNixpkgs { system = "x86_64-linux"; };
 in {
   # Export the specific Go version
-  go = pkgs.go;
+  go = pkgs.go_1_22;
 
   # Optionally export the entire pkgs set if needed
   inherit pkgs;
