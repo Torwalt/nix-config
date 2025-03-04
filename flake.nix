@@ -131,5 +131,8 @@
       devShells.x86_64-linux.rust =
         (import ./shells/rust/rust.nix { inherit pkgs; });
 
+      devShells.x86_64-linux.nodejs =
+        (import ./shells/nodejs.nix { inherit pkgs; });
+
     };
 }

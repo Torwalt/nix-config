@@ -41,7 +41,10 @@
     "/dev/disk/by-uuid/25805164-d8bc-45c4-9918-09ffd240bc1e";
 
   # vpn
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "client";
+  };
 
   networking.firewall = {
     enable = true;

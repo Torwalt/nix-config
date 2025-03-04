@@ -1,2 +1,4 @@
-[whitelist]
-exact = [ "~/repos/talon-service", "~/repos/codecrafters-bittorrent-rust/" ]
+[global]
+load_dotenv = true
+dotenv_filename = ".env.development"
+

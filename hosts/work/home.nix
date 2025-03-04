@@ -44,12 +44,14 @@ in {
       go-task
       pdm
       nodejs_18
-      corepack_18
+      pnpm
+      binaryen
       temporal-cli
       tailscale
       beekeeper-studio
       postgresql
       _1password-cli
+      azure-cli
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
@@ -58,9 +60,9 @@ in {
   programs.zsh.shellAliases = {
     sysswitch = "sudo nixos-rebuild --flake .#workSys switch";
     homeswitch = "home-manager switch --flake .#workHome";
+    # buildFHSUserEnv ignores --command, but you can still start zsh afterwards.
+    nodejsshell = "nix develop ~/nix-config#nodejs";
   };
-
-  programs.git = { userEmail = lib.mkForce "alex.dadiani@scoretech.ai"; };
 
   colorScheme = inputs.nix-colors.colorSchemes.tokyo-city-dark;
 

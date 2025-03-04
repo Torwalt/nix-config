@@ -105,6 +105,7 @@
       yaml-language-server
       chafa
       typescript-language-server
+      pyright
     ];
   };
 }
