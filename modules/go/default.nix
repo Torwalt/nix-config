@@ -3,6 +3,7 @@
   home = {
     packages = with pkgs; [ go delve ];
     sessionPath = [ "$HOME/go/bin" ];
+    sessionVariables = { PATH = "$HOME/go/bin:$PATH"; };
   };
 
   programs.go = {

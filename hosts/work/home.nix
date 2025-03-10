@@ -1,8 +1,7 @@
-{ pkgs, inputs, lib, ... }:
+{ pkgs, inputs, ... }:
 
 let
   homeDirectory = "/home/ada";
-  goPinned = import ../../modules/go/1_22.nix { };
 in {
   imports = [
     ../../modules/base.nix
@@ -13,6 +12,7 @@ in {
     ../../modules/python/default.nix
     ../../modules/direnv/default.nix
     ../../modules/delve/default.nix
+    ../../modules/go/default.nix
 
     ../../modules/nvim/nvim.nix
 
@@ -38,7 +38,6 @@ in {
       # Monitor config
       nwg-displays
       wlr-randr
-      goPinned.go
 
       libreoffice
       go-task
@@ -52,6 +51,7 @@ in {
       postgresql
       _1password-cli
       azure-cli
+      pulumi-bin
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
@@ -62,6 +62,7 @@ in {
     homeswitch = "home-manager switch --flake .#workHome";
     # buildFHSUserEnv ignores --command, but you can still start zsh afterwards.
     nodejsshell = "nix develop ~/nix-config#nodejs";
+    azureclishell = "nix develop ~/nix-config#azurecli";
   };
 
   colorScheme = inputs.nix-colors.colorSchemes.tokyo-city-dark;
