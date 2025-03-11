@@ -26,6 +26,8 @@
       merge = { conflictstyle = "diff3"; };
       diff = { colorMoved = "default"; };
     };
+
+    lfs.enable = true;
   };
 
   programs.fzf = {

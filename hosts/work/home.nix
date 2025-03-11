@@ -1,7 +1,6 @@
 { pkgs, inputs, ... }:
 
-let
-  homeDirectory = "/home/ada";
+let homeDirectory = "/home/ada";
 in {
   imports = [
     ../../modules/base.nix
@@ -52,6 +51,7 @@ in {
       _1password-cli
       azure-cli
       pulumi-bin
+      git-lfs
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
