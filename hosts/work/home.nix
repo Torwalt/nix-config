@@ -52,6 +52,7 @@ in {
       azure-cli
       pulumi-bin
       git-lfs
+      typescript
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };

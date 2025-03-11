@@ -102,8 +102,7 @@ lspconfig.jdtls.setup {on_attach = on_attach}
 lspconfig.terraformls.setup {on_attach = on_attach}
 lspconfig.yamlls.setup {on_attach = on_attach, autostart = false}
 lspconfig.jsonls.setup {on_attach = on_attach}
-lspconfig.eslint.setup {on_attach = on_attach}
-lspconfig.ts_ls.setup {on_attach = on_attach}
+-- lspconfig.eslint.setup {on_attach = on_attach}
 lspconfig.pyright.setup {on_attach = on_attach}
 
 lspconfig.nil_ls.setup {
@@ -194,3 +193,108 @@ vim.g.rustaceanvim = function()
     }
 end
 
+
+lspconfig.ts_ls.setup {
+{
+    -- Command to start the language server
+    cmd = { "typescript-language-server", "--stdio" },
+    
+    -- Performance optimizations
+    flags = {
+      debounce_text_changes = 150,      -- Debounce time in ms
+      allow_incremental_sync = true,    -- Enable incremental document sync
+    },
+    
+    -- Customize capabilities
+    capabilities = (function()
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
+      
+      -- Limit some features that might be causing performance issues
+      capabilities.textDocument.codeAction = {
+        dynamicRegistration = false,
+        codeActionLiteralSupport = {
+          codeActionKind = {
+            valueSet = {
+              "quickfix",
+              "refactor",
+              "refactor.extract",
+              "refactor.inline",
+              "refactor.rewrite",
+              "source",
+              "source.organizeImports",
+            }
+          }
+        }
+      }
+      
+      return capabilities
+    end)(),
+    
+    settings = {
+      typescript = {
+        inlayHints = {
+          -- Disable inlay hints which can cause performance issues
+          includeInlayParameterNameHints = "none",
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = false,
+          includeInlayVariableTypeHints = false,
+          includeInlayPropertyDeclarationTypeHints = false,
+          includeInlayFunctionLikeReturnTypeHints = false,
+          includeInlayEnumMemberValueHints = false,
+        },
+        suggest = {
+          completeFunctionCalls = false, -- Can be expensive
+        },
+        implementationsCodeLens = false,  -- Disable code lens which can be expensive
+        referencesCodeLens = false,       -- Disable code lens which can be expensive
+        tsserver = {
+          maxTsServerMemory = 4096,      -- Limit memory usage to prevent bloat
+          useSyntaxServer = "auto",      -- Use syntax server for lighter operations
+          watchOptions = {
+            watchFile = "useFsEvents",   -- More efficient file watching
+            watchDirectory = "useFsEvents",
+            fallbackPolling = "dynamicPriority",
+          }
+        }
+      },
+      javascript = {
+        inlayHints = {
+          -- Same hint disables for JavaScript
+          includeInlayParameterNameHints = "none",
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = false,
+          includeInlayVariableTypeHints = false,
+          includeInlayPropertyDeclarationTypeHints = false,
+          includeInlayFunctionLikeReturnTypeHints = false,
+          includeInlayEnumMemberValueHints = false,
+        },
+        -- Same settings as TypeScript
+        suggest = {
+          completeFunctionCalls = false,
+        },
+        implementationsCodeLens = false,
+        referencesCodeLens = false,
+      }
+    },
+    
+    -- Initialize options
+    init_options = {
+      hostInfo = "neovim",
+      disableAutomaticTypingAcquisition = true, -- Prevent automatic downloading of type definitions
+      maxTsServerMemory = 4096,
+      tsserver = {
+        logVerbosity = "off", -- Reduce verbose logging
+      }
+    },
+    
+    on_attach = function(client, bufnr)
+      -- Disable some features to improve performance
+      client.server_capabilities.documentFormattingProvider = false
+      client.server_capabilities.documentRangeFormattingProvider = false
+     -- Set up buffer-local keymaps
+      on_attach(client, bufnr)
+
+    end
+  }
+}

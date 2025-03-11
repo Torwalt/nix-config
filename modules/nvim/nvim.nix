@@ -106,6 +106,7 @@
       chafa
       typescript-language-server
       pyright
+      vscode-langservers-extracted
     ];
   };
 }
