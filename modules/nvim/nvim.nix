@@ -96,6 +96,7 @@
 
       nvim-treesitter.withAllGrammars
       nvim-treesitter-textobjects
+      nvim-treesitter-parsers.astro
     ];
 
     extraPackages = with pkgs; [
