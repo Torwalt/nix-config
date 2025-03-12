@@ -102,7 +102,7 @@ lspconfig.jdtls.setup {on_attach = on_attach}
 lspconfig.terraformls.setup {on_attach = on_attach}
 lspconfig.yamlls.setup {on_attach = on_attach, autostart = false}
 lspconfig.jsonls.setup {on_attach = on_attach}
-lspconfig.eslint.setup {on_attach = on_attach}
+-- lspconfig.eslint.setup {on_attach = on_attach}
 lspconfig.pyright.setup {on_attach = on_attach}
 
 lspconfig.nil_ls.setup {
@@ -195,7 +195,6 @@ end
 
 
 lspconfig.ts_ls.setup {
-{
     -- Command to start the language server
     cmd = { "typescript-language-server", "--stdio" },
     
@@ -287,14 +286,6 @@ lspconfig.ts_ls.setup {
         logVerbosity = "off", -- Reduce verbose logging
       }
     },
-    
-    on_attach = function(client, bufnr)
-      -- Disable some features to improve performance
-      client.server_capabilities.documentFormattingProvider = false
-      client.server_capabilities.documentRangeFormattingProvider = false
-     -- Set up buffer-local keymaps
-      on_attach(client, bufnr)
 
-    end
-  }
+    on_attach = on_attach
 }
