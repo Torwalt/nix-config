@@ -21,7 +21,6 @@
       nap
       lldb
       tldr
-      lazydocker
 
       # GUI
       keepassxc
