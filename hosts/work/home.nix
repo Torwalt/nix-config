@@ -54,6 +54,7 @@ in {
       pulumi-bin
       git-lfs
       typescript
+      timewarrior
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
