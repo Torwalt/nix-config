@@ -91,7 +91,7 @@ in {
         "$mainMod, Q, killactive, "
         "$mainMod, X, exit, "
         "$mainMod, D, exec, rofi -show drun -show-icons"
-        "$mainMod SHIFT, L, exec, swaylock"
+        "$mainMod SHIFT, L, exec, loginctl lock-session"
 
         # Screenshotting
         "$mainMod SHIFT, P, exec, wl-paste | swappy -f - "
