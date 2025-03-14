@@ -13,6 +13,7 @@ in {
     ../../modules/delve/default.nix
     ../../modules/go/default.nix
     ../../modules/lazydocker/default.nix
+    ../../modules/timewarrior/default.nix
 
     ../../modules/nvim/nvim.nix
 
@@ -54,7 +55,6 @@ in {
       pulumi-bin
       git-lfs
       typescript
-      timewarrior
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
