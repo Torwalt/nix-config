@@ -23,6 +23,7 @@
     ../../modules/direnv/default.nix
     ../../modules/delve/default.nix
     ../../modules/lazydocker/default.nix
+    ../../modules/timewarrior/default.nix
 
     ../../modules/nvim/nvim.nix
 

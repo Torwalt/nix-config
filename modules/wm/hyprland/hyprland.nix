@@ -14,6 +14,25 @@ let
 
     ${pkgs.swww}/bin/swww img ${../../../wp.jpg}
   '';
+
+  lockScript = pkgs.pkgs.writeShellScriptBin "lock" ''
+    # Check if timewarrior is installed and in PATH
+    if command -v ${pkgs.timewarrior}/bin/timew &> /dev/null; then
+        # Stop timewarrior tracking work
+        ${pkgs.timewarrior}/bin/timew stop work
+        
+        # Lock the screen with swaylock
+        ${pkgs.swaylock}/bin/swaylock
+        
+        # When swaylock exits (screen is unlocked), restart work tracking
+        ${pkgs.timewarrior}/bin/timew start work
+    else
+        # If timewarrior is not installed, just run swaylock
+        ${pkgs.swaylock}/bin/swaylock
+    fi
+
+  '';
+
 in {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -91,7 +110,7 @@ in {
         "$mainMod, Q, killactive, "
         "$mainMod, X, exit, "
         "$mainMod, D, exec, rofi -show drun -show-icons"
-        "$mainMod SHIFT, L, exec, loginctl lock-session"
+        "$mainMod SHIFT, L, exec, ${lockScript}/bin/lock"
 
         # Screenshotting
         "$mainMod SHIFT, P, exec, wl-paste | swappy -f - "
