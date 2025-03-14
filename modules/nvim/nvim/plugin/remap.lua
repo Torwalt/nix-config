@@ -1,6 +1,8 @@
 nmap("<leader>bb", "<c-^><cr>")
 nmap("<leader>h", ":wincmd h<cr>")
 nmap("<leader>l", ":wincmd l<cr>")
+nmap("<leader>j", ":wincmd j<cr>")
+nmap("<leader>k", ":wincmd k<cr>")
 nmap("<leader>E", ":Explore<cr>")
 nmap("<Esc>", "<C-\\><C-n>")
 nmap("<leader>jf", ":%!jq .<cr>")
