@@ -15,20 +15,16 @@
     };
 
     timewarrior-stop-work = {
-      Unit = {
-        Description = "Stop Timewarrior work";
-        Before = [ "shutdown.target" "reboot.target" "halt.target" ];
-      };
+      Unit = { Description = "Stop Timewarrior work"; };
 
       Service = {
         Type = "oneshot";
-        ExecStart = "${pkgs.timewarrior}/bin/timew stop work";
-        TimeoutStartSec = "10s";
+        ExecStop = "${pkgs.timewarrior}/bin/timew stop work";
+        StandardOutput = "journal";
+        RemainAfterExit = "yes";
       };
 
-      Install = {
-        WantedBy = [ "shutdown.target" "reboot.target" "halt.target" ];
-      };
+      Install = { WantedBy = [ "default.target" ]; };
     };
   };
 
