@@ -20,7 +20,7 @@
   };
 
   home = {
-    packages = [ pkgs.ripgrep pkgs-unstable.gopls pkgs.sqls ];
+    packages = [ pkgs.ripgrep pkgs-unstable.gopls pkgs.sqls pkgs.prettierd ];
 
     sessionVariables = {
       EDITOR = "nvim";
@@ -108,6 +108,7 @@
       typescript-language-server
       pyright
       vscode-langservers-extracted
+      efm-langserver
     ];
   };
 }

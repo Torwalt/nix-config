@@ -102,7 +102,7 @@ lspconfig.jdtls.setup {on_attach = on_attach}
 lspconfig.terraformls.setup {on_attach = on_attach}
 lspconfig.yamlls.setup {on_attach = on_attach, autostart = false}
 lspconfig.jsonls.setup {on_attach = on_attach}
--- lspconfig.eslint.setup {on_attach = on_attach}
+lspconfig.eslint.setup {on_attach = on_attach}
 lspconfig.pyright.setup {on_attach = on_attach}
 
 lspconfig.nil_ls.setup {
@@ -287,5 +287,33 @@ lspconfig.ts_ls.setup {
       }
     },
 
-    on_attach = on_attach
+    on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+    end
 }
+
+local prettier = {
+  formatCommand = 'prettierd "${INPUT}"',
+  formatStdin = true,
+  -- env = {
+  --   string.format('PRETTIERD_DEFAULT_CONFIG=%s', vim.fn.expand('~/.config/nvim/utils/linter-config/.prettierrc.json')),
+  -- },
+}
+
+lspconfig.efm.setup({
+    init_options = {documentFormatting = true},
+    filetypes = {'typescript', 'javascript', 'typescriptreact', 'javascriptreact', 'json'},
+    settings = {
+        rootMarkers = {".prettierrc", ".prettierrc.json", ".prettierrc.js", "package.json"},
+        languages = {
+            typescript = {prettier},
+            javascript = {prettier},
+            typescriptreact = {prettier},
+            javascriptreact = {prettier},
+            json = {prettier}
+        }
+    }
+})
+
