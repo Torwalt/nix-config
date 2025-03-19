@@ -12,7 +12,7 @@ let
 
     sleep 1
 
-    ${pkgs.swww}/bin/swww img ${../../../wp.jpg}
+    ${pkgs.swww}/bin/swww img ${../../../wp.png}
   '';
 
   lockScript = pkgs.pkgs.writeShellScriptBin "lock" ''
