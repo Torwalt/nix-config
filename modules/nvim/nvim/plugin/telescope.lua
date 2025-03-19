@@ -44,6 +44,7 @@ telescope.setup {
 
 telescope.load_extension("live_grep_args")
 telescope.load_extension("emoji")
+nmap("<leader>fe", function() telescope.extensions.emoji.emoji() end)
 
 local tele_builtin = require('telescope.builtin')
 
