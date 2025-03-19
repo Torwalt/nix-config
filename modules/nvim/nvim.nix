@@ -9,6 +9,14 @@
           };
         };
       })
+      (final: prev: {
+        vimPlugins = prev.vimPlugins // {
+          telescope-emoji-nvim = prev.vimUtils.buildVimPlugin {
+            name = "telescope-emoji-nvim";
+            src = inputs.plugin-telescope-emoji-nvim;
+          };
+        };
+      })
     ];
 
     # Configure your nixpkgs instance
@@ -93,6 +101,7 @@
 
       # From overlay
       neotest-golang-nvim
+      telescope-emoji-nvim
 
       nvim-treesitter.withAllGrammars
       nvim-treesitter-textobjects

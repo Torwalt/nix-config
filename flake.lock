@@ -354,35 +354,19 @@
         "type": "github"
       }
     },
-    "plugin-sqls-nvim": {
+    "plugin-telescope-emoji-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1733090837,
-        "narHash": "sha256-o5uD6shPkweuE+k/goBX42W3I2oojXVijfJC7L50sGU=",
-        "owner": "nanotee",
-        "repo": "sqls.nvim",
-        "rev": "a514379f5f89bf72955ed3bf5c1c31a40b8a1472",
+        "lastModified": 1670503796,
+        "narHash": "sha256-8V3MTporANLtZkH0RuLviWlgMmR6fay0WmZ3ZOQzpKI=",
+        "owner": "xiyaowong",
+        "repo": "telescope-emoji.nvim",
+        "rev": "86248d97be84a1ce83f0541500ef9edc99ea2aa1",
         "type": "github"
       },
       "original": {
-        "owner": "nanotee",
-        "repo": "sqls.nvim",
-        "type": "github"
-      }
-    },
-    "plugin-vim-delve": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1670926188,
-        "narHash": "sha256-wMDTMMvtjkPaWtlV6SWlQ5B7YVsJ4gjPZKPactW8HAE=",
-        "owner": "sebdah",
-        "repo": "vim-delve",
-        "rev": "41d6ad294fb6dd5090f5f938318fc4ed73b6e1ea",
-        "type": "github"
-      },
-      "original": {
-        "owner": "sebdah",
-        "repo": "vim-delve",
+        "owner": "xiyaowong",
+        "repo": "telescope-emoji.nvim",
         "type": "github"
       }
     },
@@ -395,8 +379,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nvim-rustaceanvim": "nvim-rustaceanvim",
         "plugin-neotest-golang-nvim": "plugin-neotest-golang-nvim",
-        "plugin-sqls-nvim": "plugin-sqls-nvim",
-        "plugin-vim-delve": "plugin-vim-delve",
+        "plugin-telescope-emoji-nvim": "plugin-telescope-emoji-nvim",
         "stylix": "stylix"
       }
     },

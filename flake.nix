@@ -12,11 +12,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Nvim plugin packaging
-    plugin-vim-delve.url = "github:sebdah/vim-delve";
-    plugin-vim-delve.flake = false;
-    plugin-sqls-nvim.url = "github:nanotee/sqls.nvim";
-    plugin-sqls-nvim.flake = false;
+    plugin-telescope-emoji-nvim.url = "github:xiyaowong/telescope-emoji.nvim";
+    plugin-telescope-emoji-nvim.flake = false;
+
     # v1.3.0
     plugin-neotest-golang-nvim.url =
       "github:fredrikaverpil/neotest-golang/ea1c3a7";

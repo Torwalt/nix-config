@@ -119,14 +119,6 @@ lspconfig.nil_ls.setup {
 
 lspconfig.wgsl_analyzer.setup({})
 
-local sqls_on_attach = function(client, bufnr)
-    require"lsp-format".on_attach(client)
-    on_attach(client, bufnr)
-    require('sqls').on_attach(client, bufnr)
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.documentRangeFormattingProvider = false
-end
-
 local rust_on_attach = function(_, bufnr)
     on_attach(nil, bufnr)
 
