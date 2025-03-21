@@ -118,6 +118,7 @@
       pyright
       vscode-langservers-extracted
       efm-langserver
+      astro-language-server
     ];
   };
 }

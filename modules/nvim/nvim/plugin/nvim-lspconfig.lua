@@ -105,6 +105,12 @@ lspconfig.jsonls.setup {on_attach = on_attach}
 -- lspconfig.eslint.setup {on_attach = on_attach}
 lspconfig.pyright.setup {on_attach = on_attach}
 
+lspconfig.astro.setup{
+  on_attach=on_attach,
+  filetypes = { "astro" },
+  root_dir = lspconfig.util.root_pattern("astro.config.mjs", "astro.config.js", "package.json")
+}
+
 lspconfig.nil_ls.setup {
     on_attach = on_attach,
     settings = {

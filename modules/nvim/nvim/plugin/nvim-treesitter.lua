@@ -19,7 +19,10 @@ require('nvim-treesitter.configs').setup {
         disable = ts_disable,
         additional_vim_regex_highlighting = false
     },
-    indent = {enable = true, disable = ts_disable},
+    indent = {
+        enable = true,
+        disable = ts_disable
+    },
     textobjects = {
         select = {
             enable = true,
