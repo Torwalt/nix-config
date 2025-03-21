@@ -188,7 +188,7 @@ end
 
 lspconfig.ts_ls.setup {
     -- Command to start the language server
-    cmd = { "typescript-language-server", "--stdio" },
+    cmd = { "typescript-language-server", "--stdio"},
     
     -- Performance optimizations
     flags = {
@@ -240,7 +240,7 @@ lspconfig.ts_ls.setup {
         implementationsCodeLens = false,  -- Disable code lens which can be expensive
         referencesCodeLens = false,       -- Disable code lens which can be expensive
         tsserver = {
-          maxTsServerMemory = 4096,      -- Limit memory usage to prevent bloat
+          maxTsServerMemory = 8192,      -- Limit memory usage to prevent bloat
           useSyntaxServer = "auto",      -- Use syntax server for lighter operations
           watchOptions = {
             watchFile = "useFsEvents",   -- More efficient file watching
@@ -273,10 +273,13 @@ lspconfig.ts_ls.setup {
     init_options = {
       hostInfo = "neovim",
       disableAutomaticTypingAcquisition = true, -- Prevent automatic downloading of type definitions
-      maxTsServerMemory = 4096,
+      maxTsServerMemory = 8192,
       tsserver = {
         logVerbosity = "off", -- Reduce verbose logging
-      }
+      },
+      preferences = {
+        includeCompletionsForModuleExports = false,
+      },
     },
 
     on_attach = function(client, bufnr)
