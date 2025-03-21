@@ -13,15 +13,15 @@ telescope.setup {
             '--smart-case', '-uu'
         },
         mappings = {
-            n = {['<c-d>'] = require('telescope.actions').delete_buffer},
+            n = { ['<c-d>'] = require('telescope.actions').delete_buffer },
             i = {
-                    ["<C-j>"] = t_actions.cycle_history_next,
-                    ["<C-k>"] = t_actions.cycle_history_prev,
+                ["<C-j>"] = t_actions.cycle_history_next,
+                ["<C-k>"] = t_actions.cycle_history_prev,
             },
         },
         history = {
-          path = vim.fn.stdpath('data') .. '/telescope_history',
-          limit = 100,
+            path = vim.fn.stdpath('data') .. '/telescope_history',
+            limit = 100,
         },
     },
     extensions = {
@@ -29,7 +29,7 @@ telescope.setup {
             auto_quoting = true,
             mappings = {
                 i = {
-                    ["<C-i>"] = lga_actions.quote_prompt({postfix = " --iglob "}),
+                    ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
                 }
             }
         }
@@ -48,29 +48,29 @@ nmap("<leader>fe", function() telescope.extensions.emoji.emoji() end)
 
 local tele_builtin = require('telescope.builtin')
 
-nmap("<leader>ff", function() tele_builtin.find_files({hidden = true}) end)
+nmap("<leader>ff", function() tele_builtin.find_files({ hidden = true }) end)
 
 nmap("<leader>fw",
-     function() telescope.extensions.live_grep_args.live_grep_args() end)
+    function() telescope.extensions.live_grep_args.live_grep_args() end)
 
-nmap("<leader>fb", function() tele_builtin.buffers({sort_mru = true}) end)
+nmap("<leader>fb", function() tele_builtin.buffers({ sort_mru = true }) end)
 
-nmap("/", function() tele_builtin.current_buffer_fuzzy_find({sort_mru = true}) end)
+nmap("/", function() tele_builtin.current_buffer_fuzzy_find({ sort_mru = true }) end)
 
 t_commands = {
     {
         desc = "Convert to camel case",
         command = "lua require('textcase').current_word('to_camel_case')"
     }, {
-        desc = "Convert to constant case",
-        command = "lua require('textcase').current_word('to_constant_case')"
-    }, {
-        desc = "Convert to upper case",
-        command = "lua require('textcase').current_word('to_upper_case')"
-    }, {
-        desc = "Convert to snake case",
-        command = "lua require('textcase').current_word('to_snake_case')"
-    }
+    desc = "Convert to constant case",
+    command = "lua require('textcase').current_word('to_constant_case')"
+}, {
+    desc = "Convert to upper case",
+    command = "lua require('textcase').current_word('to_upper_case')"
+}, {
+    desc = "Convert to snake case",
+    command = "lua require('textcase').current_word('to_snake_case')"
+}
 }
 
 -- Allows search, selection and execution of commands defined in t_commands.
@@ -80,7 +80,7 @@ function t_command_picker()
         finder = t_finders.new_table({
             results = t_commands,
             entry_maker = function(item)
-                return {value = item, display = item.desc, ordinal = item.desc}
+                return { value = item, display = item.desc, ordinal = item.desc }
             end
         }),
         sorter = t_conf_vals.generic_sorter({}),

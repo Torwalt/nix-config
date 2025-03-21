@@ -8,4 +8,3 @@ telekasten.setup({
 
 -- Launch panel if nothing is typed after <leader>z
 nmap("<leader>Z", function() telekasten.panel() end)
-

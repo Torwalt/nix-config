@@ -10,7 +10,7 @@ require('gitblame').setup {
     enabled = true
 }
 
-vim.api.nvim_create_autocmd({"BufEnter", "BufReadPost"}, {
+vim.api.nvim_create_autocmd({ "BufEnter", "BufReadPost" }, {
     callback = function()
         local should_disable = gitblame_disable()
         vim.g.gitblame_enabled = should_disable and 0 or 1

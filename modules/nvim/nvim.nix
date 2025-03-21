@@ -110,7 +110,7 @@
 
     extraPackages = with pkgs; [
       nil
-      luajitPackages.lua-lsp
+      lua-language-server
       python3
       yaml-language-server
       chafa

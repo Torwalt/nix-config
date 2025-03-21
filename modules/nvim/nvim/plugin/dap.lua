@@ -29,7 +29,7 @@ dap_go.setup {
         -- assigned dynamically.
         port = "${port}",
         -- additional args to pass to dlv
-        args = {"--config max-string-len=20000"},
+        args = { "--config max-string-len=20000" },
         -- the build flags that are passed to delve.
         -- defaults to empty string, but can be used to provide flags
         -- such as "-tags=unit" to make sure the test suite is
@@ -37,7 +37,7 @@ dap_go.setup {
         -- passing build flags using args is ineffective, as those are
         -- ignored by delve in dap mode.
         -- avaliable ui interactive function to prompt for arguments get_arguments
-        build_flags = {"-tags=integration clickhouse"},
+        build_flags = { "-tags=integration clickhouse" },
         -- whether the dlv process to be created detached or not. there is
         -- an issue on Windows where this needs to be set to false
         -- otherwise the dlv server creation will fail.
@@ -68,7 +68,7 @@ dap.configurations.rust = {
         request = 'launch',
         program = function()
             return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/',
-                                'file')
+                'file')
         end,
         cwd = '${workspaceFolder}',
         stopOnEntry = false,

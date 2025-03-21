@@ -1,7 +1,7 @@
 local api = vim.api
 
 local function ts_disable(lang, bufnr)
-    local disabled_langs = {"yaml", "json"}
+    local disabled_langs = { "yaml", "json" }
     local line_count_exceeds = api.nvim_buf_line_count(bufnr) > 5000
 
     for _, l in ipairs(disabled_langs) do
@@ -54,4 +54,3 @@ end)
 nmap("]]", function()
     require('nvim-treesitter.textobjects.move').goto_next_start('@function.outer')
 end)
-

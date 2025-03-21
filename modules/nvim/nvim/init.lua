@@ -28,9 +28,9 @@ vim.g.mapleader = " "
 vim.g.netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 
 vim.api.nvim_create_user_command(
-  'CopyBuffer',
-  "let @+ = expand('%')",
-  {bang = false}
+    'CopyBuffer',
+    "let @+ = expand('%')",
+    { bang = false }
 )
 
 vim.filetype.add { extension = { pgsql = 'sql' } }

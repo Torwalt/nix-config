@@ -1,5 +1,3 @@
-local util = require "lspconfig/util"
-
 local on_attach = function(_, bufnr)
     local function buf_set_keymap(...)
         vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -13,7 +11,7 @@ local on_attach = function(_, bufnr)
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- Mappings.
-    local opts = {noremap = true, silent = true}
+    local opts = { noremap = true, silent = true }
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
@@ -21,28 +19,28 @@ local on_attach = function(_, bufnr)
     buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
     buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
     buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>',
-                   opts)
+        opts)
     buf_set_keymap('n', '<leader>wa',
-                   '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+        '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
     buf_set_keymap('n', '<leader>wr',
-                   '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+        '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
     buf_set_keymap('n', '<leader>wl',
-                   '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>',
-                   opts)
+        '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>',
+        opts)
     buf_set_keymap('n', '<leader>D',
-                   '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+        '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
     buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>',
-                   opts)
+        opts)
     buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
     buf_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>',
-                   opts)
+        opts)
     buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
     buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
     buf_set_keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>',
-                   opts)
+        opts)
     buf_set_keymap('n', '<leader>F',
-                   '<cmd>lua vim.lsp.buf.format { async = true }<CR>', opts)
+        '<cmd>lua vim.lsp.buf.format { async = true }<CR>', opts)
 end
 
 local lspconfig = require("lspconfig")
@@ -51,15 +49,33 @@ vim.lsp.set_log_level("debug")
 
 lspconfig.lua_ls.setup {
     on_attach = on_attach,
-    cmd = {"lua-lsp"},
     settings = {
         Lua = {
-            workspace = {checkThirdParty = false},
-            telemetry = {enable = false},
+            runtime = {
+                -- Tell the language server which version of Lua you're using
+                version = 'LuaJIT',
+                -- Setup your lua path
+                path = vim.split(package.path, ';'),
+            },
+            diagnostics = {
+                -- Recognize the `vim` global
+                globals = { 'vim' },
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = {
+                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+                },
+                checkThirdParty = false,
+            },
+            telemetry = {
+                enable = false,
+            },
             format = {
                 enable = true,
                 defaultConfig = {
-                indent_style = "space",
+                    indent_style = "space",
                     indent_size = "4",
                 }
             }
@@ -70,13 +86,13 @@ lspconfig.lua_ls.setup {
 require("lsp-format").setup {}
 
 local go_on_attach = function(client, bufnr)
-    require"lsp-format".on_attach(client)
+    require "lsp-format".on_attach(client)
     on_attach(client, bufnr)
 end
 
 lspconfig.gopls.setup {
     on_attach = go_on_attach,
-    init_options = {buildFlags = {"-tags=clickhouse,integration"}}
+    init_options = { buildFlags = { "-tags=clickhouse,integration" } }
 }
 
 lspconfig.solargraph.setup {
@@ -95,32 +111,32 @@ lspconfig.solargraph.setup {
     }
 }
 
-lspconfig.intelephense.setup {on_attach = on_attach}
+lspconfig.intelephense.setup { on_attach = on_attach }
 
-lspconfig.jdtls.setup {on_attach = on_attach}
+lspconfig.jdtls.setup { on_attach = on_attach }
 
-lspconfig.terraformls.setup {on_attach = on_attach}
-lspconfig.yamlls.setup {on_attach = on_attach, autostart = false}
-lspconfig.jsonls.setup {on_attach = on_attach}
+lspconfig.terraformls.setup { on_attach = on_attach }
+lspconfig.yamlls.setup { on_attach = on_attach, autostart = false }
+lspconfig.jsonls.setup { on_attach = on_attach }
 -- lspconfig.eslint.setup {on_attach = on_attach}
-lspconfig.pyright.setup {on_attach = on_attach}
+lspconfig.pyright.setup { on_attach = on_attach }
 
-lspconfig.astro.setup{
-  on_attach=on_attach,
-  filetypes = { "astro" },
-  root_dir = lspconfig.util.root_pattern("astro.config.mjs", "astro.config.js", "package.json")
+lspconfig.astro.setup {
+    on_attach = on_attach,
+    filetypes = { "astro" },
+    root_dir = lspconfig.util.root_pattern("astro.config.mjs", "astro.config.js", "package.json")
 }
 
 lspconfig.nil_ls.setup {
     on_attach = on_attach,
     settings = {
         ['nil'] = {
-          testSetting = 42,
-          formatting = {
-            command = { "nixfmt" },
-          },
+            testSetting = 42,
+            formatting = {
+                command = { "nixfmt" },
+            },
         },
-      }
+    }
 }
 
 lspconfig.wgsl_analyzer.setup({})
@@ -129,13 +145,13 @@ local rust_on_attach = function(_, bufnr)
     on_attach(nil, bufnr)
 
     nbufmap("<leader>cc", function() vim.cmd.RustLsp("codeAction") end, bufnr)
-    nbufmap("<leader>rr", function() vim.cmd.RustLsp({"flyCheck", "run"}) end,
-            bufnr)
-    nbufmap("<leader>rh", function() vim.cmd.RustLsp({"view", "hir"}) end, bufnr)
-    nbufmap("<leader>rm", function() vim.cmd.RustLsp({"view", "mir"}) end, bufnr)
-    nbufmap("<leader>rt", function() vim.cmd.RustLsp({"testables"}) end, bufnr)
+    nbufmap("<leader>rr", function() vim.cmd.RustLsp({ "flyCheck", "run" }) end,
+        bufnr)
+    nbufmap("<leader>rh", function() vim.cmd.RustLsp({ "view", "hir" }) end, bufnr)
+    nbufmap("<leader>rm", function() vim.cmd.RustLsp({ "view", "mir" }) end, bufnr)
+    nbufmap("<leader>rt", function() vim.cmd.RustLsp({ "testables" }) end, bufnr)
     nbufmap("<leader>rT",
-            function() vim.cmd.RustLsp({"testables", bang = true}) end, bufnr)
+        function() vim.cmd.RustLsp({ "testables", bang = true }) end, bufnr)
     nbufmap("<leader>F", ":RustFmt<cr>", bufnr)
 end
 
@@ -148,16 +164,16 @@ vim.g.rustaceanvim = function()
             crate_test_executor = "neotest",
             enable_clippy = true,
             enable_nextest = true,
-            code_actions = {ui_select_fallback = true}
+            code_actions = { ui_select_fallback = true }
         },
         server = {
-            cmd = {"rust-analyzer"},
+            cmd = { "rust-analyzer" },
 
             on_attach = rust_on_attach,
 
             settings = {
                 ["rust-analyzer"] = {
-                    cargo = {buildScripts = {enable = true}, allTargets = true},
+                    cargo = { buildScripts = { enable = true }, allTargets = true },
                     hover = {
                         actions = {
                             implementations = true,
@@ -166,16 +182,16 @@ vim.g.rustaceanvim = function()
                         }
                     },
                     imports = {
-                        granularity = {group = "module"},
+                        granularity = { group = "module" },
                         prefix = "self"
                     },
                     inlayHints = {
-                        bindingModeHints = {enable = true},
-                        closureCaptureHints = {enable = true},
-                        closureReturnTypeHints = {enable = "always"},
+                        bindingModeHints = { enable = true },
+                        closureCaptureHints = { enable = true },
+                        closureReturnTypeHints = { enable = "always" },
                         genericParameterHints = {
-                            lifetime = {enable = true},
-                            type = {enable = true}
+                            lifetime = { enable = true },
+                            type = { enable = true }
                         },
                         lifetimeElisionHints = {
                             enable = "skip_trivial",
@@ -183,8 +199,8 @@ vim.g.rustaceanvim = function()
                         },
                         maxLength = nil
                     },
-                    procMacro = {enable = true},
-                    rust = {analyzerTargetDir = true}
+                    procMacro = { enable = true },
+                    rust = { analyzerTargetDir = true }
                 }
             }
         }
@@ -194,98 +210,98 @@ end
 
 lspconfig.ts_ls.setup {
     -- Command to start the language server
-    cmd = { "typescript-language-server", "--stdio"},
-    
+    cmd = { "typescript-language-server", "--stdio" },
+
     -- Performance optimizations
     flags = {
-      debounce_text_changes = 150,      -- Debounce time in ms
-      allow_incremental_sync = true,    -- Enable incremental document sync
+        debounce_text_changes = 150,   -- Debounce time in ms
+        allow_incremental_sync = true, -- Enable incremental document sync
     },
-    
+
     -- Customize capabilities
     capabilities = (function()
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities.textDocument.completion.completionItem.snippetSupport = true
-      
-      -- Limit some features that might be causing performance issues
-      capabilities.textDocument.codeAction = {
-        dynamicRegistration = false,
-        codeActionLiteralSupport = {
-          codeActionKind = {
-            valueSet = {
-              "quickfix",
-              "refactor",
-              "refactor.extract",
-              "refactor.inline",
-              "refactor.rewrite",
-              "source",
-              "source.organizeImports",
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+        -- Limit some features that might be causing performance issues
+        capabilities.textDocument.codeAction = {
+            dynamicRegistration = false,
+            codeActionLiteralSupport = {
+                codeActionKind = {
+                    valueSet = {
+                        "quickfix",
+                        "refactor",
+                        "refactor.extract",
+                        "refactor.inline",
+                        "refactor.rewrite",
+                        "source",
+                        "source.organizeImports",
+                    }
+                }
             }
-          }
         }
-      }
-      
-      return capabilities
+
+        return capabilities
     end)(),
-    
+
     settings = {
-      typescript = {
-        inlayHints = {
-          -- Disable inlay hints which can cause performance issues
-          includeInlayParameterNameHints = "none",
-          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-          includeInlayFunctionParameterTypeHints = false,
-          includeInlayVariableTypeHints = false,
-          includeInlayPropertyDeclarationTypeHints = false,
-          includeInlayFunctionLikeReturnTypeHints = false,
-          includeInlayEnumMemberValueHints = false,
+        typescript = {
+            inlayHints = {
+                -- Disable inlay hints which can cause performance issues
+                includeInlayParameterNameHints = "none",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayFunctionParameterTypeHints = false,
+                includeInlayVariableTypeHints = false,
+                includeInlayPropertyDeclarationTypeHints = false,
+                includeInlayFunctionLikeReturnTypeHints = false,
+                includeInlayEnumMemberValueHints = false,
+            },
+            suggest = {
+                completeFunctionCalls = false, -- Can be expensive
+            },
+            implementationsCodeLens = false,   -- Disable code lens which can be expensive
+            referencesCodeLens = false,        -- Disable code lens which can be expensive
+            tsserver = {
+                maxTsServerMemory = 8192,      -- Limit memory usage to prevent bloat
+                useSyntaxServer = "auto",      -- Use syntax server for lighter operations
+                watchOptions = {
+                    watchFile = "useFsEvents", -- More efficient file watching
+                    watchDirectory = "useFsEvents",
+                    fallbackPolling = "dynamicPriority",
+                }
+            }
         },
-        suggest = {
-          completeFunctionCalls = false, -- Can be expensive
-        },
-        implementationsCodeLens = false,  -- Disable code lens which can be expensive
-        referencesCodeLens = false,       -- Disable code lens which can be expensive
-        tsserver = {
-          maxTsServerMemory = 8192,      -- Limit memory usage to prevent bloat
-          useSyntaxServer = "auto",      -- Use syntax server for lighter operations
-          watchOptions = {
-            watchFile = "useFsEvents",   -- More efficient file watching
-            watchDirectory = "useFsEvents",
-            fallbackPolling = "dynamicPriority",
-          }
+        javascript = {
+            inlayHints = {
+                -- Same hint disables for JavaScript
+                includeInlayParameterNameHints = "none",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayFunctionParameterTypeHints = false,
+                includeInlayVariableTypeHints = false,
+                includeInlayPropertyDeclarationTypeHints = false,
+                includeInlayFunctionLikeReturnTypeHints = false,
+                includeInlayEnumMemberValueHints = false,
+            },
+            -- Same settings as TypeScript
+            suggest = {
+                completeFunctionCalls = false,
+            },
+            implementationsCodeLens = false,
+            referencesCodeLens = false,
         }
-      },
-      javascript = {
-        inlayHints = {
-          -- Same hint disables for JavaScript
-          includeInlayParameterNameHints = "none",
-          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-          includeInlayFunctionParameterTypeHints = false,
-          includeInlayVariableTypeHints = false,
-          includeInlayPropertyDeclarationTypeHints = false,
-          includeInlayFunctionLikeReturnTypeHints = false,
-          includeInlayEnumMemberValueHints = false,
-        },
-        -- Same settings as TypeScript
-        suggest = {
-          completeFunctionCalls = false,
-        },
-        implementationsCodeLens = false,
-        referencesCodeLens = false,
-      }
     },
-    
+
     -- Initialize options
     init_options = {
-      hostInfo = "neovim",
-      disableAutomaticTypingAcquisition = true, -- Prevent automatic downloading of type definitions
-      maxTsServerMemory = 8192,
-      tsserver = {
-        logVerbosity = "off", -- Reduce verbose logging
-      },
-      preferences = {
-        includeCompletionsForModuleExports = false,
-      },
+        hostInfo = "neovim",
+        disableAutomaticTypingAcquisition = true, -- Prevent automatic downloading of type definitions
+        maxTsServerMemory = 8192,
+        tsserver = {
+            logVerbosity = "off", -- Reduce verbose logging
+        },
+        preferences = {
+            includeCompletionsForModuleExports = false,
+        },
     },
 
     on_attach = function(client, bufnr)
@@ -296,25 +312,24 @@ lspconfig.ts_ls.setup {
 }
 
 local prettier = {
-  formatCommand = 'prettierd "${INPUT}"',
-  formatStdin = true,
-  -- env = {
-  --   string.format('PRETTIERD_DEFAULT_CONFIG=%s', vim.fn.expand('~/.config/nvim/utils/linter-config/.prettierrc.json')),
-  -- },
+    formatCommand = 'prettierd "${INPUT}"',
+    formatStdin = true,
+    -- env = {
+    --   string.format('PRETTIERD_DEFAULT_CONFIG=%s', vim.fn.expand('~/.config/nvim/utils/linter-config/.prettierrc.json')),
+    -- },
 }
 
 lspconfig.efm.setup({
-    init_options = {documentFormatting = true},
-    filetypes = {'typescript', 'javascript', 'typescriptreact', 'javascriptreact', 'json'},
+    init_options = { documentFormatting = true },
+    filetypes = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact', 'json' },
     settings = {
-        rootMarkers = {".prettierrc", ".prettierrc.json", ".prettierrc.js", "package.json"},
+        rootMarkers = { ".prettierrc", ".prettierrc.json", ".prettierrc.js", "package.json" },
         languages = {
-            typescript = {prettier},
-            javascript = {prettier},
-            typescriptreact = {prettier},
-            javascriptreact = {prettier},
-            json = {prettier}
+            typescript = { prettier },
+            javascript = { prettier },
+            typescriptreact = { prettier },
+            javascriptreact = { prettier },
+            json = { prettier }
         }
     }
 })
-
