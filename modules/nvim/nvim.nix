@@ -45,24 +45,10 @@
     vimAlias = true;
     vimdiffAlias = true;
 
-    extraLuaConfig = ''
-      ${builtins.readFile ./nvim/init.lua}
-      ${builtins.readFile ./nvim/plugin/map.lua}
-      ${builtins.readFile ./nvim/plugin/remap.lua}
-      ${builtins.readFile ./nvim/plugin/color.lua}
-      ${builtins.readFile ./nvim/plugin/comment.lua}
-      ${builtins.readFile ./nvim/plugin/coq_nvim.lua}
-      ${builtins.readFile ./nvim/plugin/nvim-treesitter.lua}
-      ${builtins.readFile ./nvim/plugin/telescope.lua}
-      ${builtins.readFile ./nvim/plugin/nvim-lspconfig.lua}
-      ${builtins.readFile ./nvim/plugin/telekasten.lua}
-      ${builtins.readFile ./nvim/plugin/telescope-media-files.lua}
-      ${builtins.readFile ./nvim/plugin/dap.lua}
-      ${builtins.readFile ./nvim/plugin/neotest.lua}
-      ${builtins.readFile ./nvim/plugin/ft-rules.lua}
-      ${builtins.readFile ./nvim/plugin/gitblame.lua}
-      ${builtins.readFile ./nvim/plugin/avante.lua}
-    '';
+    extraLuaConfig = let
+      fileUtils = import ../lib/fileutils.nix;
+      # lib must be before plugin
+    in fileUtils.readNeovimConfig ./nvim [ "lib" "plugin" ];
 
     plugins = with pkgs.vimPlugins; [
       tokyonight-nvim

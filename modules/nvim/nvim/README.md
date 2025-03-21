@@ -3,3 +3,5 @@
 These files do not have import capabilities as they are used to construct one
 big lua file which is then used as nix nvim extraLuaConfig.
 
+The files from ./lib must be loaded first.
+

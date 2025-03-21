@@ -1,5 +1,1 @@
-{ pkgs, ... }: {
-  home = {
-    packages = with pkgs; [ wowup-cf ];
-  };
-}
+{ pkgs, ... }: { home = { packages = with pkgs; [ wowup-cf ]; }; }
