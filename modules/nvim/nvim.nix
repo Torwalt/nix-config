@@ -47,8 +47,13 @@
 
     extraLuaConfig = let
       fileUtils = import ../lib/fileutils.nix;
-      # lib must be before plugin
-    in fileUtils.readNeovimConfig ./nvim [ "lib" "plugin" ];
+      patterns = [ "$NIX_OS_PATH_PLACEHOLDER_FRIENDLY_SNIPPET" ];
+      replacements = [ "${pkgs.vimPlugins.friendly-snippets}" ];
+
+      configContent = fileUtils.readNeovimConfig ./nvim [ "lib" "plugin" ];
+
+      replaced = builtins.replaceStrings patterns replacements configContent;
+    in replaced;
 
     plugins = with pkgs.vimPlugins; [
       tokyonight-nvim
@@ -66,6 +71,9 @@
       telescope-media-files-nvim
       calendar-vim
       text-case-nvim
+
+      luasnip
+      friendly-snippets
 
       # ✨ AI ✨
       avante-nvim
