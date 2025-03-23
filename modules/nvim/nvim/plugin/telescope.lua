@@ -42,22 +42,22 @@ telescope.setup {
     }
 }
 
-telescope.load_extension("live_grep_args")
 telescope.load_extension("emoji")
 nmap("<leader>fe", function() telescope.extensions.emoji.emoji() end)
 
+telescope.load_extension('luasnip')
+nmap("<leader>fs", function() telescope.extensions.luasnip.luasnip() end)
+
 local tele_builtin = require('telescope.builtin')
-
 nmap("<leader>ff", function() tele_builtin.find_files({ hidden = true }) end)
+nmap("<leader>fb", function() tele_builtin.buffers({ sort_mru = true }) end)
+nmap("/", function() tele_builtin.current_buffer_fuzzy_find({ sort_mru = true }) end)
 
+telescope.load_extension("live_grep_args")
 nmap("<leader>fw",
     function() telescope.extensions.live_grep_args.live_grep_args() end)
 
-nmap("<leader>fb", function() tele_builtin.buffers({ sort_mru = true }) end)
-
-nmap("/", function() tele_builtin.current_buffer_fuzzy_find({ sort_mru = true }) end)
-
-t_commands = {
+local t_commands = {
     {
         desc = "Convert to camel case",
         command = "lua require('textcase').current_word('to_camel_case')"
@@ -74,7 +74,7 @@ t_commands = {
 }
 
 -- Allows search, selection and execution of commands defined in t_commands.
-function t_command_picker()
+local function t_command_picker()
     t_pickers.new({}, {
         prompt_title = "Custom Commands",
         finder = t_finders.new_table({

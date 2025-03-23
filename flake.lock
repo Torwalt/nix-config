@@ -370,6 +370,22 @@
         "type": "github"
       }
     },
+    "plugin-telescope-luasnip-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1734145237,
+        "narHash": "sha256-9XsV2hPjt05q+y5FiSbKYYXnznDKYOsDwsVmfskYd3M=",
+        "owner": "benfowler",
+        "repo": "telescope-luasnip.nvim",
+        "rev": "07a2a2936a7557404c782dba021ac0a03165b343",
+        "type": "github"
+      },
+      "original": {
+        "owner": "benfowler",
+        "repo": "telescope-luasnip.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
@@ -380,6 +396,7 @@
         "nvim-rustaceanvim": "nvim-rustaceanvim",
         "plugin-neotest-golang-nvim": "plugin-neotest-golang-nvim",
         "plugin-telescope-emoji-nvim": "plugin-telescope-emoji-nvim",
+        "plugin-telescope-luasnip-nvim": "plugin-telescope-luasnip-nvim",
         "stylix": "stylix"
       }
     },

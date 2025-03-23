@@ -17,6 +17,14 @@
           };
         };
       })
+      (final: prev: {
+        vimPlugins = prev.vimPlugins // {
+          telescope-luasnip-nvim = prev.vimUtils.buildVimPlugin {
+            name = "telescope-luasnip-nvim";
+            src = inputs.plugin-telescope-luasnip-nvim;
+          };
+        };
+      })
     ];
 
     # Configure your nixpkgs instance
@@ -96,6 +104,7 @@
       # From overlay
       neotest-golang-nvim
       telescope-emoji-nvim
+      telescope-luasnip-nvim
 
       nvim-treesitter.withAllGrammars
       nvim-treesitter-textobjects

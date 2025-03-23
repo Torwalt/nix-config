@@ -15,6 +15,9 @@
     plugin-telescope-emoji-nvim.url = "github:xiyaowong/telescope-emoji.nvim";
     plugin-telescope-emoji-nvim.flake = false;
 
+    plugin-telescope-luasnip-nvim.url = "github:benfowler/telescope-luasnip.nvim";
+    plugin-telescope-luasnip-nvim.flake = false;
+
     # v1.3.0
     plugin-neotest-golang-nvim.url =
       "github:fredrikaverpil/neotest-golang/ea1c3a7";
