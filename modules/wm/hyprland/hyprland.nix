@@ -10,6 +10,8 @@ let
 
     ${pkgs.swww}/bin/swww init &
 
+    ${pkgs.maestral-gui}/bin/maestral_qt &
+
     sleep 1
 
     ${pkgs.swww}/bin/swww img ${../../../wp.png}
