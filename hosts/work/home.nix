@@ -55,6 +55,7 @@ in {
       pulumi-bin
       git-lfs
       typescript
+      docker-credential-helpers
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
