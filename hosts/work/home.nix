@@ -56,6 +56,7 @@ in {
       git-lfs
       typescript
       docker-credential-helpers
+      pgformatter
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
