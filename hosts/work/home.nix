@@ -57,6 +57,7 @@ in {
       typescript
       docker-credential-helpers
       pgformatter
+      iredis
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
