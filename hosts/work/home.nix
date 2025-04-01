@@ -58,6 +58,7 @@ in {
       docker-credential-helpers
       pgformatter
       iredis
+      pre-commit
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };

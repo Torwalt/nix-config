@@ -65,4 +65,12 @@
     enable = true;
     nativeMessagingHosts = [ pkgs.tridactyl-native ];
   };
+
+  programs.readline = {
+    enable = true;
+    variables = {
+      editing-mode = "vi";
+      show-mode-in-prompt = true;
+    };
+  };
 }
