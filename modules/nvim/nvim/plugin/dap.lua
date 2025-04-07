@@ -95,7 +95,7 @@ vim.fn.sign_define('DapLogPoint', { text = '📝', texthl = '', linehl = '', num
 vim.fn.sign_define('DapStopped', { text = '👉', texthl = '', linehl = '', numhl = '' })
 vim.fn.sign_define('DapBreakpointRejected', { text = '🚫', texthl = '', linehl = '', numhl = '' })
 
-nmap("<leader>dC", ":lua require'dap'.clear_breakpoints()<cr>")
-nmap("<leader>db", ":lua require'dap'.toggle_breakpoint()<cr>")
-nmap("<leader>dr", ":lua require'dap'.repl.open()<cr>")
-nmap("<leader>dc", ":lua require'dap'.continue()<cr>")
+nmap("<leader>dC", function() require('dap').clear_breakpoints() end)
+nmap("<leader>db", function() require('dap').toggle_breakpoint() end)
+nmap("<leader>dr", function() require('dap').repl.open() end)
+nmap("<leader>dc", function() require('dap').continue() end)

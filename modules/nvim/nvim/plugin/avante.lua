@@ -42,13 +42,13 @@ require('avante').setup({
         mappings = {
             --- @class AvanteConflictMappings
             diff = {
-                ours = "co",
-                theirs = "ct",
-                all_theirs = "ca",
-                both = "cb",
-                cursor = "cc",
-                next = "]x",
-                prev = "[x"
+                ours = "<leader>ao",
+                theirs = "<leader>at",
+                all_theirs = "<leader>aA",
+                both = "<leader>ab",
+                cursor = "<leader>ac",
+                next = "<leader>an",
+                prev = "<leader>ap"
             },
             suggestion = {
                 accept = "<M-l>",

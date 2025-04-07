@@ -58,7 +58,7 @@
       patterns = [ "$NIX_OS_PATH_PLACEHOLDER_FRIENDLY_SNIPPET" ];
       replacements = [ "${pkgs.vimPlugins.friendly-snippets}" ];
 
-      configContent = fileUtils.readNeovimConfig ./nvim [ "lib" "plugin" ];
+      configContent = fileUtils.readNeovimConfig ./nvim [ "lib" "general" "plugin" ];
 
       replaced = builtins.replaceStrings patterns replacements configContent;
     in replaced;
