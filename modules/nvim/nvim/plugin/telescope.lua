@@ -6,6 +6,24 @@ local t_pickers = require('telescope.pickers')
 local t_finders = require('telescope.finders')
 local t_conf_vals = require('telescope.config').values
 
+local function delete_buf(prompt_bufnr)
+    -- Get the selected entry
+    local selection = require('telescope.actions.state').get_selected_entry()
+    local action_state = require('telescope.actions.state')
+    local current_picker = action_state.get_current_picker(prompt_bufnr)
+
+    if selection then
+        -- Force delete the buffer with !
+        vim.cmd('bd! ' .. selection.bufnr)
+
+        -- Remove the entry from the picker
+        current_picker:delete_selection(function()
+            -- This is the callback that runs after deletion
+            current_picker:refresh()
+        end)
+    end
+end
+
 telescope.setup {
     defaults = {
         vimgrep_arguments = {
@@ -13,7 +31,9 @@ telescope.setup {
             '--smart-case', '-uu'
         },
         mappings = {
-            n = { ['<c-d>'] = require('telescope.actions').delete_buffer },
+            n = {
+                ['<c-d>'] = delete_buf
+            },
             i = {
                 ["<C-j>"] = t_actions.cycle_history_next,
                 ["<C-k>"] = t_actions.cycle_history_prev,

@@ -12,7 +12,7 @@ local window_maximized = false
 local original_statusline_color = nil
 
 -- Function to toggle window maximization
-function toggle_window_maximize()
+local function toggle_window_maximize()
     -- Store original statusline color if we haven't already
     if original_statusline_color == nil then
         -- Get current statusline highlight information
