@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
@@ -43,7 +43,7 @@ in {
 
       monitor = [ ",preferred,auto,auto" ];
 
-      env = "XCURSOR_SIZE,24";
+      env = lib.mkDefault "XCURSOR_SIZE,24";
 
       input = {
         kb_layout = "de";

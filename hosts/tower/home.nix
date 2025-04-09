@@ -64,15 +64,19 @@
       renderdoc
     ];
 
-    # sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
+    sessionVariables = {
+      WLR_NO_HARDWARE_CURSORS = 1;
+      CLUTTER_BACKEND = "wayland";
+      QT_QPA_PLATFORM = "wayland";
+      MOZ_ENABLE_WAYLAND = "1";
+      WLR_DRM_NO_ATOMIC = "1";
+    };
   };
 
   wayland.windowManager.hyprland = {
     settings = {
-      monitor = [
-        "DP-1,2560x1440@59.95,0x0,1.0"
-        "HDMI-A-3,2560x1440@99.95,2560x0,1.0"
-      ];
+      monitor =
+        [ "DP-1,2560x1440@59.95,0x0,1" "HDMI-A-3,2560x1440@59.95,2560x0,1" ];
 
       workspace = [
         "1, monitor:HDMI-A-3"
@@ -100,14 +104,17 @@
         "workspace 7,class:^(WowUpCf)$"
       ];
 
-      exec-once = [
-        "kitty"
-        "firefox"
-        "telegram-desktop"
-        "keepassxc"
-        "spotify"
-        "steam"
-        "xrandr --output HDMI-A-3 --primary"
+      exec-once =
+        [ "kitty" "firefox" "telegram-desktop" "keepassxc" "spotify" "steam" ];
+
+      env = [
+        "LIBVA_DRIVER_NAME,nvidia"
+        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        "XCURSOR_SIZE,24"
+        "GBM_BACKEND,nvidia-drm"
+        "__VK_LAYER_NV_optimus,NVIDIA_only"
+        "NVD_BACKEND,direct"
+        "WLR_DRM_NO_ATOMIC,1"
       ];
 
     };
