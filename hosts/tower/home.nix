@@ -76,7 +76,7 @@
   wayland.windowManager.hyprland = {
     settings = {
       monitor =
-        [ "DP-1,2560x1440@59.95,0x0,1" "HDMI-A-3,2560x1440@59.95,2560x0,1" ];
+        [ "DP-1,2560x1440@59.95,0x0,1" "HDMI-A-3,2560x1440@60,2560x0,1" ];
 
       workspace = [
         "1, monitor:HDMI-A-3"
@@ -116,6 +116,8 @@
         "NVD_BACKEND,direct"
         "WLR_DRM_NO_ATOMIC,1"
       ];
+
+      render = { explicit_sync = 0; };
 
     };
   };
