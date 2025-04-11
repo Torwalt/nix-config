@@ -43,7 +43,7 @@
     enable = true;
 
     xkb = {
-      options = "caps:swapescape";
+      options = "caps:escape";
       variant = "";
       layout = "de";
     };
