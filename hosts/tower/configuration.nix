@@ -63,6 +63,10 @@
     WLR_DRM_NO_ATOMIC = "1";
   };
 
+  services.xserver.displayManager.setupCommands = ''
+    xrandr --output DP-1 --primary
+  '';
+
   services.xserver = {
     # Load nvidia driver for Xorg and Wayland
     videoDrivers = [ "nvidia" ];

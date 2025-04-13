@@ -104,8 +104,15 @@
         "workspace 7,class:^(WowUpCf)$"
       ];
 
-      exec-once =
-        [ "kitty" "firefox" "telegram-desktop" "keepassxc" "spotify" "steam" ];
+      exec-once = [
+        "kitty"
+        "firefox"
+        "telegram-desktop"
+        "keepassxc"
+        "spotify"
+        "steam"
+        "xrandr --output HDMI-A-3 --primary"
+      ];
 
       env = [
         "LIBVA_DRIVER_NAME,nvidia"
