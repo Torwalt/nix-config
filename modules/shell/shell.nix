@@ -22,6 +22,7 @@
       gfp = "git push --force-with-lease";
       v = "nvim";
       rustshell = "nix develop ~/nix-config#rust  --command zsh";
+      ocamlshell = "nix develop ~/nix-config#ocaml  --command zsh";
     };
 
     zplug = {

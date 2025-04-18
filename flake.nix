@@ -133,5 +133,8 @@
       devShells.x86_64-linux.azurecli =
         (import ./shells/azurecli.nix { inherit pkgs; });
 
+      devShells.x86_64-linux.ocaml =
+        (import ./shells/ocaml.nix { inherit pkgs; });
+
     };
 }
