@@ -8,6 +8,7 @@ pkgs.mkShell {
     ocamlPackages.merlin
     ocamlPackages.ocaml-lsp
     ocamlformat_0_26_1
+    opam
   ];
 
   shellHook = ''
