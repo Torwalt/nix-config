@@ -117,6 +117,10 @@ in {
         # Screenshotting
         "$mainMod SHIFT, P, exec, wl-paste | swappy -f - "
         ''$mainMod SHIFT, S, exec, grim -g "$(slurp)" -  | wl-copy''
+        # Turn off opacity.
+        "$mainMod, O, exec, hyprctl --batch 'keyword windowrulev2 'opacity 1.0 1.0 override, class:.*''"
+        # Turn on again.
+        "$mainMod SHIFT, O, exec, hyprctl --batch 'keyword windowrulev2 'opacity 0.95 0.8 override, class:.*''"
 
         # Window manipulation"
         "$mainMod, V, togglefloating, "
