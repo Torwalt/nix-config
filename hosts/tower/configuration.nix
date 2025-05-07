@@ -1,4 +1,4 @@
-{ config, lib, ... }: {
+{ lib, ... }: {
   imports = [
     ./hardware-configuration.nix
     ../../modules/stylix/default.nix
@@ -6,6 +6,7 @@
     ../../modules/system/printing.nix
     ../../modules/system/hyprland.nix
     ../../modules/system/gaming.nix
+    ../../modules/system/greetd/default.nix
   ];
 
   boot.loader = {
@@ -62,10 +63,6 @@
     MOZ_ENABLE_WAYLAND = "1";
     WLR_DRM_NO_ATOMIC = "1";
   };
-
-  services.xserver.displayManager.setupCommands = ''
-    xrandr --output DP-1 --primary
-  '';
 
   services.xserver = {
     # Load nvidia driver for Xorg and Wayland

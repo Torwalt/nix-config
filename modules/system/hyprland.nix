@@ -1,16 +1,4 @@
-{ pkgs, inputs, ... }:
-let tokyo-night-sddm = pkgs.libsForQt5.callPackage ./tokyo-night-sddm.nix { };
-in {
-
-  nixpkgs.overlays = [
-    (final: prev: {
-      sddm = prev.sddm.overrideAttrs (oldAttrs: {
-        postInstall = (oldAttrs.postInstall or "") + ''
-          ln -sf $out/bin/sddm-greeter $out/bin/sddm-greeter-qt6
-        '';
-      });
-    })
-  ];
+{ pkgs, ... }: {
 
   # wayland and hyperland related stuff
   programs.hyprland = {
@@ -38,20 +26,5 @@ in {
 
     # app launcher
     rofi-wayland
-
-    tokyo-night-sddm
-    sddm-astronaut
   ];
-
-  # Wayland needed for hyprland.
-  services.displayManager = {
-    defaultSession = "hyprland";
-    sddm = {
-      package = pkgs.kdePackages.sddm; # qt6 sddm version
-      extraPackages = [ pkgs.sddm-astronaut ];
-      enable = true;
-      wayland.enable = true;
-      theme = "sddm-astronaut-theme";
-    };
-  };
 }

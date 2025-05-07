@@ -5,6 +5,7 @@
     ../../modules/system/default.nix
     ../../modules/system/printing.nix
     ../../modules/system/hyprland.nix
+    ../../modules/system/greetd/default.nix
   ];
 
   services.xserver.enable = true;
