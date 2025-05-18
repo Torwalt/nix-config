@@ -48,6 +48,7 @@
       discord
       libresprite
       renderdoc
+      helvum
     ];
 
     sessionVariables = {
