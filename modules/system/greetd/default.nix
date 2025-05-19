@@ -3,6 +3,7 @@
 {
   services.greetd = {
     enable = true;
+    vt = 2;
     settings = {
       default_session = {
         command = ''
@@ -12,6 +13,8 @@
       };
     };
   };
+
+  boot.kernelParams = [ "console=tty1" ];
 
   environment.systemPackages = with pkgs; [ greetd.tuigreet ];
 }
