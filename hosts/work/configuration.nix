@@ -42,7 +42,23 @@
     "/dev/disk/by-uuid/25805164-d8bc-45c4-9918-09ffd240bc1e";
 
   virtualisation = {
-    libvirtd.enable = true;
+    libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        runAsRoot = true;
+        swtpm.enable = true;
+        ovmf = {
+          enable = true;
+          packages = [
+            (pkgs.OVMF.override {
+              secureBoot = true;
+              tpmSupport = true;
+            }).fd
+          ];
+        };
+      };
+    };
     spiceUSBRedirection.enable = true;
   };
 
