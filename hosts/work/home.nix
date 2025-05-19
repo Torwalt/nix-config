@@ -64,6 +64,7 @@ in {
       cloud-utils
       virt-viewer
       cdrkit
+      passt
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
