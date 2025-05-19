@@ -21,6 +21,7 @@
       nap
       lldb
       tldr
+      wget
 
       # GUI
       keepassxc

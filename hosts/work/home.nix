@@ -59,9 +59,21 @@ in {
       pgformatter
       iredis
       pre-commit
+      cloud-init
+      virt-manager
+      cloud-utils
+      virt-viewer
+      cdrkit
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
+  };
+
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
+    };
   };
 
   programs.zsh.shellAliases = {

@@ -41,6 +41,16 @@
   boot.initrd.luks.devices."luks-25805164-d8bc-45c4-9918-09ffd240bc1e".device =
     "/dev/disk/by-uuid/25805164-d8bc-45c4-9918-09ffd240bc1e";
 
+  virtualisation = {
+    libvirtd.enable = true;
+    spiceUSBRedirection.enable = true;
+  };
+
+  programs.virt-manager.enable = true;
+
+  users.groups.libvirtd.members = [ "ada" ];
+  users.users.ada.extraGroups = [ "libvirtd" ];
+
   # vpn
   services.tailscale = {
     enable = true;
