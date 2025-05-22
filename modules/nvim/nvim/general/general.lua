@@ -32,6 +32,3 @@ vim.api.nvim_create_user_command(
     "let @+ = expand('%')",
     { bang = false }
 )
-
-vim.filetype.add { extension = { pgsql = 'sql' } }
-vim.filetype.add { extension = { envrc = 'bash' } }
