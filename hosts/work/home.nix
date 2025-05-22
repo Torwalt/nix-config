@@ -65,6 +65,7 @@ in {
       virt-viewer
       cdrkit
       passt
+      packer
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
