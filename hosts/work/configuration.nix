@@ -6,6 +6,7 @@
     ../../modules/system/printing.nix
     ../../modules/system/hyprland.nix
     ../../modules/system/greetd/default.nix
+    ../../modules/system/virtualisation/lxd/default.nix
   ];
 
   services.xserver.enable = true;
@@ -40,32 +41,6 @@
 
   boot.initrd.luks.devices."luks-25805164-d8bc-45c4-9918-09ffd240bc1e".device =
     "/dev/disk/by-uuid/25805164-d8bc-45c4-9918-09ffd240bc1e";
-
-  virtualisation = {
-    libvirtd = {
-      enable = true;
-      qemu = {
-        package = pkgs.qemu_kvm;
-        runAsRoot = true;
-        swtpm.enable = true;
-        ovmf = {
-          enable = true;
-          packages = [
-            (pkgs.OVMF.override {
-              secureBoot = true;
-              tpmSupport = true;
-            }).fd
-          ];
-        };
-      };
-    };
-    spiceUSBRedirection.enable = true;
-  };
-
-  programs.virt-manager.enable = true;
-
-  users.groups.libvirtd.members = [ "ada" ];
-  users.users.ada.extraGroups = [ "libvirtd" ];
 
   # vpn
   services.tailscale = {
