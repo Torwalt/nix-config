@@ -6,7 +6,7 @@
     ../../modules/system/printing.nix
     ../../modules/system/hyprland.nix
     ../../modules/system/greetd/default.nix
-    ../../modules/system/virtualisation/lxd/default.nix
+    ../../modules/system/virtualisation/virtualbox/default.nix
   ];
 
   services.xserver.enable = true;
