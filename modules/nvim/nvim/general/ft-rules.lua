@@ -1,5 +1,5 @@
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "markdown", ".md", "telekasten", "hcl" },
+    pattern = { "markdown", "md", "telekasten", "hcl" },
     callback = function()
         vim.opt_local.shiftwidth = 2   -- Number of spaces to use for each step of indentation
         vim.opt_local.tabstop = 2      -- Number of spaces a <Tab> counts for
@@ -19,6 +19,8 @@ vim.filetype.add {
         container = "ini",
         network   = "ini",
         pod       = "ini",
+        mount     = "ini",
+        service   = "ini",
         pgsql     = "sql",
         envrc     = "bash",
     },
