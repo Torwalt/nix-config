@@ -66,6 +66,7 @@ in {
       cdrkit
       passt
       packer
+      openssl
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
