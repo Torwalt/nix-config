@@ -1,54 +1,53 @@
 { pkgs, ... }: {
   home = {
-    packages = with pkgs;
-      [
-        gcc
-        jq
+    packages = with pkgs; [
+      gcc
+      jq
 
-        (python312.withPackages (ps: with ps; [ ipython virtualenv ]))
+      (python312.withPackages (ps: with ps; [ ipython virtualenv ]))
 
-        gnumake
-        nixfmt-classic
-        ffmpeg
-        btop
-        file
-        ruplacer
-        tree
-        zip
-        unzip
-        # cloc replacement - written in rust btw
-        tokei
-        dig
-        nap
-        lldb
-        tldr
-        wget
+      gnumake
+      nixfmt-classic
+      ffmpeg
+      btop
+      file
+      ruplacer
+      tree
+      zip
+      unzip
+      # cloc replacement - written in rust btw
+      tokei
+      dig
+      nap
+      lldb
+      tldr
+      wget
 
-        # GUI
-        keepassxc
-        # firefox
-        pavucontrol
-        spotify
-        chromium
-        maestral-gui
+      # GUI
+      keepassxc
+      # firefox
+      pavucontrol
+      spotify
+      chromium
+      maestral-gui
 
-        # Screenshots
-        grim
-        slurp
-        wl-clipboard
-        swappy
+      # Screenshots
+      grim
+      slurp
+      wl-clipboard
+      swappy
 
-        # Fonts
-        fira-code
-        fira-code-symbols
-        font-awesome
-        liberation_ttf
-        mplus-outline-fonts.githubRelease
-        noto-fonts
-        noto-fonts-emoji
-        proggyfonts
-      ] ++ builtins.filter lib.attrsets.isDerivation
-      (builtins.attrValues pkgs.nerd-fonts);
+      # Fonts
+      fira-code
+      fira-code-symbols
+      font-awesome
+      liberation_ttf
+      mplus-outline-fonts.githubRelease
+      noto-fonts
+      noto-fonts-emoji
+      proggyfonts
+      nerd-fonts.fira-code
+    ];
 
     sessionVariables = { LESS = "-CR"; };
   };
