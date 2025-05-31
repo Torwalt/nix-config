@@ -1,5 +1,10 @@
 { ... }:
 
 {
-  stylix = { targets.neovim.enable = false; };
+  stylix = {
+    targets = {
+      neovim.enable = false;
+      firefox.profileNames = [ "default" ];
+    };
+  };
 }
