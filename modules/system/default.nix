@@ -16,7 +16,7 @@
   hardware = {
     graphics = {
       enable = true;
-      extraPackages = [ pkgs.mesa.drivers ];
+      extraPackages = [ pkgs.mesa ];
     };
   };
 
@@ -54,7 +54,7 @@
   console.keyMap = "de";
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   services.blueman.enable = true;
   hardware.bluetooth.enable = true;
   security.rtkit.enable = true;
