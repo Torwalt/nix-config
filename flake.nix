@@ -72,7 +72,7 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = extraSpecialArgs;
           modules =
-            [ inputs.stylix.homeManagerModules.stylix ./hosts/asus/home.nix ];
+            [ inputs.stylix.homeModules.stylix ./hosts/asus/home.nix ];
         };
       };
 
@@ -93,7 +93,7 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = extraSpecialArgs;
           modules =
-            [ inputs.stylix.homeManagerModules.stylix ./hosts/tower/home.nix ];
+            [ inputs.stylix.homeModules.stylix ./hosts/tower/home.nix ];
         };
       };
 
@@ -114,7 +114,7 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = extraSpecialArgs;
           modules =
-            [ inputs.stylix.homeManagerModules.stylix ./hosts/work/home.nix ];
+            [ inputs.stylix.homeModules.stylix ./hosts/work/home.nix ];
         };
       };
 
