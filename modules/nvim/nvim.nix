@@ -3,14 +3,6 @@
     overlays = [
       (final: prev: {
         vimPlugins = prev.vimPlugins // {
-          neotest-golang-nvim = prev.vimUtils.buildVimPlugin {
-            name = "neotest-golang-nvim";
-            src = inputs.plugin-neotest-golang-nvim;
-          };
-        };
-      })
-      (final: prev: {
-        vimPlugins = prev.vimPlugins // {
           telescope-emoji-nvim = prev.vimUtils.buildVimPlugin {
             name = "telescope-emoji-nvim";
             src = inputs.plugin-telescope-emoji-nvim;
@@ -57,7 +49,8 @@
       patterns = [ "$NIX_OS_PATH_PLACEHOLDER_FRIENDLY_SNIPPET" ];
       replacements = [ "${pkgs.vimPlugins.friendly-snippets}" ];
 
-      configContent = fileUtils.readNeovimConfig ./nvim [ "lib" "general" "plugin" ];
+      configContent =
+        fileUtils.readNeovimConfig ./nvim [ "lib" "general" "plugin" ];
 
       replaced = builtins.replaceStrings patterns replacements configContent;
     in replaced;
@@ -101,7 +94,7 @@
       nvim-dap-go
 
       # From overlay
-      neotest-golang-nvim
+      neotest-golang
       telescope-emoji-nvim
       telescope-luasnip-nvim
 

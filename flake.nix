@@ -3,12 +3,12 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Home manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -18,10 +18,6 @@
     plugin-telescope-luasnip-nvim.url = "github:benfowler/telescope-luasnip.nvim";
     plugin-telescope-luasnip-nvim.flake = false;
 
-    # v1.3.0
-    plugin-neotest-golang-nvim.url =
-      "github:fredrikaverpil/neotest-golang/ea1c3a7";
-    plugin-neotest-golang-nvim.flake = false;
     nvim-rustaceanvim = {
       url = "github:mrcjkb/rustaceanvim";
       flake = false;
@@ -35,7 +31,7 @@
     nix-colors.url = "github:misterio77/nix-colors";
 
     stylix = {
-      url = "github:danth/stylix/release-24.11";
+      url = "github:danth/stylix/release-25.05";
       inputs.home-manager.follows = "home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };

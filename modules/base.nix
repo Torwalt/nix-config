@@ -1,54 +1,54 @@
 { pkgs, ... }: {
   home = {
-    packages = with pkgs; [
-      gcc
-      jq
+    packages = with pkgs;
+      [
+        gcc
+        jq
 
-      (python312.withPackages (ps: with ps; [ ipython virtualenv ]))
+        (python312.withPackages (ps: with ps; [ ipython virtualenv ]))
 
-      gnumake
-      nixfmt-classic
-      ffmpeg
-      btop
-      file
-      ruplacer
-      tree
-      zip
-      unzip
-      # cloc replacement - written in rust btw
-      tokei
-      dig
-      nap
-      lldb
-      tldr
-      wget
+        gnumake
+        nixfmt-classic
+        ffmpeg
+        btop
+        file
+        ruplacer
+        tree
+        zip
+        unzip
+        # cloc replacement - written in rust btw
+        tokei
+        dig
+        nap
+        lldb
+        tldr
+        wget
 
-      # GUI
-      keepassxc
-      # firefox
-      pavucontrol
-      spotify
-      chromium
-      maestral-gui
-      gwenview
+        # GUI
+        keepassxc
+        # firefox
+        pavucontrol
+        spotify
+        chromium
+        maestral-gui
 
-      # Screenshots
-      grim
-      slurp
-      wl-clipboard
-      swappy
+        # Screenshots
+        grim
+        slurp
+        wl-clipboard
+        swappy
 
-      # Fonts
-      fira-code
-      fira-code-symbols
-      font-awesome
-      liberation_ttf
-      mplus-outline-fonts.githubRelease
-      nerdfonts
-      noto-fonts
-      noto-fonts-emoji
-      proggyfonts
-    ];
+        # Fonts
+        fira-code
+        fira-code-symbols
+        font-awesome
+        liberation_ttf
+        mplus-outline-fonts.githubRelease
+        noto-fonts
+        noto-fonts-emoji
+        proggyfonts
+      ] ++ builtins.filter lib.attrsets.isDerivation
+      (builtins.attrValues pkgs.nerd-fonts);
 
     sessionVariables = { LESS = "-CR"; };
   };
@@ -60,7 +60,7 @@
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
 
   programs.firefox = {
     enable = true;
