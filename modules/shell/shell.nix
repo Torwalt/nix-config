@@ -2,9 +2,7 @@
   # In order for .profile being updated.
   programs.bash = { enable = true; };
 
-  home.packages = with pkgs; [
-    zsh-vi-mode
-  ];
+  home.packages = with pkgs; [ zsh-vi-mode ];
 
   programs.zsh = {
     enable = true;
@@ -45,11 +43,7 @@
     # Profiling
     # initExtraFirst = "zmodload zsh/zprof";
 
-    initExtraBeforeCompInit = ''
-      fpath+=$HOME/nix-config/shells/rust/comp
-    '';
-
-    initExtra = ''
+    initContent = ''
       source ~/nix-config/modules/shell/.p10k.zsh
     '';
 
