@@ -36,6 +36,9 @@ let
   '';
 
 in {
+
+  home = { packages = with pkgs; [ rose-pine-hyprcursor ]; };
+
   wayland.windowManager.hyprland = {
     enable = true;
 
@@ -43,7 +46,9 @@ in {
 
       monitor = [ ",preferred,auto,auto" ];
 
-      env = lib.mkDefault "XCURSOR_SIZE,24";
+      env = [ "HYPRCURSOR_THEME,rose-pine-hyprcursor" "HYPRCURSOR_SIZE,24" ];
+
+      cursor = { enable_hyprcursor = true; };
 
       input = {
         kb_layout = "de";
