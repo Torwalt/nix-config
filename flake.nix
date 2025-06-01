@@ -15,7 +15,8 @@
     plugin-telescope-emoji-nvim.url = "github:xiyaowong/telescope-emoji.nvim";
     plugin-telescope-emoji-nvim.flake = false;
 
-    plugin-telescope-luasnip-nvim.url = "github:benfowler/telescope-luasnip.nvim";
+    plugin-telescope-luasnip-nvim.url =
+      "github:benfowler/telescope-luasnip.nvim";
     plugin-telescope-luasnip-nvim.flake = false;
 
     nvim-rustaceanvim = {
@@ -71,8 +72,7 @@
         asusHome = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = extraSpecialArgs;
-          modules =
-            [ inputs.stylix.homeModules.stylix ./hosts/asus/home.nix ];
+          modules = [ inputs.stylix.homeModules.stylix ./hosts/asus/home.nix ];
         };
       };
 
@@ -92,8 +92,7 @@
         towerHome = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = extraSpecialArgs;
-          modules =
-            [ inputs.stylix.homeModules.stylix ./hosts/tower/home.nix ];
+          modules = [ inputs.stylix.homeModules.stylix ./hosts/tower/home.nix ];
         };
       };
 
@@ -113,8 +112,7 @@
         workHome = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = extraSpecialArgs;
-          modules =
-            [ inputs.stylix.homeModules.stylix ./hosts/work/home.nix ];
+          modules = [ inputs.stylix.homeModules.stylix ./hosts/work/home.nix ];
         };
       };
 

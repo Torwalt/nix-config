@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, pkgs-unstable, ... }:
 
 let homeDirectory = "/home/ada";
 in {
@@ -43,12 +43,11 @@ in {
       libreoffice
       go-task
       pdm
-      nodejs_18
       pnpm
       binaryen
       temporal-cli
       tailscale
-      beekeeper-studio
+      # beekeeper-studio
       postgresql
       _1password-cli
       azure-cli
@@ -67,7 +66,11 @@ in {
       passt
       packer
       openssl
+      dbeaver-bin
+      nodejs_24
     ];
+    # TODO: ALEX: Readd when they bump electron version.
+    # ++ [ pkgs-unstable.beekeeper-studio ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
   };
@@ -112,8 +115,7 @@ in {
         "workspace 2,title:^(Spotify Premium)$"
         "workspace 3,class:^(firefox)$"
         "workspace 4,class:^(chromium-browser)$"
-        "workspace 5,class:^(beekeeper-studio)$"
-
+        "workspace 5,class:^(DBeaver)$"
         "workspace 6,class:^(org.keepassxc.KeePassXC)$"
       ];
 
