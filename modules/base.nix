@@ -46,7 +46,11 @@
       noto-fonts
       noto-fonts-emoji
       proggyfonts
+      fira-code
+      fira-code-symbols
       nerd-fonts.fira-code
+      nerd-fonts.hack
+      nerd-fonts.jetbrains-mono
     ];
 
     sessionVariables = { LESS = "-CR"; };
