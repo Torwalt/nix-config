@@ -125,7 +125,7 @@ in {
         "keepassxc"
         "spotify"
         "chromium-browser"
-        "beekeeper-studio"
+        "dbeaver"
       ];
 
     };
