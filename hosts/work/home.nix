@@ -1,4 +1,4 @@
-{ pkgs, inputs, pkgs-unstable, ... }:
+{ pkgs, inputs, ... }:
 
 let homeDirectory = "/home/ada";
 in {
@@ -47,7 +47,6 @@ in {
       binaryen
       temporal-cli
       tailscale
-      # beekeeper-studio
       postgresql
       _1password-cli
       azure-cli
@@ -69,8 +68,6 @@ in {
       dbeaver-bin
       nodejs_24
     ];
-    # TODO: ALEX: Readd when they bump electron version.
-    # ++ [ pkgs-unstable.beekeeper-studio ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
   };
@@ -85,7 +82,6 @@ in {
   programs.zsh.shellAliases = {
     sysswitch = "sudo nixos-rebuild --flake .#workSys switch";
     homeswitch = "home-manager switch --flake .#workHome";
-    # buildFHSUserEnv ignores --command, but you can still start zsh afterwards.
     nodejsshell = "nix develop ~/nix-config#nodejs";
     azureclishell = "nix develop ~/nix-config#azurecli";
   };
