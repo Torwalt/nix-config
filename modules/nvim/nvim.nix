@@ -71,6 +71,7 @@
       telescope-media-files-nvim
       calendar-vim
       text-case-nvim
+      nvim-surround
 
       luasnip
       friendly-snippets
