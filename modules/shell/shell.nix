@@ -2,7 +2,7 @@
   # In order for .profile being updated.
   programs.bash = { enable = true; };
 
-  home.packages = with pkgs; [ zsh-vi-mode ];
+  home.packages = with pkgs; [ zsh-vi-mode nix-zsh-completions ];
 
   programs.zsh = {
     enable = true;
