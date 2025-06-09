@@ -102,6 +102,11 @@
       nvim-treesitter.withAllGrammars
       nvim-treesitter-textobjects
       nvim-treesitter-parsers.astro
+
+      # db
+      vim-dadbod
+      vim-dadbod-ui
+      vim-dadbod-completion
     ];
 
     extraPackages = with pkgs; [
