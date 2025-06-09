@@ -36,21 +36,6 @@
       slurp
       wl-clipboard
       swappy
-
-      # Fonts
-      fira-code
-      fira-code-symbols
-      font-awesome
-      liberation_ttf
-      mplus-outline-fonts.githubRelease
-      noto-fonts
-      noto-fonts-emoji
-      proggyfonts
-      fira-code
-      fira-code-symbols
-      nerd-fonts.fira-code
-      nerd-fonts.hack
-      nerd-fonts.jetbrains-mono
     ];
 
     sessionVariables = { LESS = "-CR"; };
@@ -58,7 +43,7 @@
 
   programs.home-manager.enable = true;
 
-  fonts.fontconfig.enable = true;
+  fonts = { fontconfig.enable = true; };
 
   systemd.user.startServices = "sd-switch";
 

@@ -7,6 +7,7 @@
     ../../modules/system/hyprland.nix
     ../../modules/system/greetd/default.nix
     ../../modules/system/virtualisation/libvirtd/default.nix
+    ../../modules/system/fonts.nix
   ];
 
   services.xserver.enable = true;

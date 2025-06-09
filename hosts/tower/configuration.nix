@@ -1,4 +1,6 @@
-{ lib, ... }: {
+{ lib, ... }:
+
+{
   imports = [
     ./hardware-configuration.nix
     ../../modules/stylix/default.nix
@@ -7,6 +9,7 @@
     ../../modules/system/hyprland.nix
     ../../modules/system/gaming.nix
     ../../modules/system/greetd/default.nix
+    ../../modules/system/fonts.nix
   ];
 
   boot.loader = {
