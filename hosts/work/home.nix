@@ -67,6 +67,7 @@ in {
       openssl
       dbeaver-bin
       nodejs_24
+      lazysql
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };

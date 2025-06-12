@@ -38,5 +38,25 @@ vim.api.nvim_create_autocmd("FileType", {
             "<Plug>(DBUI_ExecuteQuery)",
             { remap = true, buffer = bufnr, desc = "Execute SQL query" }
         )
+
+        -- Paste your default yank into a throwaway buffer and run it through jq
+        vim.keymap.set('n', '<leader>jp', function()
+            -- Open a brand-new, unlisted scratch buffer
+            vim.cmd('enew')
+            local buf = vim.api.nvim_get_current_buf()
+            vim.api.nvim_set_option_value('buftype', 'nofile', { buf = buf })
+            vim.api.nvim_set_option_value('bufhidden', 'wipe', { buf = buf })
+            vim.api.nvim_set_option_value('swapfile', false, { buf = buf })
+            vim.api.nvim_set_option_value('filetype', 'json', { buf = buf })
+
+            -- Paste from the unnamed register at the top
+            vim.cmd('0put')
+
+            -- Remove the original empty line that was pushed down
+            vim.cmd('2delete _')
+
+            -- Run the whole buffer through `jq .`
+            vim.cmd('%!jq .')
+        end, { desc = 'Open scratch, paste yank, format JSON with jq' })
     end,
 })
