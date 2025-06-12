@@ -2,34 +2,32 @@
   description = "Main flake";
 
   inputs = {
-    # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Home manager
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    plugin-telescope-emoji-nvim.url = "github:xiyaowong/telescope-emoji.nvim";
-    plugin-telescope-emoji-nvim.flake = false;
+    plugin-telescope-emoji-nvim = {
+      url = "github:xiyaowong/telescope-emoji.nvim";
+      flake = false;
+    };
 
-    plugin-telescope-luasnip-nvim.url =
-      "github:benfowler/telescope-luasnip.nvim";
-    plugin-telescope-luasnip-nvim.flake = false;
+    plugin-telescope-luasnip-nvim = {
+      url = "github:benfowler/telescope-luasnip.nvim";
+      flake = false;
+    };
 
     nvim-rustaceanvim = {
       url = "github:mrcjkb/rustaceanvim";
       flake = false;
     };
 
-    # Newest mpvpaper
-    mpvpaper16.url = "github:GhostNaN/mpvpaper/1.6";
-    mpvpaper16.flake = false;
-
-    # nix-colors
-    nix-colors.url = "github:misterio77/nix-colors";
+    nix-colors = {
+      url = "github:misterio77/nix-colors";
+    };
 
     stylix = {
       url = "github:danth/stylix/release-25.05";
@@ -46,11 +44,7 @@
       extraSpecialArgs = {
         inherit inputs outputs;
         pkgs-unstable = import nixpkgs-unstable {
-          # Refer to the `system` parameter from
-          # the outer scope recursively
           inherit system;
-          # To use Chrome, we need to allow the
-          # installation of non-free software.
           config.allowUnfree = true;
         };
       };
