@@ -6,7 +6,6 @@
     ../../modules/system/printing.nix
     ../../modules/system/hyprland.nix
     ../../modules/system/greetd/default.nix
-    ../../modules/system/virtualisation/libvirtd/default.nix
     ../../modules/system/fonts.nix
   ];
 
