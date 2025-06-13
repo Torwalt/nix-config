@@ -25,18 +25,22 @@
       flake = false;
     };
 
-    nix-colors = {
-      url = "github:misterio77/nix-colors";
-    };
+    nix-colors = { url = "github:misterio77/nix-colors"; };
 
     stylix = {
       url = "github:danth/stylix/release-25.05";
       inputs.home-manager.follows = "home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, ... }:
+  outputs =
+    inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, ... }:
     let
       inherit (self) outputs;
       system = "x86_64-linux";
@@ -77,6 +81,7 @@
           modules = [
             inputs.stylix.nixosModules.stylix
             ./hosts/tower/configuration.nix
+            sops-nix.nixosModules.sops
           ];
         };
       };

@@ -1,0 +1,7 @@
+keys:
+  - &tower age122y9srs5yceuucm8rr2h0hk23tlcpzr44nhezrat3z6he9t7w50q06jk89
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *tower

@@ -36,6 +36,11 @@
       slurp
       wl-clipboard
       swappy
+
+      # encryption
+      sops
+      age
+      ssh-to-age
     ];
 
     sessionVariables = { LESS = "-CR"; };
