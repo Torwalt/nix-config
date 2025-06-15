@@ -53,8 +53,8 @@
         };
       };
     in {
-      # 'sudo nixos-rebuild --flake .#asusSys switch'
       nixosConfigurations = {
+        # 'sudo nixos-rebuild --flake .#asusSys switch'
         asusSys = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
@@ -63,19 +63,8 @@
             ./hosts/asus/configuration.nix
           ];
         };
-      };
 
-      # 'home-manager switch --flake .#asusHome'
-      homeConfigurations = {
-        asusHome = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = extraSpecialArgs;
-          modules = [ inputs.stylix.homeModules.stylix ./hosts/asus/home.nix ];
-        };
-      };
-
-      # 'sudo nixos-rebuild --flake .#towerSys switch'
-      nixosConfigurations = {
+        # 'sudo nixos-rebuild --flake .#towerSys switch'
         towerSys = nixpkgs.lib.nixosSystem {
           specialArgs = extraSpecialArgs;
           modules = [
@@ -84,19 +73,8 @@
             sops-nix.nixosModules.sops
           ];
         };
-      };
 
-      # 'home-manager switch --flake .#towerHome'
-      homeConfigurations = {
-        towerHome = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = extraSpecialArgs;
-          modules = [ inputs.stylix.homeModules.stylix ./hosts/tower/home.nix ];
-        };
-      };
-
-      # 'sudo nixos-rebuild --flake .#workSys switch'
-      nixosConfigurations = {
+        # 'sudo nixos-rebuild --flake .#workSys switch'
         workSys = nixpkgs.lib.nixosSystem {
           specialArgs = extraSpecialArgs;
           modules = [
@@ -106,8 +84,22 @@
         };
       };
 
-      # 'home-manager switch --flake .#workHome'
       homeConfigurations = {
+        # 'home-manager switch --flake .#asusHome'
+        asusHome = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = extraSpecialArgs;
+          modules = [ inputs.stylix.homeModules.stylix ./hosts/asus/home.nix ];
+        };
+
+        # 'home-manager switch --flake .#towerHome'
+        towerHome = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = extraSpecialArgs;
+          modules = [ inputs.stylix.homeModules.stylix ./hosts/tower/home.nix ];
+        };
+
+        # 'home-manager switch --flake .#workHome'
         workHome = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = extraSpecialArgs;
@@ -115,19 +107,14 @@
         };
       };
 
-      ### Shells ###
-
-      devShells.x86_64-linux.rust =
-        (import ./shells/rust/rust.nix { inherit pkgs; });
-
-      devShells.x86_64-linux.nodejs =
-        (import ./shells/nodejs.nix { inherit pkgs; });
-
-      devShells.x86_64-linux.azurecli =
-        (import ./shells/azurecli.nix { inherit pkgs; });
-
-      devShells.x86_64-linux.ocaml =
-        (import ./shells/ocaml.nix { inherit pkgs; });
+      devShells = {
+        x86_64-linux = {
+          rust = (import ./shells/rust/rust.nix { inherit pkgs; });
+          nodejs = (import ./shells/nodejs.nix { inherit pkgs; });
+          azurecli = (import ./shells/azurecli.nix { inherit pkgs; });
+          ocaml = (import ./shells/ocaml.nix { inherit pkgs; });
+        };
+      };
 
     };
 }
