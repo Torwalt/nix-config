@@ -122,7 +122,6 @@ in {
         "keepassxc"
         "spotify"
         "chromium-browser"
-        "dbeaver"
       ];
 
     };
