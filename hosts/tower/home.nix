@@ -49,6 +49,7 @@
       libresprite
       renderdoc
       helvum
+      hawk-cli
     ];
 
     sessionVariables = {

@@ -44,13 +44,16 @@
     let
       inherit (self) outputs;
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
       extraSpecialArgs = {
         inherit inputs outputs;
         pkgs-unstable = import nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;
         };
+      };
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = import ./overlays.nix { inherit inputs; };
       };
     in {
       nixosConfigurations = {
@@ -87,21 +90,21 @@
       homeConfigurations = {
         # 'home-manager switch --flake .#asusHome'
         asusHome = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          pkgs = pkgs;
           extraSpecialArgs = extraSpecialArgs;
           modules = [ inputs.stylix.homeModules.stylix ./hosts/asus/home.nix ];
         };
 
         # 'home-manager switch --flake .#towerHome'
         towerHome = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          pkgs = pkgs;
           extraSpecialArgs = extraSpecialArgs;
           modules = [ inputs.stylix.homeModules.stylix ./hosts/tower/home.nix ];
         };
 
         # 'home-manager switch --flake .#workHome'
         workHome = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          pkgs = pkgs;
           extraSpecialArgs = extraSpecialArgs;
           modules = [ inputs.stylix.homeModules.stylix ./hosts/work/home.nix ];
         };
