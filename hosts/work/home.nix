@@ -68,6 +68,7 @@ in {
       dbeaver-bin
       nodejs_24
       lazysql
+      hawk-cli
     ];
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
@@ -116,13 +117,8 @@ in {
         "workspace 6,class:^(org.keepassxc.KeePassXC)$"
       ];
 
-      exec-once = [
-        "kitty"
-        "firefox"
-        "keepassxc"
-        "spotify"
-        "chromium-browser"
-      ];
+      exec-once =
+        [ "kitty" "firefox" "keepassxc" "spotify" "chromium-browser" ];
 
     };
   };
