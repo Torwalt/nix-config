@@ -72,6 +72,7 @@ local tele_builtin = require('telescope.builtin')
 nmap("<leader>ff", function() tele_builtin.find_files({ hidden = true }) end)
 nmap("<leader>fb", function() tele_builtin.buffers({ sort_mru = true }) end)
 nmap("/", function() tele_builtin.current_buffer_fuzzy_find({ sort_mru = true }) end)
+nmap("<leader>fd", function() tele_builtin.lsp_document_symbols({ sort_mru = true, query = "" }) end)
 
 telescope.load_extension("live_grep_args")
 nmap("<leader>fw",
