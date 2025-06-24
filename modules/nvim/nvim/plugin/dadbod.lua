@@ -60,3 +60,17 @@ vim.api.nvim_create_autocmd("FileType", {
         end, { desc = 'Open scratch, paste yank, format JSON with jq' })
     end,
 })
+
+-- make/clear a group so you can easily remove or tweak it
+local dadbod_grp = vim.api.nvim_create_augroup("DadbodUINumbers", { clear = true })
+
+-- listen for the User event named "DBUIOpened"
+vim.api.nvim_create_autocmd("User", {
+    group = dadbod_grp,
+    pattern = "DBUIOpened",
+    callback = function()
+        -- turn on absolute + relative numbers in that window
+        vim.wo.number = true
+        vim.wo.relativenumber = true
+    end,
+})
