@@ -1,6 +1,14 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, pkgs-unstable, ... }:
 
-let homeDirectory = "/home/ada";
+let
+  homeDirectory = "/home/ada";
+  unstable = with pkgs-unstable; [
+    claude-code
+    opencode
+    codex
+    openai
+    aider-chat
+  ];
 in {
   imports = [
     ../../modules/base.nix
@@ -35,41 +43,41 @@ in {
     username = "ada";
     homeDirectory = homeDirectory;
 
-    packages = with pkgs; [
-      # Monitor config
-      nwg-displays
-      wlr-randr
+    packages = with pkgs;
+      [
+        # Monitor config
+        nwg-displays
+        wlr-randr
 
-      libreoffice
-      go-task
-      pdm
-      pnpm
-      binaryen
-      temporal-cli
-      tailscale
-      postgresql
-      _1password-cli
-      azure-cli
-      pulumi-bin
-      git-lfs
-      typescript
-      docker-credential-helpers
-      pgformatter
-      iredis
-      pre-commit
-      cloud-init
-      virt-manager
-      cloud-utils
-      virt-viewer
-      cdrkit
-      passt
-      packer
-      openssl
-      dbeaver-bin
-      nodejs_24
-      lazysql
-      hawk-cli
-    ];
+        libreoffice
+        go-task
+        pdm
+        pnpm
+        binaryen
+        temporal-cli
+        tailscale
+        postgresql
+        _1password-cli
+        azure-cli
+        pulumi-bin
+        git-lfs
+        typescript
+        docker-credential-helpers
+        pgformatter
+        iredis
+        pre-commit
+        cloud-init
+        virt-manager
+        cloud-utils
+        virt-viewer
+        cdrkit
+        passt
+        packer
+        openssl
+        dbeaver-bin
+        nodejs_24
+        lazysql
+      ] ++ unstable;
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
   };
