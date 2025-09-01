@@ -24,7 +24,9 @@
       v = "nvim";
       rustshell = "nix develop ~/nix-config#rust  --command zsh";
       ocamlshell = "nix develop ~/nix-config#ocaml  --command zsh";
-      glast = "git rev-list --reverse master..HEAD | head -n1";
+      gls = "git gls";
+      glsr = "git glsr";
+      glsl = "git glsl";
     };
 
     zplug = {
