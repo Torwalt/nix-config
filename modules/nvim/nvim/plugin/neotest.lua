@@ -1,8 +1,9 @@
 local goconf = {
-    go_test_args = { "-v", "-tags=integration,clickhouse" },
-    go_list_args = { "-tags=integration,clickhouse" },
-    dap_go_opts = { delve = { build_flags = { "-tags=integration,clickhouse" } } },
-    runner = "gotestsum"
+    go_test_args = { "-v", "-tags=integration" },
+    go_list_args = { "-tags=integration" },
+    dap_go_opts = { delve = { build_flags = { "-tags=integration" } } },
+    runner = "gotestsum",
+    testify_enabled = true,
 }
 
 require("neotest").setup({
