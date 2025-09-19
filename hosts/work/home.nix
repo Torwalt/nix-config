@@ -77,6 +77,7 @@ in {
         dbeaver-bin
         nodejs_24
         lazysql
+        ncspot
       ] ++ unstable;
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
