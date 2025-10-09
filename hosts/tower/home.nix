@@ -49,6 +49,8 @@
       libresprite
       renderdoc
       helvum
+      gzdoom
+      lutris
     ];
 
     sessionVariables = {
