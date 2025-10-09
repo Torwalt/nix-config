@@ -36,6 +36,28 @@ let
       else
         eval "$("$HOME/.local/bin/mise" activate bash)"
       fi
+
+      fix_ssh () {
+        mkdir -p "$HOME/.ssh"
+        # Materialize config if it points into the store
+        if [ -L "$HOME/.ssh/config" ] && readlink -f "$HOME/.ssh/config" | grep -q '^/nix/store/'; then
+          cp --dereference "$HOME/.ssh/config" "$HOME/.ssh/config.fhs"
+          chmod 600 "$HOME/.ssh/config.fhs"
+          export GIT_SSH_COMMAND="ssh -F $HOME/.ssh/config.fhs"
+        fi
+
+        # Materialize common key names if they’re symlinks into the store
+        for k in id_ed25519 id_rsa; do
+          if [ -L "$HOME/.ssh/$k" ] && readlink -f "$HOME/.ssh/$k" | grep -q '^/nix/store/'; then
+            cp --dereference "$HOME/.ssh/$k" "$HOME/.ssh/$k.fhs"
+            chmod 600 "$HOME/.ssh/$k.fhs"
+            # If your config references the original name, also export:
+            #   export SSH_AUTH_SOCK="$SSH_AUTH_SOCK"
+            # Nothing else needed; ssh will pick the key via config or default name.
+          fi
+        done
+      }
+      fix_ssh
     '';
   };
 in fhs.env
