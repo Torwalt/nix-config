@@ -95,6 +95,7 @@ in {
     homeswitch = "home-manager switch --flake .#workHome";
     nodejsshell = "nix develop ~/nix-config#nodejs";
     azureclishell = "nix develop ~/nix-config#azurecli";
+    miseshell = "nix develop ~/nix-config#mise";
   };
 
   colorScheme = inputs.nix-colors.colorSchemes.tokyo-city-dark;

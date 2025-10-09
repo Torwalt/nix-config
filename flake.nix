@@ -116,6 +116,7 @@
           nodejs = (import ./shells/nodejs.nix { inherit pkgs; });
           azurecli = (import ./shells/azurecli.nix { inherit pkgs; });
           ocaml = (import ./shells/ocaml.nix { inherit pkgs; });
+          mise = (import ./shells/mise.nix { inherit pkgs; });
         };
       };
 
