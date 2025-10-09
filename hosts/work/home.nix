@@ -8,6 +8,7 @@ let
     codex
     openai
     aider-chat
+    devenv
   ];
 in {
   imports = [
