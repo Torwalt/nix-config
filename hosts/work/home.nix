@@ -8,7 +8,6 @@ let
     codex
     openai
     aider-chat
-    devenv
   ];
 in {
   imports = [
@@ -79,6 +78,7 @@ in {
         nodejs_24
         lazysql
         ncspot
+        inputs.devenv-nix.packages.${pkgs.system}.devenv
       ] ++ unstable;
 
     sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };

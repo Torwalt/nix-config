@@ -37,6 +37,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    devenv-nix = {
+      url = "github:cachix/devenv/v1.10";
+    };
   };
 
   outputs =
