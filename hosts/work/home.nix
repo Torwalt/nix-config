@@ -78,6 +78,7 @@ in {
         nodejs_24
         lazysql
         ncspot
+        just
         inputs.devenv-nix.packages.${pkgs.system}.devenv
       ] ++ unstable;
 
