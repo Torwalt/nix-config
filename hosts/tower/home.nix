@@ -58,7 +58,6 @@
       CLUTTER_BACKEND = "wayland";
       QT_QPA_PLATFORM = "wayland";
       MOZ_ENABLE_WAYLAND = "1";
-      WLR_DRM_NO_ATOMIC = "1";
     };
   };
 
@@ -104,13 +103,7 @@
       ];
 
       env = [
-        "LIBVA_DRIVER_NAME,nvidia"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
         "XCURSOR_SIZE,24"
-        "GBM_BACKEND,nvidia-drm"
-        "__VK_LAYER_NV_optimus,NVIDIA_only"
-        "NVD_BACKEND,direct"
-        "WLR_DRM_NO_ATOMIC,1"
       ];
 
       render = { explicit_sync = 0; };

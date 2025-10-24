@@ -12,7 +12,7 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
   boot.kernelParams =
-    [ "nvidia-drm.modeset=1" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+    [ "nvidia-drm.modeset=1" ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/de75b95e-83da-46d7-b9dd-2126496ca662";

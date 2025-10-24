@@ -64,7 +64,6 @@
     CLUTTER_BACKEND = "wayland";
     QT_QPA_PLATFORM = "wayland";
     MOZ_ENABLE_WAYLAND = "1";
-    WLR_DRM_NO_ATOMIC = "1";
   };
 
   services.xserver = {
