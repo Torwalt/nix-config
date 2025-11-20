@@ -79,6 +79,7 @@ in {
         lazysql
         ncspot
         just
+        nushell
         inputs.devenv-nix.packages.${pkgs.system}.devenv
       ] ++ unstable;
 
