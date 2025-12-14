@@ -106,8 +106,6 @@
         "XCURSOR_SIZE,24"
       ];
 
-      render = { explicit_sync = 0; };
-
     };
   };
 

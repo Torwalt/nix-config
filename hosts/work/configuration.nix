@@ -12,7 +12,7 @@
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 
   boot.loader = {
     systemd-boot.enable = lib.mkForce false;
@@ -41,8 +41,8 @@
 
   nix.settings.trusted-users = [ "root" "ada" ];
 
-  boot.initrd.luks.devices."luks-25805164-d8bc-45c4-9918-09ffd240bc1e".device =
-    "/dev/disk/by-uuid/25805164-d8bc-45c4-9918-09ffd240bc1e";
+  boot.initrd.luks.devices."luks-25.11164-d8bc-45c4-9918-09ffd240bc1e".device =
+    "/dev/disk/by-uuid/25.11164-d8bc-45c4-9918-09ffd240bc1e";
 
   # vpn
   services.tailscale = {

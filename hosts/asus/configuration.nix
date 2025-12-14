@@ -10,7 +10,7 @@
     ../../modules/system/fonts.nix
   ];
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
   boot.initrd.luks.devices."luks-602060e4-224b-46e2-9685-e8d6fed418d6".device =
     "/dev/disk/by-uuid/602060e4-224b-46e2-9685-e8d6fed418d6";
 

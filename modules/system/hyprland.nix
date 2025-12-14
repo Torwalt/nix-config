@@ -23,8 +23,5 @@
     libnotify
     # wallpapers
     swww
-
-    # app launcher
-    rofi-wayland
   ];
 }

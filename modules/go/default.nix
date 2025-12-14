@@ -1,14 +1,12 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
 
-  home = {
-    packages = with pkgs; [ go delve ];
-    sessionPath = [ "$HOME/go/bin" ];
-    sessionVariables = { PATH = "$HOME/go/bin:$PATH"; };
-  };
+  home = { packages = with pkgs; [ go delve gotestsum]; };
 
   programs.go = {
     enable = true;
-    goBin = "go/bin";
-    goPath = "go";
+    env = {
+      GOPATH = "${config.home.homeDirectory}/go";
+      GOBIN = "${config.home.homeDirectory}/go/bin";
+    };
   };
 }
