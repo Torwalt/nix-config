@@ -1,6 +1,8 @@
 { pkgs, inputs, pkgs-unstable, ... }: {
   nixpkgs = {
     overlays = [
+      inputs.nvim-treesitter-main.overlays.default
+
       (final: prev: {
         vimPlugins = prev.vimPlugins // {
           telescope-emoji-nvim = prev.vimUtils.buildVimPlugin {
@@ -14,6 +16,23 @@
           telescope-luasnip-nvim = prev.vimUtils.buildVimPlugin {
             name = "telescope-luasnip-nvim";
             src = inputs.plugin-telescope-luasnip-nvim;
+          };
+        };
+      })
+      (final: prev: {
+        vimPlugins = prev.vimPlugins // {
+          neotest-golang-nvim = prev.vimUtils.buildVimPlugin {
+            name = "neotest-golang-nvim";
+            src = inputs.plugin-neotest-golang-nvim;
+            doCheck = false;
+          };
+        };
+      })
+      (final: prev: {
+        vimPlugins = prev.vimPlugins // {
+          nvim-treesitter-textobjects = prev.vimUtils.buildVimPlugin {
+            name = "nvim-treesitter-textobjects";
+            src = inputs.plugin-nvim-treesitter-textobjects;
           };
         };
       })
@@ -94,14 +113,17 @@
       nvim-dap
       nvim-dap-go
 
-      # From overlay
-      neotest-golang
+      # neotest-golang
+      neotest-golang-nvim
       telescope-emoji-nvim
       telescope-luasnip-nvim
 
+      nvim-treesitter
       nvim-treesitter.withAllGrammars
       nvim-treesitter-textobjects
-      nvim-treesitter-parsers.astro
+
+      nvim-treesitter-textobjects
+      # nvim-treesitter-parsers.astro
 
       # db
       vim-dadbod

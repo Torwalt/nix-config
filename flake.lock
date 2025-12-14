@@ -481,6 +481,96 @@
         "type": "github"
       }
     },
+    "nvim-treesitter": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1765057102,
+        "narHash": "sha256-2eqOrGqOSis9vHmxe2CIxWfbf92b2iOVLxSSfoNKAw8=",
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter",
+        "rev": "20db421f5fba0c23f6a7629af96ba6d4fc531677",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-treesitter",
+        "ref": "main",
+        "repo": "nvim-treesitter",
+        "type": "github"
+      }
+    },
+    "nvim-treesitter-main": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "nvim-treesitter": "nvim-treesitter",
+        "nvim-treesitter-textobjects": "nvim-treesitter-textobjects"
+      },
+      "locked": {
+        "lastModified": 1765133966,
+        "narHash": "sha256-bALsLOGiMhs8uc/kgloDX/voquDA81O9AnG0bTJDWvs=",
+        "owner": "iofq",
+        "repo": "nvim-treesitter-main",
+        "rev": "43ebb4a2f28181d15e3f7aea3e13292aa7818b63",
+        "type": "github"
+      },
+      "original": {
+        "owner": "iofq",
+        "repo": "nvim-treesitter-main",
+        "type": "github"
+      }
+    },
+    "nvim-treesitter-textobjects": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1765057291,
+        "narHash": "sha256-k4U3MGs01DBeb1NZDF3C8uerRAo4o+CZMhy5v3Ub1BU=",
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter-textobjects",
+        "rev": "76deedf0f1cec4496ef8d49b6d1f020f6d0c6ec9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-treesitter",
+        "ref": "main",
+        "repo": "nvim-treesitter-textobjects",
+        "type": "github"
+      }
+    },
+    "plugin-neotest-golang-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1765445602,
+        "narHash": "sha256-aIiyJbJaB8YLfgt0S/MvP2AM32qE34WRfTa7249K5BQ=",
+        "owner": "fredrikaverpil",
+        "repo": "neotest-golang",
+        "rev": "37e400cfe9d193e508b1a512e96cbef83b08deb6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fredrikaverpil",
+        "ref": "v2.6.0",
+        "repo": "neotest-golang",
+        "type": "github"
+      }
+    },
+    "plugin-nvim-treesitter-textobjects": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1765672441,
+        "narHash": "sha256-w2dzc5oWyEoPUgbqaAuNKCeFeh81rYJPOCPVRnFC724=",
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter-textobjects",
+        "rev": "0d7c800fadcfe2d33089f5726cb8907fc846eece",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-treesitter",
+        "ref": "main",
+        "repo": "nvim-treesitter-textobjects",
+        "type": "github"
+      }
+    },
     "plugin-telescope-emoji-nvim": {
       "flake": false,
       "locked": {
@@ -521,6 +611,9 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nvim-rustaceanvim": "nvim-rustaceanvim",
+        "nvim-treesitter-main": "nvim-treesitter-main",
+        "plugin-neotest-golang-nvim": "plugin-neotest-golang-nvim",
+        "plugin-nvim-treesitter-textobjects": "plugin-nvim-treesitter-textobjects",
         "plugin-telescope-emoji-nvim": "plugin-telescope-emoji-nvim",
         "plugin-telescope-luasnip-nvim": "plugin-telescope-luasnip-nvim",
         "sops-nix": "sops-nix",

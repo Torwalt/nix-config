@@ -1,10 +1,12 @@
-lspconfig.astro.setup {
+vim.lsp.config('astro', {
     on_attach = on_attach,
     filetypes = { "astro" },
-    root_dir = lspconfig.util.root_pattern("astro.config.mjs", "astro.config.js", "package.json")
-}
+    root_markers = { "astro.config.mjs", "astro.config.js", "package.json" },
+})
 
-lspconfig.ts_ls.setup {
+vim.lsp.enable('astro', true)
+
+vim.lsp.config('ts_ls', {
     -- Command to start the language server
     cmd = { "typescript-language-server", "--stdio" },
 
@@ -105,7 +107,9 @@ lspconfig.ts_ls.setup {
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
     end
-}
+})
+
+vim.lsp.enable('ts_ls', true)
 
 local prettier = {
     formatCommand = 'prettierd "${INPUT}"',
@@ -115,7 +119,7 @@ local prettier = {
     -- },
 }
 
-lspconfig.efm.setup({
+vim.lsp.config('efm', {
     init_options = { documentFormatting = true },
     filetypes = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact', 'json' },
     settings = {
@@ -129,3 +133,5 @@ lspconfig.efm.setup({
         }
     }
 })
+
+vim.lsp.enable('efm', true)

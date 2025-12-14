@@ -25,6 +25,21 @@
       flake = false;
     };
 
+    plugin-neotest-golang-nvim = {
+      url = "github:fredrikaverpil/neotest-golang/v2.6.0";
+      flake = false;
+    };
+
+    # TODO: ALEX: Remove when at least unstable gets updated with new main branch.
+    nvim-treesitter-main = {
+      url = "github:iofq/nvim-treesitter-main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    plugin-nvim-treesitter-textobjects = {
+      url = "github:nvim-treesitter/nvim-treesitter-textobjects?ref=main";
+      flake = false;
+    };
+
     nix-colors = { url = "github:misterio77/nix-colors"; };
 
     stylix = {

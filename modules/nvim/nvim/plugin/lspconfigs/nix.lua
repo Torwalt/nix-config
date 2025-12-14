@@ -1,4 +1,4 @@
-lspconfig.nil_ls.setup {
+vim.lsp.config('nil_ls', {
     on_attach = on_attach,
     settings = {
         ['nil'] = {
@@ -8,4 +8,6 @@ lspconfig.nil_ls.setup {
             },
         },
     }
-}
+})
+
+vim.lsp.enable('nil_ls', true)

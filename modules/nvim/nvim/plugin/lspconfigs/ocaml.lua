@@ -1,3 +1,1 @@
-lspconfig.ocamllsp.setup {
-    on_attach = on_attach,
-}
+vim.lsp.enable('ocamllsp', true)

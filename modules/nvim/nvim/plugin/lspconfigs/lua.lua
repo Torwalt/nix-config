@@ -1,4 +1,4 @@
-lspconfig.lua_ls.setup {
+vim.lsp.config('lua_ls', {
     on_attach = on_attach,
     settings = {
         Lua = {
@@ -32,4 +32,7 @@ lspconfig.lua_ls.setup {
             }
         }
     }
-}
+})
+
+vim.lsp.enable('lua_ls', true)
+
