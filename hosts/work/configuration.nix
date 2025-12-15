@@ -30,10 +30,9 @@
   nixpkgs.config.allowUnfree = true;
 
   hardware.graphics.extraPackages = with pkgs; [
-    amdvlk
     rocmPackages.clr
     rocmPackages.rocm-runtime
-    vaapiVdpau
+    libva-vdpau-driver
     libvdpau-va-gl
   ];
 
