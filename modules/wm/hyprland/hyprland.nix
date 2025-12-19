@@ -165,6 +165,8 @@ in {
         "$mainMod, mouse_up, workspace, e-1"
         # Connect to Headset.
         "$mainMod SHIFT, V, exec, bluetoothctl power on && bluetoothctl connect 14:3F:A6:98:D8:9F"
+        "$mainMod, s, togglesplit"
+
       ];
 
       bindm = [

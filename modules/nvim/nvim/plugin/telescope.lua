@@ -5,6 +5,7 @@ local t_action_state = require('telescope.actions.state')
 local t_pickers = require('telescope.pickers')
 local t_finders = require('telescope.finders')
 local t_conf_vals = require('telescope.config').values
+local previewers = require("telescope.previewers")
 
 local function delete_buf(prompt_bufnr)
     -- Get the selected entry
@@ -22,6 +23,22 @@ local function delete_buf(prompt_bufnr)
             current_picker:refresh()
         end)
     end
+end
+
+
+local new_maker = function(filepath, bufnr, opts)
+    opts = opts or {}
+
+    vim.loop.fs_stat(filepath, function(_, stat)
+        if not stat then return end
+
+        -- Skip huge files
+        if stat.size > 200 * 1024 then
+            return
+        end
+
+        previewers.buffer_previewer_maker(filepath, bufnr, opts)
+    end)
 end
 
 telescope.setup {
@@ -43,6 +60,7 @@ telescope.setup {
             path = vim.fn.stdpath('data') .. '/telescope_history',
             limit = 100,
         },
+        buffer_previewer_maker = new_maker,
     },
     extensions = {
         live_grep_args = {
