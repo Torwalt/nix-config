@@ -95,7 +95,7 @@
       exec-once = [
         "kitty"
         "firefox"
-        "telegram-desktop"
+        "Telegram"
         "keepassxc"
         "spotify"
         "steam"
