@@ -25,3 +25,10 @@ vim.filetype.add {
         envrc     = "bash",
     },
 }
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+    pattern = "/tmp/*",
+    callback = function()
+        vim.bo.filetype = "markdown"
+    end,
+})
