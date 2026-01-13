@@ -106,7 +106,16 @@ vim.lsp.config('ts_ls', {
         on_attach(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
-    end
+    end,
+
+    root_markers = {
+        "pnpm-workspace.yaml",
+        "turbo.json",
+        "nx.json",
+        ".git",
+        "tsconfig.base.json",
+        "tsconfig.json",
+    },
 })
 
 vim.lsp.enable('ts_ls', true)
