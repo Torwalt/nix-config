@@ -85,6 +85,10 @@
       text-case-nvim
       nvim-surround
 
+      noice-nvim
+      nui-nvim
+      nvim-notify
+
       luasnip
       friendly-snippets
 
