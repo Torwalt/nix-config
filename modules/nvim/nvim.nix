@@ -77,11 +77,6 @@
 
     plugins = with pkgs.vimPlugins; [
       tokyonight-nvim
-      plenary-nvim
-      nvim-lspconfig
-      lsp-format-nvim
-      coq_nvim
-      coq-artifacts
       git-blame-nvim
       comment-nvim
       markdown-preview-nvim
@@ -90,6 +85,15 @@
       text-case-nvim
       nvim-surround
 
+      luasnip
+      friendly-snippets
+
+      nvim-lspconfig
+      lsp-format-nvim
+      coq_nvim
+      coq-artifacts
+
+      plenary-nvim
       telescope-nvim
       telescope-media-files-nvim
       telescope-live-grep-args-nvim
@@ -97,36 +101,20 @@
       telescope-luasnip-nvim
       telescope-fzf-native-nvim
 
-      luasnip
-      friendly-snippets
-
-      # ✨ AI ✨
-      avante-nvim
-      # deps for avante
-      dressing-nvim
-      nui-nvim
-
-      # language specific
       rustaceanvim
 
       # testing
       nvim-nio
       neotest
       FixCursorHold-nvim
-
-      # debugging
       nvim-dap
       nvim-dap-go
-
-      # neotest-golang
       neotest-golang-nvim
 
       nvim-treesitter
       nvim-treesitter.withAllGrammars
       nvim-treesitter-textobjects
-
       nvim-treesitter-textobjects
-      # nvim-treesitter-parsers.astro
 
       # db
       vim-dadbod
