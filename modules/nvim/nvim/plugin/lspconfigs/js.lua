@@ -16,9 +16,9 @@ vim.lsp.config('ts_ls', {
         allow_incremental_sync = true, -- Enable incremental document sync
     },
 
-    -- Customize capabilities
+    -- Customize capabilities (merged with cmp_caps from common.lua)
     capabilities = (function()
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        local capabilities = vim.tbl_deep_extend("force", cmp_caps, {})
         capabilities.textDocument.completion.completionItem.snippetSupport = true
 
         -- Limit some features that might be causing performance issues

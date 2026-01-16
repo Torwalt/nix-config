@@ -85,6 +85,14 @@
       text-case-nvim
       nvim-surround
 
+      nvim-cmp
+      cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
+      cmp-cmdline
+      cmp_luasnip
+      lspkind-nvim
+
       noice-nvim
       nui-nvim
       nvim-notify
@@ -94,8 +102,6 @@
 
       nvim-lspconfig
       lsp-format-nvim
-      coq_nvim
-      coq-artifacts
 
       plenary-nvim
       telescope-nvim
