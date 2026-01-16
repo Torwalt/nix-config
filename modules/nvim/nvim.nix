@@ -47,7 +47,8 @@
   };
 
   home = {
-    packages = [ pkgs.ripgrep pkgs-unstable.gopls pkgs.sqls pkgs.prettierd ];
+    packages =
+      [ pkgs.ripgrep pkgs-unstable.gopls pkgs.sqls pkgs.prettierd pkgs.fd ];
 
     sessionVariables = {
       EDITOR = "nvim";
@@ -77,8 +78,6 @@
     plugins = with pkgs.vimPlugins; [
       tokyonight-nvim
       plenary-nvim
-      telescope-nvim
-      telescope-live-grep-args-nvim
       nvim-lspconfig
       lsp-format-nvim
       coq_nvim
@@ -87,10 +86,16 @@
       comment-nvim
       markdown-preview-nvim
       telekasten-nvim
-      telescope-media-files-nvim
       calendar-vim
       text-case-nvim
       nvim-surround
+
+      telescope-nvim
+      telescope-media-files-nvim
+      telescope-live-grep-args-nvim
+      telescope-emoji-nvim
+      telescope-luasnip-nvim
+      telescope-fzf-native-nvim
 
       luasnip
       friendly-snippets
@@ -115,8 +120,6 @@
 
       # neotest-golang
       neotest-golang-nvim
-      telescope-emoji-nvim
-      telescope-luasnip-nvim
 
       nvim-treesitter
       nvim-treesitter.withAllGrammars

@@ -44,8 +44,16 @@ end
 telescope.setup {
     defaults = {
         vimgrep_arguments = {
-            'rg', '--with-filename', '--line-number', '--column',
-            '--smart-case', '-uu'
+            'rg',
+            '--with-filename', '--line-number', '--column',
+            '--smart-case',
+            '--hidden',
+            '--glob', '!.git/*',
+            -- optionally: '--no-ignore-vcs'  -- only if you truly need ignored files, but be careful
+        },
+        file_ignore_patterns = {
+            "node_modules/", "dist/", "build/", "target/", "vendor/",
+            "%.min%.js", "%.lock",
         },
         mappings = {
             n = {
@@ -70,6 +78,13 @@ telescope.setup {
                     ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
                 }
             }
+        },
+        fzf = {
+            fuzzy = true,             -- false will only do exact matching
+            override_generic_sorter = true, -- override the generic sorter
+            override_file_sorter = true, -- override the file sorter
+            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+            -- the default case_mode is "smart_case"
         }
     },
     pickers = {
@@ -80,6 +95,8 @@ telescope.setup {
     }
 }
 
+telescope.load_extension("fzf")
+
 telescope.load_extension("emoji")
 nmap("<leader>fe", function() telescope.extensions.emoji.emoji() end)
 
@@ -87,7 +104,22 @@ telescope.load_extension('luasnip')
 nmap("<leader>fs", function() telescope.extensions.luasnip.luasnip() end)
 
 local tele_builtin = require('telescope.builtin')
-nmap("<leader>ff", function() tele_builtin.find_files({ hidden = true }) end)
+
+nmap("<leader>ff", function()
+    require('telescope.builtin').find_files({
+        hidden = true,
+        find_command = {
+            "fd", "--type", "f",
+            "--hidden",
+            "--exclude", ".git",
+            "--exclude", "node_modules",
+            "--exclude", "dist",
+            "--exclude", "build",
+            "--exclude", "target",
+        },
+    })
+end)
+
 nmap("<leader>fb", function() tele_builtin.buffers({ sort_mru = true }) end)
 nmap("/", function() tele_builtin.current_buffer_fuzzy_find({ sort_mru = true }) end)
 nmap("<leader>fd", function() tele_builtin.lsp_document_symbols({ sort_mru = true, query = "" }) end)
