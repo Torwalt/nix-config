@@ -4,7 +4,6 @@ pcall(function()
 end)
 
 require("noice").setup({
-    -- This is the main feature you asked for (cmdline in a centered popup)
     cmdline = {
         enabled = true,
         view = "cmdline_popup",
