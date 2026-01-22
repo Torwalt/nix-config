@@ -9,3 +9,11 @@ vim.lsp.config('gopls', {
 })
 
 vim.lsp.enable('gopls', true)
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "go",
+    callback = function()
+        -- Otherwise `gqq` (comment linebreaking) will delegate to gofmt which wont linebreak.
+        vim.opt_local.formatprg = ""
+    end,
+})
