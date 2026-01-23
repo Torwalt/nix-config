@@ -1,25 +1,3 @@
--- /nix/store/.../modules/nvim/nvim/plugin/nvim-cmp.lua
---
--- Drop-in replacement for COQ.
--- You should REMOVE/DISABLE your coq_nvim.lua (the `require('coq')` + `COQnow -s` bits),
--- and ensure these plugins are installed (via Nix):
---
---   hrsh7th/nvim-cmp
---   hrsh7th/cmp-nvim-lsp
---   hrsh7th/cmp-buffer
---   hrsh7th/cmp-path
---   hrsh7th/cmp-cmdline
---   L3MON4D3/LuaSnip
---   saadparwaiz1/cmp_luasnip
---   (optional but nice) onsails/lspkind.nvim   -- icons in completion menu
---
--- You already have LuaSnip + friendly-snippets configured; this will reuse that.
---
--- IMPORTANT with your setup:
--- - This config aggressively prioritizes LSP completion over buffer words
---   to avoid the “random tmux word beats struct field” annoyance.
--- - It does NOT depend on noice popupmenu integration (keeps your noice.popupmenu disabled).
-
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
