@@ -102,9 +102,7 @@
         "xrandr --output HDMI-A-3 --primary"
       ];
 
-      env = [
-        "XCURSOR_SIZE,24"
-      ];
+      env = [ "XCURSOR_SIZE,24" ];
 
     };
   };

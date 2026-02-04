@@ -4,7 +4,15 @@
     gamescopeSession.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [ mangohud protonup-ng bottles wine winetricks protonup-qt ];
+  environment.systemPackages = with pkgs; [
+    mangohud
+    protonup-ng
+    bottles
+    wine
+    winetricks
+    protonup-qt
+    nexusmods-app
+  ];
 
   environment.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS =
