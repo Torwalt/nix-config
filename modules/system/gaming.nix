@@ -11,7 +11,6 @@
     wine
     winetricks
     protonup-qt
-    nexusmods-app
   ];
 
   environment.sessionVariables = {
