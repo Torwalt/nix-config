@@ -2,13 +2,7 @@
 
 let
   homeDirectory = "/home/ada";
-  unstable = with pkgs-unstable; [
-    claude-code
-    opencode
-    codex
-    openai
-    aider-chat
-  ];
+  unstable = with pkgs-unstable; [ ];
 in {
   imports = [
     ../../modules/base.nix
