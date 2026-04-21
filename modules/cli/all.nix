@@ -1,5 +1,4 @@
 { ... }: {
-
   programs.git = {
     enable = true;
 
@@ -9,7 +8,6 @@
         email = "alexdadiani1994@gmail.com";
       };
 
-      # IMPORTANT: section is "alias", not "aliases"
       alias = {
         gls =
           "!f(){ git rev-list --reverse \${1:-master}..HEAD | head -n1; }; f";
@@ -21,7 +19,6 @@
 
       url."ssh://git@github.com/".insteadOf = "https://github.com/";
 
-      # Git-side delta config (only delta’s own knobs)
       delta = {
         navigate = true;
         line-numbers = true;
@@ -36,7 +33,6 @@
     lfs.enable = true;
   };
 
-  # IMPORTANT: this is what actually wires delta into git as pager/diff filter
   programs.delta = {
     enable = true;
     enableGitIntegration = true;
@@ -44,6 +40,13 @@
       navigate = true;
       line-numbers = true;
       paging = "always";
+    };
+  };
+
+  programs.lazygit = {
+    enable = true;
+    settings = {
+      git = { pagers = [{ pager = "delta --paging=never --line-numbers"; }]; };
     };
   };
 
@@ -61,3 +64,4 @@
 
   programs.btop = { enable = true; };
 }
+
