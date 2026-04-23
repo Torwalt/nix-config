@@ -1,8 +1,30 @@
-{ pkgs, inputs, pkgs-unstable, ... }:
+{ pkgs, inputs, pkgs-unstable, lib, ... }:
 
 let
   homeDirectory = "/home/ada";
   unstable = with pkgs-unstable; [ ];
+
+  workFe = pkgs.writeShellScriptBin "work-fe" ''
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    session="run"
+    repo="''${WORK_REPO:-$HOME/repos/scoretech-mono}"
+
+    if ! tmux has-session -t "$session" 2>/dev/null; then
+      tmux new-session -d -s "$session" -n fe -c "$repo"
+      tmux send-keys -t "$session":fe.0 "nix run .#scoreboard-dev" C-m
+      tmux split-window -h -t "$session":fe -c "$repo"
+      tmux send-keys -t "$session":fe.1 "nix run .#scorealerts-dev" C-m
+      tmux select-pane -t "$session":fe.0
+    fi
+
+    if [ -n "''${TMUX-}" ]; then
+      exec tmux switch-client -t "$session"
+    else
+      exec tmux attach -t "$session"
+    fi
+  '';
 in {
   imports = [
     ../../modules/base.nix
@@ -75,9 +97,13 @@ in {
         just
         nushell
         inputs.devenv-nix.packages.${pkgs.system}.devenv
+        workFe
       ] ++ unstable;
 
-    sessionVariables = { WLR_NO_HARDWARE_CURSORS = 1; };
+    sessionVariables = {
+      WLR_NO_HARDWARE_CURSORS = 1;
+      WORK_REPO = "/home/ada/repos/scoretech-mono";
+    };
   };
 
   dconf.settings = {
@@ -93,6 +119,7 @@ in {
     nodejsshell = "nix develop ~/nix-config#nodejs";
     azureclishell = "nix develop ~/nix-config#azurecli";
     miseshell = "nix develop ~/nix-config#mise";
+    runfe = "work-fe";
   };
 
   colorScheme = inputs.nix-colors.colorSchemes.tokyo-city-dark;
@@ -140,7 +167,7 @@ in {
         "hyprctl dispatch exec '[workspace 2 silent]' kitty --title btop -e btop"
         "hyprctl dispatch exec '[workspace 2 silent]' kitty --title lazydocker -e lazydocker"
       ];
-
     };
   };
+
 }
