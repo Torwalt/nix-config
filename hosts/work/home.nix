@@ -111,21 +111,35 @@ in {
         "5, monitor:HDMI-A-1"
         "6, monitor:HDMI-A-1"
         "7, monitor:HDMI-A-1"
+        "8, monitor:HDMI-A-1"
+        "0, monitor:HDMI-A-1"
 
         "2, monitor:eDP-1"
+        "9, monitor:eDP-1"
       ];
 
       windowrulev2 = [
         "workspace 1,class:^(kitty)$"
-        "workspace 2,title:^(Spotify Premium)$"
         "workspace 3,class:^(firefox)$"
         "workspace 4,class:^(chromium-browser)$"
-        "workspace 5,class:^(DBeaver)$"
         "workspace 6,class:^(org.keepassxc.KeePassXC)$"
+
+        "workspace 2,title:^(btop)$"
+        "workspace 2,title:^(lazydocker)$"
+
+        "workspace 9,title:^(Spotify Premium)$"
       ];
 
-      exec-once =
-        [ "kitty" "firefox" "keepassxc" "spotify" "chromium-browser" ];
+      exec-once = [
+        "kitty"
+        "firefox"
+        "keepassxc"
+        "spotify"
+        "chromium-browser"
+
+        "hyprctl dispatch exec '[workspace 2 silent]' kitty --title btop -e btop"
+        "hyprctl dispatch exec '[workspace 2 silent]' kitty --title lazydocker -e lazydocker"
+      ];
 
     };
   };
