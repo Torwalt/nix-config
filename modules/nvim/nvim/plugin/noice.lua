@@ -1,5 +1,13 @@
 pcall(function()
     local notify = require("notify")
+    notify.setup({
+        timeout = 1500,
+        stages = "static",
+        render = "compact",
+        max_width = 50,
+        max_height = 8,
+        fps = 15,
+    })
     vim.notify = notify
 end)
 
@@ -26,11 +34,15 @@ require("noice").setup({
 
     messages = {
         enabled = true,
-        view = "notify", -- uses nvim-notify if available, otherwise falls back
+        view = "mini",
         view_error = "notify",
-        view_warn = "notify",
+        view_warn = "mini",
         view_history = "messages",
-        view_search = "virtualtext",
+        view_search = false,
+    },
+
+    lsp = {
+        progress = { enabled = false },
     },
 
     -- Keeps the classic bottom cmdline *only* when Noice can’t attach.
@@ -38,17 +50,17 @@ require("noice").setup({
     health = { checker = true },
 
     -- Nice LSP markdown rendering without doing anything that breaks Telescope.
-    lsp = {
-        progress = { enabled = true },
-        hover = { enabled = true },
-        signature = { enabled = true },
-        override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-            -- NOTE: you don't use nvim-cmp, you use COQ, so do NOT enable the cmp override:
-            -- ["cmp.entry.get_documentation"] = true,
-        },
-    },
+    -- lsp = {
+    --     progress = { enabled = true },
+    --     hover = { enabled = true },
+    --     signature = { enabled = true },
+    --     override = {
+    --         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+    --         ["vim.lsp.util.stylize_markdown"] = true,
+    --         -- NOTE: you don't use nvim-cmp, you use COQ, so do NOT enable the cmp override:
+    --         -- ["cmp.entry.get_documentation"] = true,
+    --     },
+    -- },
 
     -- Some sane noise suppression
     routes = {
@@ -81,8 +93,8 @@ require("noice").setup({
     },
 
     presets = {
-        bottom_search = true,     -- keep / and ? at the bottom (usually less annoying)
-        command_palette = false,  -- you want centered cmdline, not the wide palette layout
+        bottom_search = true,         -- keep / and ? at the bottom (usually less annoying)
+        command_palette = false,      -- you want centered cmdline, not the wide palette layout
         long_message_to_split = true, -- big messages go to a split, not covering your code
         lsp_doc_border = true,
     },
