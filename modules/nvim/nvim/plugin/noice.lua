@@ -26,8 +26,6 @@ require("noice").setup({
         },
     },
 
-    -- IMPORTANT: you use COQ. Noice can replace the popupmenu UI and that can
-    -- conflict with completion plugins. Keep popupmenu OFF.
     popupmenu = {
         enabled = false,
     },

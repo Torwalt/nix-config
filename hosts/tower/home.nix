@@ -27,6 +27,7 @@
     ../../modules/wm/hyprland/waybar.nix
     ../../modules/wm/hyprland/swaylock.nix
     ../../modules/wm/hyprland/gammastep.nix
+    ../../modules/ai/default.nix
 
     inputs.nix-colors.homeManagerModules.default
   ];
