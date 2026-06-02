@@ -2,7 +2,7 @@
 
 let
   homeDirectory = "/home/ada";
-  unstable = with pkgs-unstable; [ ];
+  unstable = with pkgs-unstable; [ codex ];
 
   workFe = pkgs.writeShellScriptBin "work-fe" ''
     #!/usr/bin/env bash
