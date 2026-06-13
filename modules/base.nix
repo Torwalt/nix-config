@@ -7,7 +7,7 @@
       (python312.withPackages (ps: with ps; [ ipython virtualenv ]))
 
       gnumake
-      nixfmt-classic
+      nixfmt
       ffmpeg
       btop
       file
@@ -57,6 +57,7 @@
 
   programs.firefox = {
     enable = true;
+    configPath = ".mozilla/firefox";
     nativeMessagingHosts = [ pkgs.tridactyl-native ];
   };
 

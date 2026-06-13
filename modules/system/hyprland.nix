@@ -22,6 +22,6 @@
     # dependency for all notifiers
     libnotify
     # wallpapers
-    swww
+    awww
   ];
 }

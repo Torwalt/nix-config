@@ -1,8 +1,6 @@
 { pkgs, inputs, pkgs-unstable, ... }: {
   nixpkgs = {
     overlays = [
-      inputs.nvim-treesitter-main.overlays.default
-
       (final: prev: {
         vimPlugins = prev.vimPlugins // {
           telescope-emoji-nvim = prev.vimUtils.buildVimPlugin {
@@ -57,6 +55,9 @@
   };
 
   programs.neovim = {
+    withPython3 = true;
+    withRuby = true;
+
     enable = true;
     defaultEditor = true;
 
@@ -64,7 +65,7 @@
     vimAlias = true;
     vimdiffAlias = true;
 
-    extraLuaConfig = let
+    initLua = let
       fileUtils = import ../lib/fileutils.nix;
       patterns = [ "$NIX_OS_PATH_PLACEHOLDER_FRIENDLY_SNIPPET" ];
       replacements = [ "${pkgs.vimPlugins.friendly-snippets}" ];
@@ -75,7 +76,9 @@
       replaced = builtins.replaceStrings patterns replacements configContent;
     in replaced;
 
-    plugins = with pkgs.vimPlugins; [
+    plugins =
+      let unstableTreesitter = pkgs-unstable.vimPlugins.nvim-treesitter;
+      in with pkgs.vimPlugins; [
       tokyonight-nvim
       git-blame-nvim
       comment-nvim
@@ -121,8 +124,8 @@
       nvim-dap-go
       neotest-golang-nvim
 
-      nvim-treesitter
-      nvim-treesitter.withAllGrammars
+      unstableTreesitter
+      unstableTreesitter.withAllGrammars
       nvim-treesitter-textobjects
       nvim-treesitter-textobjects
 

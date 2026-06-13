@@ -1,7 +1,17 @@
-{ pkgs, inputs, pkgs-unstable, ... }:
-let unstable = with pkgs-unstable; [ codex ];
+{
+  pkgs,
+  inputs,
+  pkgs-unstable,
+  ...
+}:
+let
+  unstable = with pkgs-unstable; [
+    codex
+    bubblewrap
+  ];
 
-in {
+in
+{
   imports = [
     ../../modules/base.nix
     ../../modules/stylix/default.nix
@@ -37,7 +47,8 @@ in {
     username = "ada";
     homeDirectory = "/home/ada";
 
-    packages = with pkgs;
+    packages =
+      with pkgs;
       [
         # Monitor config
         nwg-displays
@@ -51,10 +62,11 @@ in {
         discord
         libresprite
         renderdoc
-        helvum
+        crosspipe
         gzdoom
         lutris
-      ] ++ unstable;
+      ]
+      ++ unstable;
 
     sessionVariables = {
       WLR_NO_HARDWARE_CURSORS = 1;
@@ -66,8 +78,10 @@ in {
 
   wayland.windowManager.hyprland = {
     settings = {
-      monitor =
-        [ "DP-1,2560x1440@59.95,0x0,1" "HDMI-A-3,2560x1440@60,2560x0,1" ];
+      monitor = [
+        "DP-1,2560x1440@59.95,0x0,1"
+        "HDMI-A-3,2560x1440@60,2560x0,1"
+      ];
 
       workspace = [
         "1, monitor:HDMI-A-3"
@@ -80,19 +94,19 @@ in {
         "2, monitor:DP-1"
       ];
 
-      windowrulev2 = [
-        "workspace 1,class:^(kitty)$"
-        "workspace 2,title:^(Spotify Premium)$"
-        "workspace 3,class:^(firefox)$"
-        "workspace 4,class:^(org.telegram.desktop)$"
+      windowrule = [
+        "workspace 1, match:class ^(kitty)$"
+        "workspace 2, match:class ^(Spotify)$"
+        "workspace 3, match:class ^(firefox)$"
+        "workspace 4, match:class ^(org.telegram.desktop)$"
 
-        "workspace 5,class:^(com.usebottles.bottles)$"
-        "workspace 5,class:^(battle.net.exe)$"
-        "workspace 5,class:^(wow.exe)$"
-        "workspace 5,class:^(steam)$"
+        "workspace 5, match:class ^(com.usebottles.bottles)$"
+        "workspace 5, match:class ^(battle.net.exe)$"
+        "workspace 5, match:class ^(wow.exe)$"
+        "workspace 5, match:class ^(steam)$"
 
-        "workspace 6,class:^(org.keepassxc.KeePassXC)$"
-        "workspace 7,class:^(WowUpCf)$"
+        "workspace 6, match:class ^(org.keepassxc.KeePassXC)$"
+        "workspace 7, match:class ^(WowUpCf)$"
       ];
 
       exec-once = [

@@ -10,7 +10,7 @@
     ../../modules/system/gaming.nix
     ../../modules/system/greetd/default.nix
     ../../modules/system/fonts.nix
-    ../../modules/system/ai/default.nix
+    # ../../modules/system/ai/default.nix
   ];
 
   boot.loader = {

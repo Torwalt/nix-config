@@ -145,16 +145,16 @@ in {
         "9, monitor:eDP-1"
       ];
 
-      windowrulev2 = [
-        "workspace 1,class:^(kitty)$"
-        "workspace 3,class:^(firefox)$"
-        "workspace 4,class:^(chromium-browser)$"
-        "workspace 6,class:^(org.keepassxc.KeePassXC)$"
+      windowrule = [
+        "workspace 1, match:class ^(kitty)$"
+        "workspace 3, match:class ^(firefox)$"
+        "workspace 4, match:class ^(chromium-browser)$"
+        "workspace 6, match:class ^(org.keepassxc.KeePassXC)$"
 
-        "workspace 2,title:^(btop)$"
-        "workspace 2,title:^(lazydocker)$"
+        "workspace 2, match:title ^(btop)$"
+        "workspace 2, match:title ^(lazydocker)$"
 
-        "workspace 9,title:^(Spotify Premium)$"
+        "workspace 9, match:title ^(Spotify Premium)$"
       ];
 
       exec-once = [

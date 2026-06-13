@@ -8,13 +8,13 @@ let
 
     ${pkgs.dunst}/bin/dunst &
 
-    ${pkgs.swww}/bin/swww init &
+    ${pkgs.awww}/bin/awww init &
 
     ${pkgs.maestral-gui}/bin/maestral_qt &
 
     sleep 1
 
-    ${pkgs.swww}/bin/swww img ${../../../wp.png}
+    ${pkgs.awww}/bin/awww img ${../../../wp.png}
   '';
 
   lockScript = pkgs.pkgs.writeShellScriptBin "lock" ''
@@ -41,6 +41,7 @@ in {
 
   wayland.windowManager.hyprland = {
     enable = true;
+    configType = "hyprlang";
 
     settings = {
 
@@ -66,9 +67,9 @@ in {
         allow_tearing = false;
       };
 
-      windowrulev2 = [
-        "opacity 0.95 0.8,class:.*" # Set opacity of active and inactive windows for all types of windows.
-        "stayfocused, class:(Rofi)$" # Autofocus rofi to fix bug
+      windowrule = [
+        "opacity 0.95 0.8, match:class .*" # Set opacity of active and inactive windows for all types of windows.
+        "stay_focused on, match:class (Rofi)$" # Autofocus rofi to fix bug
       ];
 
       decoration = {
@@ -94,7 +95,6 @@ in {
       };
 
       dwindle = {
-        pseudotile = "yes";
         preserve_split = "yes";
       };
 
@@ -121,9 +121,9 @@ in {
         "$mainMod SHIFT, P, exec, wl-paste | swappy -f - "
         ''$mainMod SHIFT, S, exec, grim -g "$(slurp)" -  | wl-copy''
         # Turn off opacity.
-        "$mainMod, O, exec, hyprctl --batch 'keyword windowrulev2 'opacity 1.0 1.0 override, class:.*''"
+        ''$mainMod, O, exec, hyprctl keyword windowrule "opacity 1.0 1.0 override, match:class .*"''
         # Turn on again.
-        "$mainMod SHIFT, O, exec, hyprctl --batch 'keyword windowrulev2 'opacity 0.95 0.8 override, class:.*''"
+        ''$mainMod SHIFT, O, exec, hyprctl keyword windowrule "opacity 0.95 0.8 override, match:class .*"''
 
         # Window manipulation"
         "$mainMod, V, togglefloating, "
@@ -165,7 +165,7 @@ in {
         "$mainMod, mouse_up, workspace, e-1"
         # Connect to Headset.
         "$mainMod SHIFT, V, exec, bluetoothctl power on && bluetoothctl connect 14:3F:A6:98:D8:9F"
-        "$mainMod, s, togglesplit"
+        "$mainMod, s, layoutmsg, togglesplit"
 
       ];
 
