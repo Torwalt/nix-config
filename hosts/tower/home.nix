@@ -1,6 +1,7 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, pkgs-unstable, ... }:
+let unstable = with pkgs-unstable; [ codex ];
 
-{
+in {
   imports = [
     ../../modules/base.nix
     ../../modules/stylix/default.nix
@@ -36,23 +37,24 @@
     username = "ada";
     homeDirectory = "/home/ada";
 
-    packages = with pkgs; [
-      # Monitor config
-      nwg-displays
-      wlr-randr
+    packages = with pkgs;
+      [
+        # Monitor config
+        nwg-displays
+        wlr-randr
 
-      libreoffice
-      gimp-with-plugins
+        libreoffice
+        gimp-with-plugins
 
-      # Non programming
-      telegram-desktop
-      discord
-      libresprite
-      renderdoc
-      helvum
-      gzdoom
-      lutris
-    ];
+        # Non programming
+        telegram-desktop
+        discord
+        libresprite
+        renderdoc
+        helvum
+        gzdoom
+        lutris
+      ] ++ unstable;
 
     sessionVariables = {
       WLR_NO_HARDWARE_CURSORS = 1;
