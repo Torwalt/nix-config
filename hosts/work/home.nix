@@ -67,7 +67,6 @@ in {
 
         libreoffice
         go-task
-        pdm
         pnpm
         binaryen
         temporal-cli
@@ -96,6 +95,7 @@ in {
         ncspot
         just
         nushell
+        brightnessctl
         inputs.devenv-nix.packages.${pkgs.system}.devenv
         workFe
       ] ++ unstable;
