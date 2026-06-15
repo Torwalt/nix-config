@@ -158,7 +158,7 @@ in {
       ];
 
       exec-once = [
-        "kitty"
+        "hyprctl dispatch exec kitty"
         "firefox"
         "keepassxc"
         "spotify"

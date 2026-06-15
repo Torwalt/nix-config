@@ -110,7 +110,7 @@ in
       ];
 
       exec-once = [
-        "kitty"
+        "hyprctl dispatch exec kitty"
         "firefox"
         "Telegram"
         "keepassxc"
