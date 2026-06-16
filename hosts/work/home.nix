@@ -154,7 +154,7 @@ in {
         "workspace 2, match:title ^(btop)$"
         "workspace 2, match:title ^(lazydocker)$"
 
-        "workspace 9, match:title ^(Spotify Premium)$"
+        "workspace 2, match:class ^(Spotify)$"
       ];
 
       exec-once = [
