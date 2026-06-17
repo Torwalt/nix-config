@@ -28,7 +28,6 @@
       # firefox
       pavucontrol
       spotify
-      chromium
       maestral-gui
 
       # Screenshots
@@ -59,6 +58,13 @@
     enable = true;
     configPath = ".mozilla/firefox";
     nativeMessagingHosts = [ pkgs.tridactyl-native ];
+  };
+
+  programs.chromium = {
+    enable = true;
+    commandLineArgs = [
+      "--enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer"
+    ];
   };
 
   programs.readline = {

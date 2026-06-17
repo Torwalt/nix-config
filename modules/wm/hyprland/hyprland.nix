@@ -37,7 +37,11 @@ let
 
 in {
 
-  home = { packages = with pkgs; [ rose-pine-hyprcursor ]; };
+  home = {
+    packages = with pkgs; [ rose-pine-hyprcursor ];
+    sessionVariables.NIX_XDG_DESKTOP_PORTAL_DIR =
+      lib.mkForce "/run/current-system/sw/share/xdg-desktop-portal/portals";
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -47,7 +51,12 @@ in {
 
       monitor = [ ",preferred,auto,auto" ];
 
-      env = [ "HYPRCURSOR_THEME,rose-pine-hyprcursor" "HYPRCURSOR_SIZE,24" ];
+      env = [
+        "HYPRCURSOR_THEME,rose-pine-hyprcursor"
+        "HYPRCURSOR_SIZE,24"
+        "NIX_XDG_DESKTOP_PORTAL_DIR,/run/current-system/sw/share/xdg-desktop-portal/portals"
+        "XDG_SESSION_DESKTOP,Hyprland"
+      ];
 
       cursor = { enable_hyprcursor = true; };
 
@@ -185,7 +194,7 @@ in {
 
       exec-once = [
         "${startupScript}/bin/start"
-        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP XDG_SESSION_TYPE NIX_XDG_DESKTOP_PORTAL_DIR"
       ];
     };
   };

@@ -12,6 +12,7 @@
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = [ "hyprland" "gtk" ];
   };
 
   environment.sessionVariables = { XDG_SESSION_TYPE = "wayland"; };
