@@ -22,6 +22,7 @@
       lldb
       tldr
       wget
+      files-to-prompt
 
       # GUI
       keepassxc
