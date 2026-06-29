@@ -55,7 +55,9 @@ in {
         "HYPRCURSOR_THEME,rose-pine-hyprcursor"
         "HYPRCURSOR_SIZE,24"
         "NIX_XDG_DESKTOP_PORTAL_DIR,/run/current-system/sw/share/xdg-desktop-portal/portals"
+        "XDG_CURRENT_DESKTOP,Hyprland"
         "XDG_SESSION_DESKTOP,Hyprland"
+        "XDG_SESSION_TYPE,wayland"
       ];
 
       cursor = { enable_hyprcursor = true; };

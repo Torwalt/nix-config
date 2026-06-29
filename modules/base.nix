@@ -64,7 +64,8 @@
   programs.chromium = {
     enable = true;
     commandLineArgs = [
-      "--enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer"
+      "--ozone-platform=wayland"
+      "--enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer,UsePortalFilePicker"
     ];
   };
 
