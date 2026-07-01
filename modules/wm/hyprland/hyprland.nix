@@ -124,7 +124,7 @@ in {
         # Program shortcuts
         "$mainMod, RETURN, exec, kitty"
         "$mainMod, Q, killactive, "
-        "$mainMod, X, exit, "
+        "$mainMod SHIFT, X, exit, "
         "$mainMod, D, exec, rofi -show drun -show-icons"
         "$mainMod SHIFT, L, exec, ${lockScript}/bin/lock"
 
