@@ -7,6 +7,8 @@ nmap("<leader>E", ":Explore<cr>")
 nmap("<Esc>", "<C-\\><C-n>")
 nmap("<leader>jf", ":%!jq .<cr>")
 nmap("<leader>s", ":update<cr>")
+nmap("ZZ", "<Nop>")
+nmap("ZQ", "<Nop>")
 
 local window_maximized = false
 local original_statusline_color = nil
