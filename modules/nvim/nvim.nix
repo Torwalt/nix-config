@@ -137,6 +137,7 @@
 
     extraPackages = with pkgs; [
       nil
+      ols
       lua-language-server
       python3
       yaml-language-server

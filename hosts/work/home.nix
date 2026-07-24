@@ -1,4 +1,10 @@
-{ pkgs, inputs, pkgs-unstable, lib, ... }:
+{
+  pkgs,
+  inputs,
+  pkgs-unstable,
+  lib,
+  ...
+}:
 
 let
   homeDirectory = "/home/ada";
@@ -25,7 +31,8 @@ let
       exec tmux attach -t "$session"
     fi
   '';
-in {
+in
+{
   imports = [
     ../../modules/base.nix
     ../../modules/stylix/default.nix
@@ -40,6 +47,7 @@ in {
     ../../modules/timewarrior/default.nix
 
     ../../modules/nvim/nvim.nix
+    ../../modules/ai/default.nix
 
     ../../modules/cli/all.nix
 
@@ -59,7 +67,8 @@ in {
     username = "ada";
     homeDirectory = homeDirectory;
 
-    packages = with pkgs;
+    packages =
+      with pkgs;
       [
         # Monitor config
         nwg-displays
@@ -98,7 +107,8 @@ in {
         brightnessctl
         inputs.devenv-nix.packages.${pkgs.system}.devenv
         workFe
-      ] ++ unstable;
+      ]
+      ++ unstable;
 
     sessionVariables = {
       WLR_NO_HARDWARE_CURSORS = 1;
