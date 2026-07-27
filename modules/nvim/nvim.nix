@@ -111,6 +111,7 @@
       noice-nvim
       nui-nvim
       nvim-notify
+      which-key-nvim
       codediff-nvim
       review-nvim
 
