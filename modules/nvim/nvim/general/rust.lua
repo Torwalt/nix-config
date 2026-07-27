@@ -3,7 +3,7 @@
 local rust_on_attach = function(client, bufnr)
     on_attach(client, bufnr)
 
-    nbufmap("<leader>cc", function() vim.cmd.RustLsp("codeAction") end, bufnr)
+    nbufmap("<leader>ca", function() vim.cmd.RustLsp("codeAction") end, bufnr)
     nbufmap("<leader>rr", function() vim.cmd.RustLsp({ "flyCheck", "run" }) end,
         bufnr)
     nbufmap("<leader>rh", function() vim.cmd.RustLsp({ "view", "hir" }) end, bufnr)
