@@ -34,6 +34,18 @@
           };
         };
       })
+      (final: prev: {
+        vimPlugins = prev.vimPlugins // {
+          review-nvim = prev.vimUtils.buildVimPlugin {
+            name = "review-nvim";
+            src = inputs.plugin-review-nvim;
+            dependencies = [
+              final.vimPlugins.codediff-nvim
+              prev.vimPlugins.nui-nvim
+            ];
+          };
+        };
+      })
     ];
 
     # Configure your nixpkgs instance
@@ -99,6 +111,8 @@
       noice-nvim
       nui-nvim
       nvim-notify
+      codediff-nvim
+      review-nvim
 
       luasnip
       friendly-snippets

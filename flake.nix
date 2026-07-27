@@ -35,6 +35,11 @@
       flake = false;
     };
 
+    plugin-review-nvim = {
+      url = "github:georgeguimaraes/review.nvim/v1.9.1";
+      flake = false;
+    };
+
     nix-colors = { url = "github:misterio77/nix-colors"; };
 
     stylix = {

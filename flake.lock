@@ -513,6 +513,23 @@
         "type": "github"
       }
     },
+    "plugin-review-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1773689759,
+        "narHash": "sha256-/iP4ALu1oGamZe34FvP32qrzmg6wCsa5mmDaVUhIt0c=",
+        "owner": "georgeguimaraes",
+        "repo": "review.nvim",
+        "rev": "8e4bc16c8f430208bb0361a3957d487bc458576d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "georgeguimaraes",
+        "ref": "v1.9.1",
+        "repo": "review.nvim",
+        "type": "github"
+      }
+    },
     "plugin-telescope-emoji-nvim": {
       "flake": false,
       "locked": {
@@ -555,6 +572,7 @@
         "nvim-rustaceanvim": "nvim-rustaceanvim",
         "plugin-neotest-golang-nvim": "plugin-neotest-golang-nvim",
         "plugin-nvim-treesitter-textobjects": "plugin-nvim-treesitter-textobjects",
+        "plugin-review-nvim": "plugin-review-nvim",
         "plugin-telescope-emoji-nvim": "plugin-telescope-emoji-nvim",
         "plugin-telescope-luasnip-nvim": "plugin-telescope-luasnip-nvim",
         "sops-nix": "sops-nix",
