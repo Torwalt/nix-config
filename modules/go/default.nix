@@ -1,6 +1,12 @@
 { pkgs, config, ... }: {
 
-  home = { packages = with pkgs; [ go delve gotestsum]; };
+  home = {
+    packages = with pkgs; [
+      go
+      delve
+      gotestsum
+    ];
+  };
 
   programs.go = {
     enable = true;

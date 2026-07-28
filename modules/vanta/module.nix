@@ -1,6 +1,10 @@
 { ... }: {
   systemd.services.vanta = {
-    after = [ "network.service" "syslog.service" "osqueryd.service" ];
+    after = [
+      "network.service"
+      "syslog.service"
+      "osqueryd.service"
+    ];
     description = "Vanta monitoring software";
     wantedBy = [ "multi-user.target" ];
     script = ''

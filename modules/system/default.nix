@@ -9,7 +9,9 @@
 
     networkmanager = {
       enable = true;
-      wifi = { powersave = false; };
+      wifi = {
+        powersave = false;
+      };
     };
   };
 
@@ -69,7 +71,10 @@
   users.users.ada = {
     isNormalUser = true;
     description = "alex";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     shell = pkgs.zsh;
   };
 
@@ -121,7 +126,10 @@
   system.stateVersion = "25.11";
 
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     always-allow-substitutes = true;
     builders-use-substitutes = true;
   };

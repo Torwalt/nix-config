@@ -1,11 +1,19 @@
-{ stdenv, dpkg, glibc, gcc-unwrapped, autoPatchelfHook, osquery, }:
+{
+  stdenv,
+  dpkg,
+  glibc,
+  gcc-unwrapped,
+  autoPatchelfHook,
+  osquery,
+}:
 let
 
   version = "2.10.0";
 
   src = /home/ada/vanta-agent/vanta-amd64.deb;
 
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   name = "Vanta-Agent-${version}";
 
   system = "x86_64-linux";
@@ -19,17 +27,21 @@ in stdenv.mkDerivation {
   ];
 
   # Required at running time
-  buildInputs = [ glibc gcc-unwrapped osquery ];
+  buildInputs = [
+    glibc
+    gcc-unwrapped
+    osquery
+  ];
 
   unpackPhase = "true";
 
   installPhase = ''
-            export $(cat .env | xargs)
-            mkdir $out
-            dpkg -x $src $out
-            mv $out/var/vanta/* $out
-            mkdir $out/log
-            touch $out/log/$(date +"%Y-%-m-%-d-0")
+    export $(cat .env | xargs)
+    mkdir $out
+    dpkg -x $src $out
+    mv $out/var/vanta/* $out
+    mkdir $out/log
+    touch $out/log/$(date +"%Y-%-m-%-d-0")
   '';
 
   meta = {

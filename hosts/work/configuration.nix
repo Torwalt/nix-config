@@ -25,7 +25,9 @@
 
   services.power-profiles-daemon.enable = true;
 
-  environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
 
   nixpkgs.config.allowUnfree = true;
 
@@ -38,7 +40,10 @@
 
   hardware.graphics.extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
 
-  nix.settings.trusted-users = [ "root" "ada" ];
+  nix.settings.trusted-users = [
+    "root"
+    "ada"
+  ];
 
   boot.initrd.luks.devices."luks-25805164-d8bc-45c4-9918-09ffd240bc1e".device =
     "/dev/disk/by-uuid/25805164-d8bc-45c4-9918-09ffd240bc1e";

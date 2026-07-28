@@ -1,4 +1,6 @@
-{ pkgs ? import <nixpkgs> { } }:
+{
+  pkgs ? import <nixpkgs> { },
+}:
 
 pkgs.mkShell {
   buildInputs = with pkgs; [
@@ -15,4 +17,3 @@ pkgs.mkShell {
     echo "✅ OCaml 5.2 dev shell ready (LSP, dune, utop, formatter)"
   '';
 }
-

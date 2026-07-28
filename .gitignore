@@ -2,3 +2,5 @@
 vanta.env
 .aider*
 .codex
+.pre-commit-config.yaml
+.direnv

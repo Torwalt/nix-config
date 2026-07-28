@@ -1,4 +1,6 @@
-{ pkgs ? import <nixpkgs> { } }:
+{
+  pkgs ? import <nixpkgs> { },
+}:
 
 pkgs.mkShell {
   buildInputs = with pkgs; [
@@ -16,4 +18,3 @@ pkgs.mkShell {
     echo "NixOS development environment with Azure CLI and Python 3.12 with pip is ready"
   '';
 }
-

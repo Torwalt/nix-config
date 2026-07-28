@@ -1,3 +1,8 @@
 { pkgs, ... }: {
-  home = { packages = with pkgs; [ wowup-cf protontricks ]; };
+  home = {
+    packages = with pkgs; [
+      wowup-cf
+      protontricks
+    ];
+  };
 }

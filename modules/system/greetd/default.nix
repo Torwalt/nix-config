@@ -17,4 +17,3 @@
 
   environment.systemPackages = with pkgs; [ tuigreet ];
 }
-

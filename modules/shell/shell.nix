@@ -1,9 +1,14 @@
 { pkgs, ... }: {
   # In order for .profile being updated.
-  programs.bash = { enable = true; };
+  programs.bash = {
+    enable = true;
+  };
 
   home = {
-    packages = with pkgs; [ zsh-vi-mode nix-zsh-completions ];
+    packages = with pkgs; [
+      zsh-vi-mode
+      nix-zsh-completions
+    ];
     shell.enableZshIntegration = true;
   };
 
@@ -40,11 +45,13 @@
       ];
     };
 
-    plugins = [{
-      name = "powerlevel10k";
-      src = pkgs.zsh-powerlevel10k;
-      file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-    }];
+    plugins = [
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+    ];
 
     # Profiling
     # initExtraFirst = "zmodload zsh/zprof";

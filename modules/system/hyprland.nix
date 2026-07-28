@@ -12,14 +12,22 @@
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    config.common.default = [ "hyprland" "gtk" ];
+    config.common.default = [
+      "hyprland"
+      "gtk"
+    ];
     config.hyprland = {
-      default = [ "hyprland" "gtk" ];
+      default = [
+        "hyprland"
+        "gtk"
+      ];
       "org.freedesktop.impl.portal.FileChooser" = "gtk";
     };
   };
 
-  environment.sessionVariables = { XDG_SESSION_TYPE = "wayland"; };
+  environment.sessionVariables = {
+    XDG_SESSION_TYPE = "wayland";
+  };
 
   environment.systemPackages = with pkgs; [
     # notifier

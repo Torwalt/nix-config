@@ -1,21 +1,32 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   systemd.user.services = {
     # Services to start timew and stop on shutdown.
     timewarrior-start-work = {
-      Unit = { Description = "Start Timewarrior work"; };
+      Unit = {
+        Description = "Start Timewarrior work";
+      };
 
       Service = {
         Type = "oneshot";
         ExecStart = "${pkgs.timewarrior}/bin/timew start work";
       };
 
-      Install = { WantedBy = [ "default.target" ]; };
+      Install = {
+        WantedBy = [ "default.target" ];
+      };
     };
 
     timewarrior-stop-work = {
-      Unit = { Description = "Stop Timewarrior work"; };
+      Unit = {
+        Description = "Stop Timewarrior work";
+      };
 
       Service = {
         Type = "oneshot";
@@ -24,7 +35,9 @@
         RemainAfterExit = "yes";
       };
 
-      Install = { WantedBy = [ "default.target" ]; };
+      Install = {
+        WantedBy = [ "default.target" ];
+      };
     };
   };
 

@@ -10,7 +10,8 @@ let
   };
 
   pkgs = import pinnedNixpkgs { system = "x86_64-linux"; };
-in {
+in
+{
   # Export the specific Go version
   go = pkgs.go_1_22;
 
@@ -27,4 +28,3 @@ in {
     goPath = "go";
   };
 }
-

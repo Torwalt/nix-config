@@ -4,7 +4,12 @@
       gcc
       jq
 
-      (python312.withPackages (ps: with ps; [ ipython virtualenv ]))
+      (python312.withPackages (
+        ps: with ps; [
+          ipython
+          virtualenv
+        ]
+      ))
 
       gnumake
       nixfmt
@@ -43,12 +48,16 @@
       ssh-to-age
     ];
 
-    sessionVariables = { LESS = "-CR"; };
+    sessionVariables = {
+      LESS = "-CR";
+    };
   };
 
   programs.home-manager.enable = true;
 
-  fonts = { fontconfig.enable = true; };
+  fonts = {
+    fontconfig.enable = true;
+  };
 
   systemd.user.startServices = "sd-switch";
 

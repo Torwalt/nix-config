@@ -14,8 +14,7 @@
   ];
 
   environment.sessionVariables = {
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-      "\${HOME}/user/.steam/root/compatibilitytools.d";
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/user/.steam/root/compatibilitytools.d";
   };
 
   programs.gamemode.enable = true;

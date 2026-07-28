@@ -54,6 +54,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    pre-commit-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     devenv-nix = {
       url = "github:cachix/devenv/v1.10";
     };
@@ -65,6 +70,7 @@
       nixpkgs,
       nixpkgs-unstable,
       home-manager,
+      pre-commit-hooks,
       sops-nix,
       ...
     }:
@@ -82,8 +88,31 @@
         inherit system;
         overlays = import ./overlays.nix { inherit inputs; };
       };
+      nixfmt-tree = pkgs.writeShellApplication {
+        name = "nixfmt-tree";
+        runtimeInputs = with pkgs; [
+          findutils
+          nixfmt
+          ripgrep
+        ];
+        text = ''
+          if [ "$#" -eq 0 ]; then
+            rg --files -g '*.nix' -0 | xargs -0 nixfmt
+          else
+            nixfmt "$@"
+          fi
+        '';
+      };
+      hooks = pre-commit-hooks.lib.${system}.run {
+        src = ./.;
+        hooks.nixfmt.enable = true;
+      };
     in
     {
+      checks.${system}.pre-commit-check = hooks;
+
+      formatter.${system} = nixfmt-tree;
+
       nixosConfigurations = {
         # 'sudo nixos-rebuild --flake .#asusSys switch'
         asusSys = nixpkgs.lib.nixosSystem {
@@ -149,6 +178,10 @@
 
       devShells = {
         x86_64-linux = {
+          default = pkgs.mkShell {
+            inherit (hooks) shellHook;
+            buildInputs = hooks.enabledPackages;
+          };
           rust = (import ./shells/rust/rust.nix { inherit pkgs; });
           nodejs = (import ./shells/nodejs.nix { inherit pkgs; });
           azurecli = (import ./shells/azurecli.nix { inherit pkgs; });

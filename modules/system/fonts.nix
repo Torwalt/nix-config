@@ -1,7 +1,9 @@
 { lib, pkgs, ... }:
 
-let fastFontOverlay = import ../../modules/fastfonts/overlay.nix;
-in {
+let
+  fastFontOverlay = import ../../modules/fastfonts/overlay.nix;
+in
+{
   nixpkgs.overlays = [ fastFontOverlay ];
 
   environment.systemPackages = with pkgs; [
