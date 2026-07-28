@@ -9,12 +9,9 @@
       };
 
       alias = {
-        gls =
-          "!f(){ git rev-list --reverse \${1:-master}..HEAD | head -n1; }; f";
-        glsr = ''
-          !f(){ base="$(git merge-base --fork-point "''${1:-master}" HEAD || git merge-base "''${1:-master}" HEAD)"; [ -n "$base" ] && git rebase -i "''${base}"; }; f'';
-        glsl = ''
-          !f(){ base="$(git merge-base --fork-point "''${1:-master}" HEAD || git merge-base "''${1:-master}" HEAD)"; git log "''${base}..HEAD" --reverse --pretty=format:"## %s%n%n%b%n"; }; f'';
+        gls = "!f(){ git rev-list --reverse \${1:-master}..HEAD | head -n1; }; f";
+        glsr = ''!f(){ base="$(git merge-base --fork-point "''${1:-master}" HEAD || git merge-base "''${1:-master}" HEAD)"; [ -n "$base" ] && git rebase -i "''${base}"; }; f'';
+        glsl = ''!f(){ base="$(git merge-base --fork-point "''${1:-master}" HEAD || git merge-base "''${1:-master}" HEAD)"; git log "''${base}..HEAD" --reverse --pretty=format:"## %s%n%n%b%n"; }; f'';
       };
 
       url."ssh://git@github.com/".insteadOf = "https://github.com/";
@@ -46,7 +43,9 @@
   programs.lazygit = {
     enable = true;
     settings = {
-      git = { pagers = [{ pager = "delta --paging=never --line-numbers"; }]; };
+      git = {
+        pagers = [ { pager = "delta --paging=never --line-numbers"; } ];
+      };
     };
   };
 
@@ -55,13 +54,11 @@
     enableZshIntegration = true;
   };
 
-  programs.kitty = { enable = true; };
-
-  services.dunst = {
+  programs.kitty = {
     enable = true;
-    settings.global.monitor = 1;
   };
 
-  programs.btop = { enable = true; };
+  programs.btop = {
+    enable = true;
+  };
 }
-

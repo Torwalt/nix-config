@@ -19,15 +19,14 @@
     ../../modules/shell/tmux.nix
     ../../modules/shell/ssh.nix
 
-    ../../modules/wm/hyprland/hyprland.nix
-    ../../modules/wm/hyprland/waybar.nix
-    ../../modules/wm/hyprland/swaylock.nix
-    ../../modules/wm/hyprland/gammastep.nix
+    ../../modules/wm/hyprland
 
     inputs.nix-colors.homeManagerModules.default
   ];
 
   home.packages = with pkgs; [ telegram-desktop ];
+
+  wm.hyprland.notification.monitor = "HDMI-A-1";
 
   home = {
     username = "ada";

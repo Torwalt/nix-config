@@ -1,23 +1,7 @@
 { pkgs, lib, ... }:
 
 let
-  startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-    ${pkgs.networkmanagerapplet}/bin/nm-applet --indicator &
-
-    ${pkgs.waybar}/bin/waybar &
-
-    ${pkgs.dunst}/bin/dunst &
-
-    ${pkgs.awww}/bin/awww init &
-
-    ${pkgs.maestral-gui}/bin/maestral_qt &
-
-    sleep 1
-
-    ${pkgs.awww}/bin/awww img ${../../../wp.png}
-  '';
-
-  lockScript = pkgs.pkgs.writeShellScriptBin "lock" ''
+  lockScript = pkgs.writeShellScriptBin "lock" ''
     # Check if timewarrior is installed and in PATH
     if command -v ${pkgs.timewarrior}/bin/timew &> /dev/null; then
         # Stop timewarrior tracking work
@@ -35,17 +19,29 @@ let
 
   '';
 
-in {
+in
+{
 
   home = {
     packages = with pkgs; [ rose-pine-hyprcursor ];
-    sessionVariables.NIX_XDG_DESKTOP_PORTAL_DIR =
-      lib.mkForce "/run/current-system/sw/share/xdg-desktop-portal/portals";
+    sessionVariables.NIX_XDG_DESKTOP_PORTAL_DIR = lib.mkForce "/run/current-system/sw/share/xdg-desktop-portal/portals";
   };
 
   wayland.windowManager.hyprland = {
     enable = true;
     configType = "hyprlang";
+    systemd = {
+      enable = true;
+      variables = [
+        "DISPLAY"
+        "HYPRLAND_INSTANCE_SIGNATURE"
+        "NIX_XDG_DESKTOP_PORTAL_DIR"
+        "WAYLAND_DISPLAY"
+        "XDG_CURRENT_DESKTOP"
+        "XDG_SESSION_DESKTOP"
+        "XDG_SESSION_TYPE"
+      ];
+    };
 
     settings = {
 
@@ -60,13 +56,17 @@ in {
         "XDG_SESSION_TYPE,wayland"
       ];
 
-      cursor = { enable_hyprcursor = true; };
+      cursor = {
+        enable_hyprcursor = true;
+      };
 
       input = {
         kb_layout = "de";
         kb_options = "caps:escape";
         follow_mouse = 1;
-        touchpad = { natural_scroll = "no"; };
+        touchpad = {
+          natural_scroll = "no";
+        };
         sensitivity = 0;
       };
 
@@ -109,9 +109,13 @@ in {
         preserve_split = "yes";
       };
 
-      master = { new_status = "master"; };
+      master = {
+        new_status = "master";
+      };
 
-      misc = { force_default_wallpaper = 0; };
+      misc = {
+        force_default_wallpaper = 0;
+      };
 
       "$mainMod" = "ALT_L";
 
@@ -195,7 +199,6 @@ in {
       ];
 
       exec-once = [
-        "${startupScript}/bin/start"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP XDG_SESSION_TYPE NIX_XDG_DESKTOP_PORTAL_DIR"
       ];
     };

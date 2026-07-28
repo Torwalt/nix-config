@@ -34,14 +34,13 @@ in
     ../../modules/shell/tmux.nix
     ../../modules/shell/ssh.nix
 
-    ../../modules/wm/hyprland/hyprland.nix
-    ../../modules/wm/hyprland/waybar.nix
-    ../../modules/wm/hyprland/swaylock.nix
-    ../../modules/wm/hyprland/gammastep.nix
+    ../../modules/wm/hyprland
     ../../modules/ai/default.nix
 
     inputs.nix-colors.homeManagerModules.default
   ];
+
+  wm.hyprland.notification.monitor = "HDMI-A-3";
 
   home = {
     username = "ada";

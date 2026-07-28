@@ -1,6 +1,10 @@
-{ ... }: {
+{ config, ... }: {
   programs.waybar = {
     enable = true;
+    systemd = {
+      enable = true;
+      targets = [ config.wm.hyprland.sessionTarget ];
+    };
     settings = {
       mainBar = {
         layer = "top";
@@ -28,7 +32,9 @@
             default = "";
           };
         };
-        "hyprland/mode" = { format = "<span style=italic>{}</span>"; };
+        "hyprland/mode" = {
+          format = "<span style=italic>{}</span>";
+        };
         tray = {
           spacing = 8;
           icon-size = 20;
@@ -45,11 +51,17 @@
           format = "{usage}% ";
           tooltip = false;
         };
-        memory = { format = "{}% "; };
+        memory = {
+          format = "{}% ";
+        };
         temperature = {
           "critical-threshold" = 80;
           "format" = "{temperatureC}°C {icon}";
-          "format-icons" = [ "" "" "" ];
+          "format-icons" = [
+            ""
+            ""
+            ""
+          ];
         };
         battery = {
           states = {
@@ -60,7 +72,13 @@
           "format-charging" = "{capacity}% ";
           "format-plugged" = "{capacity}% ";
           "format-alt" = "{time} {icon}";
-          format-icons = [ "" "" "" "" "" ];
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
         };
         network = {
           "format-wifi" = "{essid} ({signalStrength}%) ";
@@ -84,7 +102,11 @@
             phone = "";
             portable = "";
             car = "";
-            default = [ "" "" "" ];
+            default = [
+              ""
+              ""
+              ""
+            ];
           };
           on-click = "pavucontrol";
         };
