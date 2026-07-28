@@ -40,7 +40,9 @@
       flake = false;
     };
 
-    nix-colors = { url = "github:misterio77/nix-colors"; };
+    nix-colors = {
+      url = "github:misterio77/nix-colors";
+    };
 
     stylix = {
       url = "github:nix-community/stylix/release-26.05";
@@ -52,11 +54,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    devenv-nix = { url = "github:cachix/devenv/v1.10"; };
+    devenv-nix = {
+      url = "github:cachix/devenv/v1.10";
+    };
   };
 
   outputs =
-    inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, ... }:
+    inputs@{
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      home-manager,
+      sops-nix,
+      ...
+    }:
     let
       inherit (self) outputs;
       system = "x86_64-linux";
@@ -71,7 +82,8 @@
         inherit system;
         overlays = import ./overlays.nix { inherit inputs; };
       };
-    in {
+    in
+    {
       nixosConfigurations = {
         # 'sudo nixos-rebuild --flake .#asusSys switch'
         asusSys = nixpkgs.lib.nixosSystem {
@@ -108,21 +120,30 @@
         asusHome = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs;
           extraSpecialArgs = extraSpecialArgs;
-          modules = [ inputs.stylix.homeModules.stylix ./hosts/asus/home.nix ];
+          modules = [
+            inputs.stylix.homeModules.stylix
+            ./hosts/asus/home.nix
+          ];
         };
 
         # 'home-manager switch --flake .#towerHome'
         towerHome = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs;
           extraSpecialArgs = extraSpecialArgs;
-          modules = [ inputs.stylix.homeModules.stylix ./hosts/tower/home.nix ];
+          modules = [
+            inputs.stylix.homeModules.stylix
+            ./hosts/tower/home.nix
+          ];
         };
 
         # 'home-manager switch --flake .#workHome'
         workHome = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs;
           extraSpecialArgs = extraSpecialArgs;
-          modules = [ inputs.stylix.homeModules.stylix ./hosts/work/home.nix ];
+          modules = [
+            inputs.stylix.homeModules.stylix
+            ./hosts/work/home.nix
+          ];
         };
       };
 
@@ -132,7 +153,6 @@
           nodejs = (import ./shells/nodejs.nix { inherit pkgs; });
           azurecli = (import ./shells/azurecli.nix { inherit pkgs; });
           ocaml = (import ./shells/ocaml.nix { inherit pkgs; });
-          mise = (import ./shells/mise.nix { inherit pkgs; });
         };
       };
 

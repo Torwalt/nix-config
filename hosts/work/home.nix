@@ -128,7 +128,6 @@ in
     homeswitch = "home-manager switch --flake .#workHome";
     nodejsshell = "nix develop ~/nix-config#nodejs";
     azureclishell = "nix develop ~/nix-config#azurecli";
-    miseshell = "nix develop ~/nix-config#mise";
     runfe = "work-fe";
   };
 
