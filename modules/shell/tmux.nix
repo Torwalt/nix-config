@@ -8,6 +8,10 @@
     extraConfig = ''
       # session fzf to switch to
       bind-key f run-shell -b "${pkgs.tmuxPlugins.tmux-fzf}/share/tmux-plugins/tmux-fzf/scripts/session.sh switch"
+
+      set -g allow-passthrough on
+      set -s extended-keys on
+      set -as terminal-features 'xterm*:extkeys'
     '';
 
     plugins = with pkgs; [
