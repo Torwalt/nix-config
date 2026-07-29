@@ -46,7 +46,7 @@ in
         };
 
         Service = {
-          ExecStart = "${pkgs.awww}/bin/awww init";
+          ExecStart = "${pkgs.awww}/bin/awww-daemon";
           Restart = "on-failure";
         };
 
