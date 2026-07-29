@@ -35,8 +35,8 @@
       flake = false;
     };
 
-    plugin-review-nvim = {
-      url = "github:georgeguimaraes/review.nvim/v1.9.1";
+    plugin-meow-review-nvim = {
+      url = "github:retran/meow.review.nvim";
       flake = false;
     };
 

@@ -42,11 +42,10 @@
       })
       (final: prev: {
         vimPlugins = prev.vimPlugins // {
-          review-nvim = prev.vimUtils.buildVimPlugin {
-            name = "review-nvim";
-            src = inputs.plugin-review-nvim;
+          meow-review-nvim = prev.vimUtils.buildVimPlugin {
+            name = "meow-review-nvim";
+            src = inputs.plugin-meow-review-nvim;
             dependencies = [
-              final.vimPlugins.codediff-nvim
               prev.vimPlugins.nui-nvim
             ];
           };
@@ -132,7 +131,7 @@
         nvim-notify
         which-key-nvim
         codediff-nvim
-        review-nvim
+        meow-review-nvim
 
         luasnip
         friendly-snippets
