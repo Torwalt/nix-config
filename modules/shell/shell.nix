@@ -27,6 +27,7 @@
       gam = "git commit --amend";
       gfp = "git push --force-with-lease";
       v = "nvim";
+      vm = ''nvim --listen "$XDG_RUNTIME_DIR/nvim-main.sock"'';
       rustshell = "nix develop ~/nix-config#rust  --command zsh";
       ocamlshell = "nix develop ~/nix-config#ocaml  --command zsh";
       gls = "git gls";

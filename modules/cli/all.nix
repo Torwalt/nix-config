@@ -17,6 +17,8 @@
       url."ssh://git@github.com/".insteadOf = "https://github.com/";
 
       delta = {
+        hyperlinks = true;
+        hyperlinks-file-link-format = "file://{path}#{line}";
         navigate = true;
         line-numbers = true;
         paging = "always";
@@ -34,6 +36,8 @@
     enable = true;
     enableGitIntegration = true;
     options = {
+      hyperlinks = true;
+      hyperlinks-file-link-format = "file://{path}#{line}";
       navigate = true;
       line-numbers = true;
       paging = "always";
