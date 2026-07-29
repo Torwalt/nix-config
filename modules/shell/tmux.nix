@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-unstable, ... }:
 let
   openNvimUrl = pkgs.writeShellApplication {
     name = "open-nvim-url";
@@ -68,6 +68,7 @@ in
 
   programs.tmux = {
     enable = true;
+    package = pkgs-unstable.tmux;
     escapeTime = 0;
     terminal = "screen-256color";
     historyLimit = 100000;
@@ -82,6 +83,9 @@ in
           'display-message "No hyperlink under cursor"'
 
       set -g allow-passthrough on
+      set -g copy-mode-line-numbers relative
+      set -g copy-mode-line-number-style "fg=colour240"
+      set -g copy-mode-current-line-number-style "fg=yellow,bold"
       set -s extended-keys on
       set -as terminal-features 'xterm*:extkeys'
       set -as terminal-features ',xterm-kitty:hyperlinks'
