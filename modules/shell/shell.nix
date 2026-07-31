@@ -1,4 +1,15 @@
-{ pkgs, ... }: {
+{ pkgs, pkgs-unstable, ... }:
+let
+  nvimSession = pkgs.writeShellApplication {
+    name = "nvim-session";
+    runtimeInputs = [
+      pkgs.neovim
+      pkgs-unstable.tmux
+    ];
+    text = builtins.readFile ./scripts/nvim-session.sh;
+  };
+in
+{
   # In order for .profile being updated.
   programs.bash = {
     enable = true;
@@ -8,6 +19,7 @@
     packages = with pkgs; [
       zsh-vi-mode
       nix-zsh-completions
+      nvimSession
     ];
     shell.enableZshIntegration = true;
   };
@@ -26,8 +38,7 @@
       gc = "git commit";
       gam = "git commit --amend";
       gfp = "git push --force-with-lease";
-      v = "nvim";
-      vm = ''nvim --listen "$XDG_RUNTIME_DIR/nvim-main.sock"'';
+      v = "nvim-session";
       rustshell = "nix develop ~/nix-config#rust  --command zsh";
       ocamlshell = "nix develop ~/nix-config#ocaml  --command zsh";
       gls = "git gls";
