@@ -1,6 +1,9 @@
 { inputs }:
 [
   (final: prev: {
+    godiff = inputs.godiff.packages.${final.stdenv.hostPlatform.system}.default;
+  })
+  (final: prev: {
     hawk-cli = prev.rustPlatform.buildRustPackage rec {
       pname = "hawk";
       version = "0.1.4";
