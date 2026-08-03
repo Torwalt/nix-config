@@ -5,8 +5,8 @@ resolve_socket() {
   local fallback=""
 
   session="$(tmux display-message -p -t "$pane" '#{session_name}')"
-  fallback="${XDG_RUNTIME_DIR:?}/nvim-tmux-${session}.sock"
-  socket="$(tmux show-option -qv -t "$session" @nvim_socket)"
+  fallback="$(nvim_tmux_session_socket "$session")"
+  socket="$(tmux show-option -qv -t "$session" "$nvim_tmux_socket_option")"
 
   if [[ -n "$socket" && -S "$socket" ]]; then
     printf '%s\n' "$socket"

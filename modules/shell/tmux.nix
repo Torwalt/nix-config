@@ -1,5 +1,6 @@
 { pkgs, pkgs-unstable, ... }:
 let
+  nvimSocketContract = import ./nvim-socket-contract.nix;
   tmuxOpenNvimHyperlink = pkgs.writeShellApplication {
     name = "tmux-open-nvim-hyperlink";
     runtimeInputs = with pkgs; [
@@ -7,7 +8,7 @@ let
       python3
       pkgs-unstable.tmux
     ];
-    text = builtins.readFile ./scripts/tmux-open-nvim-hyperlink.sh;
+    text = nvimSocketContract.shell + builtins.readFile ./scripts/tmux-open-nvim-hyperlink.sh;
   };
 in
 {

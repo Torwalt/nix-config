@@ -1,12 +1,13 @@
 { pkgs, pkgs-unstable, ... }:
 let
+  nvimSocketContract = import ./nvim-socket-contract.nix;
   nvimSession = pkgs.writeShellApplication {
     name = "nvim-session";
     runtimeInputs = [
       pkgs.neovim
       pkgs-unstable.tmux
     ];
-    text = builtins.readFile ./scripts/nvim-session.sh;
+    text = nvimSocketContract.shell + builtins.readFile ./scripts/nvim-session.sh;
   };
 in
 {
