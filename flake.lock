@@ -356,11 +356,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1785773628,
-        "narHash": "sha256-sP4u6IlHYxTJsfP8/9sbZrvQd+w3AvQwqxWn8Qi+Y0I=",
+        "lastModified": 1785830147,
+        "narHash": "sha256-A66KaCb03xQEXVoI56H3Njm53iyyD7wit9yzdkEE7e8=",
         "owner": "Torwalt",
         "repo": "godiff",
-        "rev": "4b2fb83ce1b26b522fb3b06e67a2571f85020d26",
+        "rev": "fe7d22fa3256e4447db9d16aa532a3b09603608e",
         "type": "github"
       },
       "original": {
