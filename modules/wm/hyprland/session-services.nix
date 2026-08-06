@@ -8,6 +8,11 @@
 let
   cfg = config.wm.hyprland;
 
+  waylandSocketReady = pkgs.writeShellScript "wayland-socket-ready" ''
+    test -n "$WAYLAND_DISPLAY"
+    test -S "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY"
+  '';
+
   wallpaperScript = pkgs.writeShellScript "awww-wallpaper" ''
     for attempt in $(seq 1 20); do
       if ${pkgs.awww}/bin/awww img ${lib.escapeShellArg cfg.wallpaper}; then
@@ -31,8 +36,10 @@ in
         };
 
         Service = {
+          ExecCondition = waylandSocketReady;
           ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator";
           Restart = "on-failure";
+          RestartSec = 2;
         };
 
         Install.WantedBy = [ cfg.sessionTarget ];
@@ -46,8 +53,10 @@ in
         };
 
         Service = {
+          ExecCondition = waylandSocketReady;
           ExecStart = "${pkgs.awww}/bin/awww-daemon";
           Restart = "on-failure";
+          RestartSec = 2;
         };
 
         Install.WantedBy = [ cfg.sessionTarget ];
@@ -80,8 +89,10 @@ in
         };
 
         Service = {
+          ExecCondition = waylandSocketReady;
           ExecStart = "${pkgs.maestral-gui}/bin/maestral_qt";
           Restart = "on-failure";
+          RestartSec = 2;
         };
 
         Install.WantedBy = [ cfg.sessionTarget ];

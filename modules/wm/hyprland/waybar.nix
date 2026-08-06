@@ -1,4 +1,17 @@
-{ config, ... }: {
+{ config, pkgs, ... }:
+
+let
+  waylandSocketReady = pkgs.writeShellScript "wayland-socket-ready" ''
+    test -n "$WAYLAND_DISPLAY"
+    test -S "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY"
+  '';
+in
+{
+  systemd.user.services.waybar.Service = {
+    ExecCondition = waylandSocketReady;
+    RestartSec = 2;
+  };
+
   programs.waybar = {
     enable = true;
     systemd = {
