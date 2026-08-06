@@ -74,7 +74,9 @@
     enable = true;
     commandLineArgs = [
       "--ozone-platform=wayland"
-      "--enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer,UsePortalFilePicker"
+      "--enable-features=UseOzonePlatform,WaylandWindowDecorations,WebRTCPipeWireCapturer,UsePortalFilePicker"
+      "--enable-wayland-ime"
+      "--wayland-text-input-version=3"
     ];
   };
 

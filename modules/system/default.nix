@@ -38,6 +38,39 @@
       LC_TELEPHONE = "de_DE.UTF-8";
       LC_TIME = "de_DE.UTF-8";
     };
+
+    inputMethod = {
+      enable = true;
+      type = "fcitx5";
+
+      fcitx5 = {
+        addons = [ pkgs.fcitx5-m17n ];
+        waylandFrontend = true;
+
+        # ru-translit does not use a writable dictionary, so ignoring user
+        # configuration keeps this two-mode profile reproducible.
+        ignoreUserConfig = true;
+        settings = {
+          inputMethod = {
+            "GroupOrder"."0" = "German and Russian translit";
+            "Groups/0" = {
+              Name = "German and Russian translit";
+              "Default Layout" = "de";
+              DefaultIM = "m17n_ru_translit";
+            };
+            "Groups/0/Items/0" = {
+              Name = "keyboard-de";
+              Layout = "de";
+            };
+            "Groups/0/Items/1" = {
+              Name = "m17n_ru_translit";
+              # m17n transliteration rules expect US Latin key positions.
+              Layout = "us";
+            };
+          };
+        };
+      };
+    };
   };
 
   # Enable the X11 windowing system.
@@ -54,6 +87,13 @@
 
   # Configure console keymap
   console.keyMap = "de";
+
+  environment.sessionVariables = {
+    # Prefer native Wayland input, with the Fcitx plugin as a Qt fallback.
+    QT_IM_MODULES = "wayland;fcitx";
+    SDL_IM_MODULE = "fcitx";
+    GLFW_IM_MODULE = "ibus";
+  };
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
