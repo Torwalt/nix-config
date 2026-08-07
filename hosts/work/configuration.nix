@@ -3,6 +3,7 @@
     ./hardware-configuration.nix
     ../../modules/stylix/default.nix
     ../../modules/system/default.nix
+    ../../modules/system/codex.nix
     ../../modules/system/printing.nix
     ../../modules/system/hyprland.nix
     ../../modules/system/greetd/default.nix
