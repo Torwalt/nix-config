@@ -31,6 +31,30 @@ let
       exec tmux attach -t "$session"
     fi
   '';
+
+  startMonitoringTerminals = pkgs.writeShellScript "start-monitoring-terminals" ''
+    set -eu
+
+    ${pkgs.hyprland}/bin/hyprctl dispatch exec \
+      '${pkgs.kitty}/bin/kitty --class kitty-lazydocker --title lazydocker ${pkgs.lazydocker}/bin/lazydocker'
+
+    # Dwindle places the next window to the right. Wait for lazydocker to map
+    # before starting btop so their left/right order is deterministic.
+    attempts=0
+    while [ "$attempts" -lt 50 ]; do
+      if ${pkgs.hyprland}/bin/hyprctl clients -j \
+        | ${pkgs.jq}/bin/jq -e 'any(.[]; .initialClass == "kitty-lazydocker")' > /dev/null
+      then
+        break
+      fi
+
+      attempts=$((attempts + 1))
+      ${pkgs.coreutils}/bin/sleep 0.1
+    done
+
+    ${pkgs.hyprland}/bin/hyprctl dispatch exec \
+      '${pkgs.kitty}/bin/kitty --class kitty-btop --title btop ${pkgs.btop}/bin/btop'
+  '';
 in
 {
   imports = [
@@ -159,8 +183,8 @@ in
         "workspace 4, match:class ^(chromium-browser)$"
         "workspace 6, match:class ^(org.keepassxc.KeePassXC)$"
 
-        "workspace 2, match:title ^(btop)$"
-        "workspace 2, match:title ^(lazydocker)$"
+        "workspace 2 silent, match:class ^(kitty-lazydocker)$"
+        "workspace 2 silent, match:class ^(kitty-btop)$"
 
         "workspace 2, match:class ^(Spotify)$"
       ];
@@ -172,8 +196,7 @@ in
         "spotify"
         "chromium-browser"
 
-        "hyprctl dispatch exec '[workspace 2 silent]' kitty --title btop -e btop"
-        "hyprctl dispatch exec '[workspace 2 silent]' kitty --title lazydocker -e lazydocker"
+        "${startMonitoringTerminals}"
       ];
     };
   };
