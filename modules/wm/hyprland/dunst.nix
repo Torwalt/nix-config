@@ -7,9 +7,15 @@ in
   services.dunst = {
     enable = true;
 
-    settings.global = {
-      follow = "none";
-      origin = "top-right";
+    settings = {
+      global = {
+        follow = "none";
+        origin = "top-right";
+      };
+
+      force-timeout = lib.hm.dag.entryAfter [ "global" ] {
+        override_dbus_timeout = "10s";
+      };
     };
   };
 
