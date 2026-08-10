@@ -186,7 +186,7 @@ in
         "workspace 2 silent, match:class ^(kitty-lazydocker)$"
         "workspace 2 silent, match:class ^(kitty-btop)$"
 
-        "workspace 2, match:class ^(Spotify)$"
+        "workspace 9, match:class ^(Spotify)$"
       ];
 
       exec-once = [
