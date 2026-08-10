@@ -7,6 +7,7 @@
 {
   nixpkgs = {
     overlays = [
+      inputs.vrv.overlays.default
       (final: prev: {
         vimPlugins = prev.vimPlugins // {
           telescope-emoji-nvim = prev.vimUtils.buildVimPlugin {
@@ -37,17 +38,6 @@
           nvim-treesitter-textobjects = prev.vimUtils.buildVimPlugin {
             name = "nvim-treesitter-textobjects";
             src = inputs.plugin-nvim-treesitter-textobjects;
-          };
-        };
-      })
-      (final: prev: {
-        vimPlugins = prev.vimPlugins // {
-          meow-review-nvim = prev.vimUtils.buildVimPlugin {
-            name = "meow-review-nvim";
-            src = inputs.plugin-meow-review-nvim;
-            dependencies = [
-              prev.vimPlugins.nui-nvim
-            ];
           };
         };
       })
@@ -131,7 +121,7 @@
         nvim-notify
         which-key-nvim
         codediff-nvim
-        meow-review-nvim
+        pkgs.vrv-nvim
 
         luasnip
         friendly-snippets

@@ -569,22 +569,6 @@
         "type": "github"
       }
     },
-    "plugin-meow-review-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1777634319,
-        "narHash": "sha256-bQ+IKG8OMvuNmnNm8hVruMH/KvxlDSEYV3KZ4gENJzc=",
-        "owner": "retran",
-        "repo": "meow.review.nvim",
-        "rev": "904880b83448adc7e9ba4c913a19adf21d4dc8e4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "retran",
-        "repo": "meow.review.nvim",
-        "type": "github"
-      }
-    },
     "plugin-neotest-golang-nvim": {
       "flake": false,
       "locked": {
@@ -681,14 +665,14 @@
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nvim-rustaceanvim": "nvim-rustaceanvim",
-        "plugin-meow-review-nvim": "plugin-meow-review-nvim",
         "plugin-neotest-golang-nvim": "plugin-neotest-golang-nvim",
         "plugin-nvim-treesitter-textobjects": "plugin-nvim-treesitter-textobjects",
         "plugin-telescope-emoji-nvim": "plugin-telescope-emoji-nvim",
         "plugin-telescope-luasnip-nvim": "plugin-telescope-luasnip-nvim",
         "pre-commit-hooks": "pre-commit-hooks",
         "sops-nix": "sops-nix",
-        "stylix": "stylix"
+        "stylix": "stylix",
+        "vrv": "vrv"
       }
     },
     "sops-nix": {
@@ -836,6 +820,26 @@
       "original": {
         "owner": "tinted-theming",
         "repo": "base16-zed",
+        "type": "github"
+      }
+    },
+    "vrv": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786372870,
+        "narHash": "sha256-R84dT1Y8DgTkfK0MHrmD/ghvByr1PeH8+Saq++1DUic=",
+        "owner": "Torwalt",
+        "repo": "vrv",
+        "rev": "91f58070d3df3d55dcf2d36b3ca13de2e787e6ef",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Torwalt",
+        "repo": "vrv",
         "type": "github"
       }
     }

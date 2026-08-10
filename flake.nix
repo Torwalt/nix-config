@@ -35,9 +35,9 @@
       flake = false;
     };
 
-    plugin-meow-review-nvim = {
-      url = "github:retran/meow.review.nvim";
-      flake = false;
+    vrv = {
+      url = "github:Torwalt/vrv";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-colors = {
