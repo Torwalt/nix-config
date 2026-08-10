@@ -80,6 +80,7 @@ in
       monitor = [
         "DP-1,2560x1440@59.95,0x0,1"
         "HDMI-A-3,2560x1440@60,2560x0,1"
+        "HDMI-A-1,1920x1280@60,5120x0,2"
       ];
 
       workspace = [
@@ -89,8 +90,9 @@ in
         "5, monitor:HDMI-A-3"
         "6, monitor:HDMI-A-3"
         "7, monitor:HDMI-A-3"
+        "8, monitor:HDMI-A-3"
 
-        "2, monitor:DP-1"
+        "2, monitor:HDMI-A-1"
       ];
 
       windowrule = [
