@@ -1,5 +1,14 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
 let
+  codingAgentNotify = import ../lib/coding-agent-notify.nix {
+    inherit pkgs;
+    tmux = pkgs-unstable.tmux;
+  };
+
   claudeSettings =
     builtins.toJSON {
       "$schema" = "https://json.schemastore.org/claude-code-settings.json";
@@ -19,18 +28,7 @@ let
             hooks = [
               {
                 type = "command";
-                command = "${pkgs.libnotify}/bin/notify-send 'Claude Code' 'Task finished'";
-              }
-            ];
-          }
-        ];
-        Notification = [
-          {
-            matcher = "";
-            hooks = [
-              {
-                type = "command";
-                command = "${pkgs.libnotify}/bin/notify-send 'Claude Code' 'Claude needs your attention'";
+                command = "${codingAgentNotify}/bin/coding-agent-notify 'Claude Code'";
               }
             ];
           }
@@ -44,7 +42,6 @@ in
     packages = with pkgs; [
       aider-chat
       claude-code
-      libnotify
       pi-coding-agent
     ];
 
