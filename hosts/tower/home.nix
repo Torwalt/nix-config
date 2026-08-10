@@ -108,6 +108,8 @@ in
 
         "workspace 6, match:class ^(org.keepassxc.KeePassXC)$"
         "workspace 7, match:class ^(WowUpCf)$"
+
+        "confine_pointer on, match:class ^(explorer\\.exe)$, match:title ^(RiseOfLegends - Wine desktop)$"
       ];
 
       exec-once = [
