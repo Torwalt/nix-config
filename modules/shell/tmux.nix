@@ -27,6 +27,10 @@ in
       # session fzf to switch to
       bind-key f run-shell -b "${pkgs.tmuxPlugins.tmux-fzf}/share/tmux-plugins/tmux-fzf/scripts/session.sh switch"
 
+      # Treat both uppercase and Ctrl-z like the default pane zoom binding.
+      bind-key Z resize-pane -Z
+      bind-key C-z resize-pane -Z
+
       bind-key -T copy-mode-vi o \
         run-shell "${tmuxOpenNvimHyperlink}/bin/tmux-open-nvim-hyperlink '#{pane_id}' '#{copy_cursor_x}' '#{pane_width}'"
 
