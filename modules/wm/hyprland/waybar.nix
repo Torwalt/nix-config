@@ -1,6 +1,13 @@
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
+  diskMountPoint = config.wm.hyprland.waybar.disk.mountPoint;
+
   waylandSocketReady = pkgs.writeShellScript "wayland-socket-ready" ''
     test -n "$WAYLAND_DISPLAY"
     test -S "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY"
@@ -30,6 +37,9 @@ in
           "network"
           "cpu"
           "memory"
+        ]
+        ++ lib.optional (diskMountPoint != null) "disk"
+        ++ [
           "temperature"
           "battery"
           "clock"
@@ -125,9 +135,8 @@ in
         };
         disk = {
           interval = 30;
-          format = "{percentage_free}% free on {path}";
-          path = "/";
-          unit = "GB";
+          format = " {free}";
+          paths = lib.optional (diskMountPoint != null) diskMountPoint;
         };
       };
     };

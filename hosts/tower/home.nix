@@ -41,6 +41,7 @@ in
   ];
 
   wm.hyprland.notification.monitor = "HDMI-A-3";
+  wm.hyprland.waybar.disk.mountPoint = "/";
 
   home = {
     username = "ada";

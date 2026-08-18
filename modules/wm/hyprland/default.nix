@@ -85,6 +85,13 @@ in
       default = null;
       description = "Optional monitor name for Dunst notifications.";
     };
+
+    waybar.disk.mountPoint = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      example = "/";
+      description = "Mount point whose available disk space Waybar displays; null disables the widget.";
+    };
   };
 
   config = {
