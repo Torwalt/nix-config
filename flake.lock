@@ -830,11 +830,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786372870,
-        "narHash": "sha256-R84dT1Y8DgTkfK0MHrmD/ghvByr1PeH8+Saq++1DUic=",
+        "lastModified": 1787073858,
+        "narHash": "sha256-b5zUdLmNORqxn1w/2KM4g0vG2iazwhavXtJn7m2iFp0=",
         "owner": "Torwalt",
         "repo": "vrv",
-        "rev": "91f58070d3df3d55dcf2d36b3ca13de2e787e6ef",
+        "rev": "f69be2828470a872423bbcf0d680c335c2ca7e84",
         "type": "github"
       },
       "original": {
