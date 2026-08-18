@@ -64,8 +64,8 @@
             };
             "Groups/0/Items/1" = {
               Name = "m17n_ru_translit";
-              # m17n transliteration rules expect US Latin key positions.
-              Layout = "us";
+              # Feed the transliterator from the German QWERTZ layout.
+              Layout = "de";
             };
           };
         };

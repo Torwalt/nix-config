@@ -111,7 +111,7 @@ in
         # Name
         Name=${russianInputMethod}
         # Layout
-        Layout=us
+        Layout=de
 
         [GroupOrder]
         0=German and Russian translit
