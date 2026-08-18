@@ -51,6 +51,8 @@
         # configuration keeps this two-mode profile reproducible.
         ignoreUserConfig = true;
         settings = {
+          globalOptions.Hotkey.TriggerKeys = "";
+
           inputMethod = {
             "GroupOrder"."0" = "German and Russian translit";
             "Groups/0" = {
