@@ -155,6 +155,7 @@ in
   };
 
   colorScheme = inputs.nix-colors.colorSchemes.tokyo-city-dark;
+  wm.hyprland.waybar.disk.mountPoint = "/";
 
   wayland.windowManager.hyprland = {
     settings = {
