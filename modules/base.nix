@@ -68,6 +68,9 @@
     enable = true;
     configPath = ".mozilla/firefox";
     nativeMessagingHosts = [ pkgs.tridactyl-native ];
+    profiles.default.settings = {
+      "ui.key.menuAccessKeyFocuses" = false;
+    };
   };
 
   programs.chromium = {
