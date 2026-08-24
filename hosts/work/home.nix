@@ -85,6 +85,10 @@ in
   ];
 
   wm.hyprland.notification.monitor = "HDMI-A-1";
+  wm.hyprland.autostart = {
+    firefox = true;
+    chromium = true;
+  };
 
   home = {
     username = "ada";
@@ -192,10 +196,8 @@ in
 
       exec-once = [
         "hyprctl dispatch exec kitty"
-        "firefox"
         "keepassxc"
         "spotify"
-        "chromium-browser"
 
         "${startMonitoringTerminals}"
       ];

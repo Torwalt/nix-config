@@ -42,6 +42,7 @@ in
 
   wm.hyprland.notification.monitor = "HDMI-A-3";
   wm.hyprland.waybar.disk.mountPoint = "/";
+  wm.hyprland.autostart.firefox = true;
 
   home = {
     username = "ada";
@@ -115,7 +116,6 @@ in
 
       exec-once = [
         "hyprctl dispatch exec kitty"
-        "firefox"
         "Telegram"
         "keepassxc"
         "spotify"

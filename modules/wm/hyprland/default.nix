@@ -9,6 +9,27 @@ let
   germanInputMethod = "keyboard-de";
   russianInputMethod = "m17n_ru_translit";
 
+  portalServices = [
+    "xdg-desktop-portal.service"
+    "xdg-desktop-portal-hyprland.service"
+  ];
+
+  browserService = description: executable: {
+    Unit = {
+      Description = description;
+      PartOf = [ config.wm.hyprland.sessionTarget ];
+      Wants = portalServices;
+      After = [ config.wm.hyprland.sessionTarget ] ++ portalServices;
+    };
+
+    Service = {
+      Type = "exec";
+      ExecStart = executable;
+    };
+
+    Install.WantedBy = [ config.wm.hyprland.sessionTarget ];
+  };
+
   fcitx5 = pkgs.qt6Packages.fcitx5-with-addons.override {
     addons = [ pkgs.fcitx5-m17n ];
   };
@@ -92,6 +113,11 @@ in
       example = "/";
       description = "Mount point whose available disk space Waybar displays; null disables the widget.";
     };
+
+    autostart = {
+      firefox = lib.mkEnableOption "Firefox after the desktop portals are ready";
+      chromium = lib.mkEnableOption "Chromium after the desktop portals are ready";
+    };
   };
 
   config = {
@@ -139,6 +165,14 @@ in
 
       Install.WantedBy = [ config.wm.hyprland.sessionTarget ];
     };
+
+    systemd.user.services.firefox-autostart = lib.mkIf config.wm.hyprland.autostart.firefox (
+      browserService "Firefox" "${config.programs.firefox.finalPackage}/bin/firefox"
+    );
+
+    systemd.user.services.chromium-autostart = lib.mkIf config.wm.hyprland.autostart.chromium (
+      browserService "Chromium" "${config.programs.chromium.finalPackage}/bin/chromium-browser"
+    );
 
     wayland.windowManager.hyprland.settings.bind = [
       "$mainMod, SPACE, exec, ${toggleInputMethod}/bin/toggle-input-method"
