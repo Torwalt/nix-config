@@ -121,7 +121,7 @@
       nixosConfigurations = {
         # 'sudo nixos-rebuild --flake .#asusSys switch'
         asusSys = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = extraSpecialArgs;
           modules = [
             inputs.stylix.nixosModules.stylix
             home-manager.nixosModules.home-manager

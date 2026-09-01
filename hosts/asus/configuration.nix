@@ -8,6 +8,7 @@
     ../../modules/system/hyprland.nix
     ../../modules/system/greetd/default.nix
     ../../modules/system/fonts.nix
+    ../../modules/system/codex.nix
   ];
 
   system.stateVersion = "25.11";
