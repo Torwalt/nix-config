@@ -1,4 +1,9 @@
-{ pkgs, pkgs-unstable, ... }:
+{
+  inputs,
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
 let
   nvimSocketContract = import ./nvim-socket-contract.nix;
   nvimSession = pkgs.writeShellApplication {
@@ -18,7 +23,6 @@ in
 
   home = {
     packages = with pkgs; [
-      zsh-vi-mode
       nix-zsh-completions
       nvimSession
     ];
@@ -41,25 +45,24 @@ in
       gfp = "git push --force-with-lease";
       gd = "command -v godiff >/dev/null && godiff || git diff";
       v = "nvim-session";
-      rustshell = "nix develop ~/nix-config#rust  --command zsh";
-      ocamlshell = "nix develop ~/nix-config#ocaml  --command zsh";
+      rustshell = "nix develop ${inputs.self}#rust --command zsh";
+      ocamlshell = "nix develop ${inputs.self}#ocaml --command zsh";
       gls = "git gls";
       glsr = "git glsr";
       glsl = "git glsl";
     };
 
-    zplug = {
-      enable = true;
-      plugins = [
-        { name = "jeffreytse/zsh-vi-mode"; }
-        {
-          name = "plugins/git";
-          tags = [ "from:oh-my-zsh" ];
-        }
-      ];
-    };
-
     plugins = [
+      {
+        name = "zsh-vi-mode";
+        src = pkgs.zsh-vi-mode;
+        file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+      }
+      {
+        name = "git";
+        src = pkgs.oh-my-zsh;
+        file = "share/oh-my-zsh/plugins/git/git.plugin.zsh";
+      }
       {
         name = "powerlevel10k";
         src = pkgs.zsh-powerlevel10k;
@@ -70,13 +73,6 @@ in
     # Profiling
     # initExtraFirst = "zmodload zsh/zprof";
 
-    initContent = ''
-      source ~/nix-config/modules/shell/.p10k.zsh
-    '';
-
-    # initExtra = ''
-    #   source ~/nix-config/.p10k.zsh \n
-    #   zprof
-    # '';
+    initContent = "source ${./.p10k.zsh}";
   };
 }
