@@ -133,7 +133,6 @@ in
         just
         nushell
         brightnessctl
-        inputs.devenv-nix.packages.${pkgs.stdenv.hostPlatform.system}.devenv
         workFe
       ]
       ++ unstable;
