@@ -8,7 +8,7 @@ pkgs.writeShellApplication {
   ];
   text = ''
     app_name="''${1:-Coding agent}"
-    message="Task finished"
+    message="''${2:-Task finished}"
 
     if [ -n "''${TMUX:-}" ]; then
       tmux_target=()
@@ -20,7 +20,7 @@ pkgs.writeShellApplication {
         '#{session_name}:#{window_index}.#{pane_index} (#{window_name})' 2>/dev/null || true)"
 
       if [ -n "$tmux_context" ]; then
-        message="Task finished · tmux $tmux_context"
+        message="$message · tmux $tmux_context"
       fi
     fi
 
