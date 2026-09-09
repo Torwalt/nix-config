@@ -15,6 +15,7 @@
       nixfmt
       ffmpeg
       btop
+      ncdu
       file
       ruplacer
       tree
