@@ -1,6 +1,15 @@
 { pkgs, lib, ... }:
 
 let
+  keyboardOptions = "caps:escape";
+  capsfix = pkgs.writeShellApplication {
+    name = "capsfix";
+    runtimeInputs = [ pkgs.hyprland ];
+    text = ''
+      hyprctl keyword input:kb_options ""
+      hyprctl keyword input:kb_options ${lib.escapeShellArg keyboardOptions}
+    '';
+  };
   lockScript = pkgs.writeShellScriptBin "lock" ''
     # Check if timewarrior is installed and in PATH
     if command -v ${pkgs.timewarrior}/bin/timew &> /dev/null; then
@@ -23,7 +32,10 @@ in
 {
 
   home = {
-    packages = with pkgs; [ rose-pine-hyprcursor ];
+    packages = [
+      capsfix
+      pkgs.rose-pine-hyprcursor
+    ];
     sessionVariables.NIX_XDG_DESKTOP_PORTAL_DIR = lib.mkForce "/run/current-system/sw/share/xdg-desktop-portal/portals";
   };
 
@@ -62,7 +74,7 @@ in
 
       input = {
         kb_layout = "de";
-        kb_options = "caps:escape";
+        kb_options = keyboardOptions;
         follow_mouse = 1;
         touchpad = {
           natural_scroll = "no";
