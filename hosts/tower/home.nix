@@ -22,6 +22,7 @@ in
     ../../modules/delve/default.nix
     ../../modules/lazydocker/default.nix
     ../../modules/timewarrior/default.nix
+    ../../modules/maintenance/default.nix
 
     ../../modules/nvim/nvim.nix
 
@@ -128,9 +129,10 @@ in
     };
   };
 
-  programs.zsh.shellAliases = {
-    sysswitch = "sudo nixos-rebuild --flake .#towerSys switch";
-    homeswitch = "home-manager switch --flake .#towerHome";
+  programs.nixup = {
+    enable = true;
+    systemConfiguration = "towerSys";
+    homeConfiguration = "towerHome";
   };
 
   colorScheme = inputs.nix-colors.colorSchemes.tokyo-city-dark;

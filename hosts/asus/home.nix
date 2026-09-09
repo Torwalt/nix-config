@@ -19,6 +19,7 @@ in
     ../../modules/delve/default.nix
     ../../modules/lazydocker/default.nix
     ../../modules/timewarrior/default.nix
+    ../../modules/maintenance/default.nix
 
     ../../modules/nvim/nvim.nix
 
@@ -60,8 +61,9 @@ in
     homeDirectory = "/home/ada";
   };
 
-  programs.zsh.shellAliases = {
-    sysswitch = "sudo nixos-rebuild --flake .#asusSys switch";
-    homeswitch = "home-manager switch --flake .#asusHome";
+  programs.nixup = {
+    enable = true;
+    systemConfiguration = "asusSys";
+    homeConfiguration = "asusHome";
   };
 }

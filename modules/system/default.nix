@@ -175,4 +175,18 @@
     always-allow-substitutes = true;
     builders-use-substitutes = true;
   };
+
+  # Generation retention is handled by `nixup clean`. This weekly pass only
+  # removes paths that are already unreferenced, including temporary builds.
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+  };
+
+  # Deduplicate identical files in the store without doing the work on every
+  # package installation.
+  nix.optimise = {
+    automatic = true;
+    dates = [ "weekly" ];
+  };
 }

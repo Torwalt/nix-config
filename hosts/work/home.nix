@@ -69,6 +69,7 @@ in
     ../../modules/go/default.nix
     ../../modules/lazydocker/default.nix
     ../../modules/timewarrior/default.nix
+    ../../modules/maintenance/default.nix
 
     ../../modules/nvim/nvim.nix
     ../../modules/ai/default.nix
@@ -151,11 +152,15 @@ in
   };
 
   programs.zsh.shellAliases = {
-    sysswitch = "sudo nixos-rebuild --flake .#workSys switch";
-    homeswitch = "home-manager switch --flake .#workHome";
     nodejsshell = "nix develop ~/nix-config#nodejs";
     azureclishell = "nix develop ~/nix-config#azurecli";
     runfe = "work-fe";
+  };
+
+  programs.nixup = {
+    enable = true;
+    systemConfiguration = "workSys";
+    homeConfiguration = "workHome";
   };
 
   colorScheme = inputs.nix-colors.colorSchemes.tokyo-city-dark;
