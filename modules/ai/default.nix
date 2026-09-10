@@ -91,6 +91,12 @@ let
       };
     }
     + "\n";
+
+  claudeInstructions = ''
+    When creating Git commits, do not add Claude session links or other
+    session identifiers to the commit message. In particular, never add a
+    `Claude-Session:` trailer. Do not add AI attribution or co-author trailers.
+  '';
 in
 {
   home = {
@@ -104,8 +110,16 @@ in
       text = claudeSettings;
       force = true;
     };
+    file.".claude-personal/CLAUDE.md" = {
+      text = claudeInstructions;
+      force = true;
+    };
     file.".claude-work/settings.json" = {
       text = claudeSettings;
+      force = true;
+    };
+    file.".claude-work/CLAUDE.md" = {
+      text = claudeInstructions;
       force = true;
     };
 
