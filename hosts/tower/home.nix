@@ -100,7 +100,7 @@ in
 
       windowrule = [
         "workspace 1, match:class ^(kitty)$"
-        "workspace 2, match:class ^(Spotify)$"
+        "workspace 2, match:class ^(spotify)$"
         "workspace 3, match:class ^(firefox)$"
         "workspace 4, match:class ^(org.telegram.desktop)$"
 
