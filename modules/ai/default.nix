@@ -31,6 +31,8 @@ let
   claudeSettings =
     builtins.toJSON {
       "$schema" = "https://json.schemastore.org/claude-code-settings.json";
+      model = "opus";
+      effortLevel = "high";
       enabledPlugins = {
         "gopls-lsp@claude-plugins-official" = true;
       };

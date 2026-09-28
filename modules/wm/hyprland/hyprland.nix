@@ -10,6 +10,19 @@ let
       hyprctl keyword input:kb_options ${lib.escapeShellArg keyboardOptions}
     '';
   };
+  screenshotActiveWindow = pkgs.writeShellApplication {
+    name = "screenshot-active-window";
+    runtimeInputs = [
+      pkgs.grim
+      pkgs.hyprland
+      pkgs.jq
+      pkgs.wl-clipboard
+    ];
+    text = ''
+      geometry="$(${pkgs.hyprland}/bin/hyprctl activewindow -j | ${pkgs.jq}/bin/jq -er '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')"
+      ${pkgs.grim}/bin/grim -g "$geometry" - | ${pkgs.wl-clipboard}/bin/wl-copy --type image/png
+    '';
+  };
   lockScript = pkgs.writeShellScriptBin "lock" ''
     # Check if timewarrior is installed and in PATH
     if command -v ${pkgs.timewarrior}/bin/timew &> /dev/null; then
@@ -147,6 +160,7 @@ in
         # Screenshotting
         "$mainMod SHIFT, P, exec, wl-paste | swappy -f - "
         ''$mainMod SHIFT, S, exec, grim -g "$(slurp)" -  | wl-copy''
+        "$mainMod SHIFT, W, exec, ${screenshotActiveWindow}/bin/screenshot-active-window"
         # Turn off opacity.
         ''$mainMod, O, exec, hyprctl keyword windowrule "opacity 1.0 1.0 override, match:class .*"''
         # Turn on again.
