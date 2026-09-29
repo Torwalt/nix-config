@@ -98,6 +98,9 @@ let
     When creating Git commits, do not add Claude session links or other
     session identifiers to the commit message. In particular, never add a
     `Claude-Session:` trailer. Do not add AI attribution or co-author trailers.
+
+    Commit messages must not reference notes or plans: no decision IDs such
+    as R14, no zettel names, no plan step numbers. State the change itself.
   '';
 in
 {
