@@ -151,6 +151,14 @@ in
       '';
     };
 
+    xdg.configFile."swappy/config".text = ''
+      [Default]
+      paint_mode=rectangle
+      fill_shape=true
+      custom_color=rgba(0,0,0,1)
+      early_exit=true
+    '';
+
     systemd.user.services.fcitx5 = {
       Unit = {
         Description = "Fcitx 5 input method";
