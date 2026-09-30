@@ -6,3 +6,4 @@ vanta.env
 .direnv
 
 /.cache
+.env
