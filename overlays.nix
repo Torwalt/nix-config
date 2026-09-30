@@ -2,6 +2,7 @@
 [
   (final: prev: {
     godiff = inputs.godiff.packages.${final.stdenv.hostPlatform.system}.default;
+    spool = inputs.spool.packages.${final.stdenv.hostPlatform.system}.default;
   })
   (final: prev: {
     hawk-cli = prev.rustPlatform.buildRustPackage rec {

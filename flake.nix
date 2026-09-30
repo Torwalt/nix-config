@@ -59,6 +59,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    spool = {
+      url = "github:Torwalt/spool";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     pre-commit-hooks = {
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";

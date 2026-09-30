@@ -1,5 +1,8 @@
 { pkgs, ... }: {
-  home.packages = [ pkgs.godiff ];
+  home.packages = [
+    pkgs.godiff
+    pkgs.spool
+  ];
 
   programs.git = {
     enable = true;

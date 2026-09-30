@@ -31,6 +31,10 @@ in
       bind-key Z resize-pane -Z
       bind-key C-z resize-pane -Z
 
+      # spool over the current pane: read its Claude session, q goes back.
+      # run-shell expands the pane formats; display-popup does not in -w/-h.
+      bind-key v run-shell -b "${pkgs-unstable.tmux}/bin/tmux display-popup -c '#{client_name}' -t '#{pane_id}' -E -B -x P -y P -w #{pane_width} -h #{pane_height} -d '#{pane_current_path}' '${pkgs.spool}/bin/spool --popup --pane #{pane_id}'"
+
       bind-key -T copy-mode-vi o \
         run-shell "${tmuxOpenNvimHyperlink}/bin/tmux-open-nvim-hyperlink '#{pane_id}' '#{copy_cursor_x}' '#{pane_width}'"
 
