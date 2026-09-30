@@ -108,6 +108,8 @@ let
   '';
 in
 {
+  imports = [ ../karrt/default.nix ];
+
   home = {
     packages = with pkgs; [
       aider-chat
