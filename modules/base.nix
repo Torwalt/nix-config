@@ -81,6 +81,8 @@
       "--enable-features=UseOzonePlatform,WaylandWindowDecorations,WebRTCPipeWireCapturer,UsePortalFilePicker"
       "--enable-wayland-ime"
       "--wayland-text-input-version=3"
+      # Skip the Secret Service lookup that summons the KeePassXC unlock prompt
+      "--password-store=basic"
     ];
   };
 
