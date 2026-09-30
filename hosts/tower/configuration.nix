@@ -11,8 +11,11 @@
     ../../modules/system/gaming.nix
     ../../modules/system/greetd/default.nix
     ../../modules/system/fonts.nix
+    ../../modules/system/audio.nix
     # ../../modules/system/ai/default.nix
   ];
+
+  audio.preferredInput = "~alsa_input\\.usb-(?!.*([Cc]amera|[Ww]ebcam)).*";
 
   boot.loader = {
     systemd-boot.enable = lib.mkForce false;

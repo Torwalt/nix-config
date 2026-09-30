@@ -42,6 +42,10 @@ let
       editorMode = "vim";
       autoCompactEnabled = false;
       preferredNotifChannel = "terminal_bell";
+      voice = {
+        enabled = true;
+        mode = "hold";
+      };
       attribution.commit = "";
       statusLine = {
         type = "command";
@@ -109,6 +113,8 @@ in
       aider-chat
       claude-code
       pi-coding-agent
+      # Recorder fallback for Claude Code /voice.
+      sox
     ];
 
     file.".claude-personal/settings.json" = {

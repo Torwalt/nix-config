@@ -8,12 +8,15 @@
     ../../modules/system/hyprland.nix
     ../../modules/system/greetd/default.nix
     ../../modules/system/fonts.nix
+    ../../modules/system/audio.nix
   ];
 
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   system.stateVersion = "25.11";
+
+  audio.preferredInput = "~alsa_input\\.usb-GeneralPlus_USB_Audio_Device-.*";
 
   boot.loader = {
     systemd-boot.enable = lib.mkForce false;
