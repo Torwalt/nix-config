@@ -104,7 +104,11 @@ in
       };
 
       windowrule = [
-        "opacity 0.95 0.8, match:class .*" # Set opacity of active and inactive windows for all types of windows.
+        {
+          name = "global-opacity";
+          "match:class" = ".*";
+          opacity = "0.95 override 0.8 override";
+        }
         "stay_focused on, match:class (Rofi)$" # Autofocus rofi to fix bug
       ];
 
@@ -162,9 +166,9 @@ in
         ''$mainMod SHIFT, S, exec, grim -g "$(slurp)" -  | wl-copy''
         "$mainMod SHIFT, W, exec, ${screenshotActiveWindow}/bin/screenshot-active-window"
         # Turn off opacity.
-        ''$mainMod, O, exec, hyprctl keyword windowrule "opacity 1.0 1.0 override, match:class .*"''
+        "$mainMod, O, exec, hyprctl keyword 'windowrule[global-opacity]:enable false'"
         # Turn on again.
-        ''$mainMod SHIFT, O, exec, hyprctl keyword windowrule "opacity 0.95 0.8 override, match:class .*"''
+        "$mainMod SHIFT, O, exec, hyprctl keyword 'windowrule[global-opacity]:enable true'"
 
         # Window manipulation"
         "$mainMod, V, togglefloating, "
