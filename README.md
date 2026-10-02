@@ -47,11 +47,12 @@ and prints the `nixos-install` command. The committed file it replaces is a
 placeholder with deliberately invalid UUIDs. Keep `grub.efiSupport` in
 `hosts/socke/configuration.nix` matching the BIOS mode from step 4.
 
-Set both passwords after the first boot, since neither account has one:
+Neither account has a password, so set them before rebooting. Otherwise both
+are locked and the login screen cannot be passed:
 
 ```console
-passwd socke
-passwd ada
+sudo nixos-enter --root /mnt -c 'passwd socke'
+sudo nixos-enter --root /mnt -c 'passwd ada'
 ```
 
 `socke` upgrades itself daily from the `socke-stable` branch with

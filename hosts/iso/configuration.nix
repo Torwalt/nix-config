@@ -27,7 +27,8 @@ let
       fi
 
       if [ ! -d "$repo" ]; then
-        cp -r /etc/nix-config "$repo"
+        # -L: /etc/nix-config is a symlink into the read-only store.
+        cp -rL /etc/nix-config "$repo"
         chmod -R u+w "$repo"
       fi
 
