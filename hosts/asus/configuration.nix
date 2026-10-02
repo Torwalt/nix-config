@@ -4,7 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/stylix/default.nix
-    ../../modules/system/default.nix
+    ../../modules/system/workstation.nix
     ../../modules/system/hyprland.nix
     ../../modules/system/greetd/default.nix
     ../../modules/system/fonts.nix
