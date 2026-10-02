@@ -9,6 +9,7 @@
     ../../modules/system/greetd/default.nix
     ../../modules/system/fonts.nix
     ../../modules/system/audio.nix
+    ../../modules/system/tuxedo.nix
   ];
 
   services.xserver.enable = true;
