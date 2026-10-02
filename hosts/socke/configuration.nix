@@ -35,6 +35,9 @@
   # grub.device set to the disk, for example "/dev/sda".
   boot.loader = {
     systemd-boot.enable = lib.mkForce false;
+    # The Windows ESP is typically 100 MB, far too small for NixOS kernels.
+    # GRUB reads ext4, so only its EFI stub goes there and /boot stays on root.
+    efi.efiSysMountPoint = "/boot/efi";
     grub = {
       enable = true;
       device = "nodev";

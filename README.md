@@ -32,14 +32,19 @@ Dual boots alongside Windows on one disk. In Windows first:
 
 In the BIOS: Secure Boot off.
 
-Then install NixOS and, before the first rebuild:
+Then boot the installer ISO below and partition the free space Windows left.
+Mount the new root at `/mnt` and the **existing** EFI system partition at
+`/mnt/boot/efi`. Do not format the ESP: Windows boots from it. Kernels do not
+go there either, because a 100 MB OEM ESP cannot hold them, so `/boot` stays
+on the root filesystem and GRUB reads it from ext4.
 
 ```console
-nixos-generate-config --no-filesystems --root /mnt   # overwrite hosts/socke/hardware-configuration.nix
+seed-socke
 ```
 
-The committed `hosts/socke/hardware-configuration.nix` is a placeholder with
-deliberately invalid UUIDs. Replace it, and keep `grub.efiSupport` in
+That generates `hosts/socke/hardware-configuration.nix` from what is mounted
+and prints the `nixos-install` command. The committed file it replaces is a
+placeholder with deliberately invalid UUIDs. Keep `grub.efiSupport` in
 `hosts/socke/configuration.nix` matching the BIOS mode from step 4.
 
 Set both passwords after the first boot, since neither account has one:
@@ -60,6 +65,24 @@ git push origin master:socke-stable
 Keeping the branch behind `master` is the point: a broken `master` does not
 reach an unattended machine. Failed builds change nothing, and older
 generations stay in the boot menu for 30 days.
+
+## Installer ISO
+
+`isoSys` builds a live image carrying this flake, so installing socke needs
+neither a clone nor a plain NixOS install first.
+
+```console
+nix build .#nixosConfigurations.isoSys.config.system.build.isoImage
+```
+
+The image lands in `result/iso/`. It boots a live Plasma desktop on a German
+keymap with GParted and Firefox, the flake at `/etc/nix-config`, and
+`seed-socke` on the path. `seed-socke` copies the flake somewhere writable,
+writes the hardware configuration and stops. It never partitions anything.
+
+The install still downloads socke's closure. Uncomment `isoImage.storeContents`
+in `hosts/iso/configuration.nix` to carry the whole closure on the stick and
+install with no network, at roughly 15 GB of extra image.
 
 ## Updating and cleanup
 

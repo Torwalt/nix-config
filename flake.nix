@@ -140,6 +140,12 @@
           ];
         };
 
+        # 'nix build .#nixosConfigurations.isoSys.config.system.build.isoImage'
+        isoSys = nixpkgs.lib.nixosSystem {
+          specialArgs = extraSpecialArgs;
+          modules = [ ./hosts/iso/configuration.nix ];
+        };
+
         # 'sudo nixos-rebuild --flake .#sockeSys switch'
         # No stylix: this desktop is themed from Plasma's own settings.
         sockeSys = nixpkgs.lib.nixosSystem {
