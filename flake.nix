@@ -140,6 +140,26 @@
           ];
         };
 
+        # 'sudo nixos-rebuild --flake .#sockeSys switch'
+        # No stylix: this desktop is themed from Plasma's own settings.
+        sockeSys = nixpkgs.lib.nixosSystem {
+          specialArgs = extraSpecialArgs;
+          modules = [
+            ./hosts/socke/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              # One command deploys this host, so Home Manager rides along with
+              # the system instead of being switched separately.
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = extraSpecialArgs;
+                users.socke = import ./hosts/socke/home.nix;
+              };
+            }
+          ];
+        };
+
         # 'sudo nixos-rebuild --flake .#workSys switch'
         workSys = nixpkgs.lib.nixosSystem {
           specialArgs = extraSpecialArgs;

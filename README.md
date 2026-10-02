@@ -5,6 +5,62 @@
 - dont forget to copy generated hardware-configuration.nix and include it in configuration.nix
 - if full disk encryption was chosen in installer, dont forget to add that part into configuration.nix
 
+## Host kinds
+
+`modules/system/core.nix` holds what every host needs: locale, German keymap,
+NetworkManager, PipeWire, firewall, Nix settings. Two profiles import it.
+
+`workstation.nix` is the profile for hosts administered by their user: the
+`ada` account with sudo, Docker, Zsh, Kitty, the fcitx5 translit setup.
+`asus`, `tower` and `work` use it.
+
+`managed.nix` is the profile for a host whose user does not administer it. The
+day-to-day account has no sudo, a second account keeps it, and the host pulls
+its own upgrades from a flake reference on a timer. `socke` uses it.
+
+## Installing socke
+
+Dual boots alongside Windows on one disk. In Windows first:
+
+1. Uninstall the Steam games. Proton cannot use an NTFS library, so the games
+   get reinstalled on the Linux side.
+2. Control Panel, Power Options, "Choose what the power buttons do",
+   uncheck "Turn on fast startup". This is a Windows setting, not a BIOS one.
+   Without it the NTFS partition is left dirty and Linux will not mount it.
+3. Disk Management, shrink the Windows partition. Leave 500 GB or more.
+4. Note the "BIOS Mode" row in `msinfo32` and the GPU in `dxdiag`.
+
+In the BIOS: Secure Boot off.
+
+Then install NixOS and, before the first rebuild:
+
+```console
+nixos-generate-config --no-filesystems --root /mnt   # overwrite hosts/socke/hardware-configuration.nix
+```
+
+The committed `hosts/socke/hardware-configuration.nix` is a placeholder with
+deliberately invalid UUIDs. Replace it, and keep `grub.efiSupport` in
+`hosts/socke/configuration.nix` matching the BIOS mode from step 4.
+
+Set both passwords after the first boot, since neither account has one:
+
+```console
+passwd socke
+passwd ada
+```
+
+`socke` upgrades itself daily from the `socke-stable` branch with
+`nixos-rebuild boot`, so a change lands on her next power-on and never
+restarts anything under a running session. Push to that branch to release:
+
+```console
+git push origin master:socke-stable
+```
+
+Keeping the branch behind `master` is the point: a broken `master` does not
+reach an unattended machine. Failed builds change nothing, and older
+generations stay in the boot menu for 30 days.
+
 ## Updating and cleanup
 
 Every host installs a `nixup` command through Home Manager. It knows the
