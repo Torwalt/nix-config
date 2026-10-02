@@ -135,6 +135,8 @@ in
       text = claudeInstructions;
       force = true;
     };
+    file.".claude-personal/skills/zettelkasten".source = ./skills/zettelkasten;
+    file.".claude-work/skills/zettelkasten".source = ./skills/zettelkasten;
 
     file.".pi/agent/settings.json".text =
       builtins.toJSON {
