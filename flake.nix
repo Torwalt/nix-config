@@ -212,7 +212,7 @@
         x86_64-linux = {
           default = pkgs.mkShell {
             inherit (hooks) shellHook;
-            buildInputs = hooks.enabledPackages;
+            buildInputs = hooks.enabledPackages ++ [ pkgs.just ];
           };
           rust = (import ./shells/rust/rust.nix { inherit pkgs; });
           nodejs = (import ./shells/nodejs.nix { inherit pkgs; });

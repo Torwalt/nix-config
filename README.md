@@ -20,70 +20,36 @@ its own upgrades from a flake reference on a timer. `socke` uses it.
 
 ## Installing socke
 
-Dual boots alongside Windows on one disk. In Windows first:
+`hosts/iso/README.md` has the procedure: Windows preparation, partitioning
+next to it, and the install from the live image.
 
-1. Uninstall the Steam games. Proton cannot use an NTFS library, so the games
-   get reinstalled on the Linux side.
-2. Control Panel, Power Options, "Choose what the power buttons do",
-   uncheck "Turn on fast startup". This is a Windows setting, not a BIOS one.
-   Without it the NTFS partition is left dirty and Linux will not mount it.
-3. Disk Management, shrink the Windows partition. Leave 500 GB or more.
-4. Note the "BIOS Mode" row in `msinfo32` and the GPU in `dxdiag`.
-
-In the BIOS: Secure Boot off.
-
-Then boot the installer ISO below and partition the free space Windows left.
-Mount the new root at `/mnt` and the **existing** EFI system partition at
-`/mnt/boot/efi`. Do not format the ESP: Windows boots from it. Kernels do not
-go there either, because a 100 MB OEM ESP cannot hold them, so `/boot` stays
-on the root filesystem and GRUB reads it from ext4.
-
-```console
-seed-socke
-```
-
-That generates `hosts/socke/hardware-configuration.nix` from what is mounted
-and prints the `nixos-install` command. The committed file it replaces is a
-placeholder with deliberately invalid UUIDs. Keep `grub.efiSupport` in
-`hosts/socke/configuration.nix` matching the BIOS mode from step 4.
-
-Neither account has a password, so set them before rebooting. Otherwise both
-are locked and the login screen cannot be passed:
-
-```console
-sudo nixos-enter --root /mnt -c 'passwd socke'
-sudo nixos-enter --root /mnt -c 'passwd ada'
-```
-
-`socke` upgrades itself daily from the `socke-stable` branch with
+`socke` then upgrades itself daily from the `socke-stable` branch with
 `nixos-rebuild boot`, so a change lands on her next power-on and never
-restarts anything under a running session. Push to that branch to release:
+restarts anything under a running session. Release by advancing that branch:
 
 ```console
-git push origin master:socke-stable
+just release-socke
 ```
 
-Keeping the branch behind `master` is the point: a broken `master` does not
-reach an unattended machine. Failed builds change nothing, and older
-generations stay in the boot menu for 30 days.
+`socke-stable` only ever holds commits that are already on `master`, so it
+fast-forwards and never needs a rebase. Keeping it behind `master` is the
+point: a broken `master` does not reach an unattended machine. Failed builds
+change nothing, and older generations stay in the boot menu for 30 days.
 
-## Installer ISO
+## Tasks
 
-`isoSys` builds a live image carrying this flake, so installing socke needs
-neither a clone nor a plain NixOS install first.
+`just` is in the dev shell, so direnv puts it on the path in this directory.
+It holds repository-level tasks; per-host updates stay in `nixup`.
 
 ```console
-nix build .#nixosConfigurations.isoSys.config.system.build.isoImage
+just              # list recipes
+just fmt
+just check        # evaluate every host, run the pre-commit hooks
+just build towerSys
+just iso          # build the socke installer image
+just iso-write /dev/sdb
+just release-socke
 ```
-
-The image lands in `result/iso/`. It boots a live Plasma desktop on a German
-keymap with GParted and Firefox, the flake at `/etc/nix-config`, and
-`seed-socke` on the path. `seed-socke` copies the flake somewhere writable,
-writes the hardware configuration and stops. It never partitions anything.
-
-The install still downloads socke's closure. Uncomment `isoImage.storeContents`
-in `hosts/iso/configuration.nix` to carry the whole closure on the stick and
-install with no network, at roughly 15 GB of extra image.
 
 ## Updating and cleanup
 
