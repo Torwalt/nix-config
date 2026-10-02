@@ -32,7 +32,8 @@ let
         chmod -R u+w "$repo"
       fi
 
-      nixos-generate-config --root "$target"
+      # Writing under $target needs root; the rest stays in the live user's home.
+      sudo nixos-generate-config --root "$target"
       cp "$target/etc/nixos/hardware-configuration.nix" \
         "$repo/hosts/socke/hardware-configuration.nix"
 
