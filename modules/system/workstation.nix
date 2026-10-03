@@ -54,6 +54,7 @@
     isNormalUser = true;
     description = "alex";
     extraGroups = [
+      "gamemode"
       "networkmanager"
       "wheel"
     ];
