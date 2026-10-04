@@ -10,12 +10,15 @@
     ../../modules/system/fonts.nix
     ../../modules/system/audio.nix
     ../../modules/system/tuxedo.nix
+    ../../modules/system/monitor-follow.nix
   ];
 
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   system.stateVersion = "25.11";
+
+  monitorFollow.input = "0x12";
 
   audio.preferredInput = "~alsa_input\\.usb-GeneralPlus_USB_Audio_Device-.*";
 

@@ -13,10 +13,13 @@
     ../../modules/system/greetd/default.nix
     ../../modules/system/fonts.nix
     ../../modules/system/audio.nix
+    ../../modules/system/monitor-follow.nix
     # ../../modules/system/ai/default.nix
   ];
 
   system.stateVersion = "25.11";
+
+  monitorFollow.input = "0x11";
 
   audio.preferredInput = "~alsa_input\\.usb-(?!.*([Cc]amera|[Ww]ebcam)).*";
 
