@@ -82,7 +82,7 @@ in
   imports = [
     ./hyprland.nix
     ./session-services.nix
-    ./dunst.nix
+    ./swaync.nix
     ./waybar.nix
     ./swaylock.nix
     ./gammastep.nix
@@ -104,7 +104,7 @@ in
     notification.monitor = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       default = null;
-      description = "Optional monitor name for Dunst notifications.";
+      description = "Optional monitor name for notification popups and the notification center.";
     };
 
     waybar.disk.mountPoint = lib.mkOption {

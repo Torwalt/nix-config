@@ -31,7 +31,7 @@
 
   environment.systemPackages = with pkgs; [
     # notifier
-    dunst
+    swaynotificationcenter
     # dependency for all notifiers
     libnotify
     # wallpapers
