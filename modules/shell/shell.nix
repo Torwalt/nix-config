@@ -73,6 +73,29 @@ in
     # Profiling
     # initExtraFirst = "zmodload zsh/zprof";
 
-    initContent = "source ${./.p10k.zsh}";
+    initContent = ''
+      source ${./.p10k.zsh}
+
+      unalias gb 2>/dev/null
+      gb() {
+        local branch
+        branch=$(
+          git for-each-ref \
+            --sort=-committerdate \
+            --format='%(refname:short)' \
+            refs/heads refs/remotes |
+            command grep -v '/HEAD$' |
+            fzf --preview 'git log --oneline --decorate --color=always -10 {}'
+        ) || return
+
+        [[ -n "$branch" ]] || return
+
+        if git show-ref --verify --quiet "refs/heads/$branch"; then
+          git switch "$branch"
+        else
+          git switch --track "$branch"
+        fi
+      }
+    '';
   };
 }
