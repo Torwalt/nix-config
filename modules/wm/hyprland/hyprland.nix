@@ -171,7 +171,6 @@ in
         "$mainMod SHIFT, O, exec, hyprctl keyword 'windowrule[global-opacity]:enable true'"
 
         # Window manipulation"
-        "$mainMod, V, togglefloating, "
         "$mainMod, T, togglegroup, "
         "$mainMod, N, changegroupactive, "
         "$mainMod, F, fullscreen,"
