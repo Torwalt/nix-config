@@ -1,6 +1,8 @@
 { pkgs, ... }:
 
 {
+  imports = [ ../../modules/firefox-tab-guard/default.nix ];
+
   home = {
     username = "socke";
     homeDirectory = "/home/socke";

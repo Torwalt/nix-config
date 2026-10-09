@@ -1,4 +1,6 @@
 { pkgs, ... }: {
+  imports = [ ./firefox-tab-guard/default.nix ];
+
   home = {
     packages = with pkgs; [
       gcc

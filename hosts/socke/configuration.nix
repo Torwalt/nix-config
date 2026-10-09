@@ -14,6 +14,8 @@
 
   networking.hostName = "socke";
 
+  zramSwap.enable = true;
+
   managedHost = {
     enable = true;
     flake = "github:Torwalt/nix-config/socke-stable#sockeSys";
