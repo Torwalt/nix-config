@@ -105,20 +105,28 @@ nmap("<leader>fs", function() telescope.extensions.luasnip.luasnip() end)
 
 local tele_builtin = require('telescope.builtin')
 
-nmap("<leader>ff", function()
-    require('telescope.builtin').find_files({
-        hidden = true,
-        find_command = {
-            "fd", "--type", "f",
-            "--hidden",
-            "--exclude", ".git",
-            "--exclude", "node_modules",
-            "--exclude", "dist",
-            "--exclude", "build",
-            "--exclude", "target",
-        },
+-- no_ignore also lists git-ignored files, e.g. worktrees in .claude/worktrees.
+local function find_files(no_ignore)
+    local find_command = { "fd", "--type", "f", "--hidden" }
+    if no_ignore then
+        table.insert(find_command, "--no-ignore")
+    end
+    vim.list_extend(find_command, {
+        "--exclude", ".git",
+        "--exclude", "node_modules",
+        "--exclude", "dist",
+        "--exclude", "build",
+        "--exclude", "target",
     })
-end)
+    tele_builtin.find_files({
+        hidden = true,
+        find_command = find_command,
+        prompt_title = no_ignore and "Find Files (incl. ignored)" or "Find Files",
+    })
+end
+
+nmap("<leader>ff", function() find_files(false) end)
+nmap("<leader>fF", function() find_files(true) end)
 
 nmap("<leader>fb", function() tele_builtin.buffers({ sort_mru = true }) end)
 nmap("/", function() tele_builtin.current_buffer_fuzzy_find({ sort_mru = true }) end)
