@@ -89,6 +89,7 @@
         pkgs-unstable = import nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;
+          overlays = import ./overlays.nix { inherit inputs; };
         };
       };
       pkgs = import nixpkgs {

@@ -19,6 +19,14 @@ in
     model_reasoning_effort = "high";
     personality = "pragmatic";
     sandbox_mode = "danger-full-access";
+    features.realtime_conversation = true;
+    tui.keymap.chat = {
+      toggle_voice = "f8";
+      toggle_voice_mute = [
+        "ctrl-space"
+        "ctrl-x"
+      ];
+    };
     developer_instructions = ''
       When creating commits, do not add AI authorship or attribution to the
       commit message. Do not add Co-authored-by trailers for Codex or any other
