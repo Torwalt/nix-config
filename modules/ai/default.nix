@@ -143,6 +143,10 @@ in
       force = true;
     };
 
+    # Codex, OpenCode and Pi read the shared notes skills from ~/.agents/skills.
+    file.".agents/skills".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/notes/claude-plugins/shared/skills";
+
     file.".pi/agent/settings.json".text =
       builtins.toJSON {
         externalEditor = "nvim";
