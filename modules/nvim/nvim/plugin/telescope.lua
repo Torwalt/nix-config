@@ -1,6 +1,7 @@
 local telescope = require("telescope")
 local lga_actions = require("telescope-live-grep-args.actions")
 local t_actions = require('telescope.actions')
+local t_layout = require('telescope.actions.layout')
 local t_action_state = require('telescope.actions.state')
 local t_pickers = require('telescope.pickers')
 local t_finders = require('telescope.finders')
@@ -55,13 +56,23 @@ telescope.setup {
             "node_modules/", "dist/", "build/", "target/", "vendor/",
             "%.min%.js", "%.lock",
         },
+        -- Results get 60% so worktree paths fit; truncate keeps the filename when they don't.
+        layout_config = {
+            horizontal = {
+                width = 0.95,
+                preview_width = 0.4,
+            },
+        },
+        path_display = { "truncate" },
         mappings = {
             n = {
-                ['<c-d>'] = delete_buf
+                ['<c-d>'] = delete_buf,
+                ["<C-o>"] = t_layout.toggle_preview,
             },
             i = {
                 ["<C-j>"] = t_actions.cycle_history_next,
                 ["<C-k>"] = t_actions.cycle_history_prev,
+                ["<C-o>"] = t_layout.toggle_preview,
             },
         },
         history = {
