@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   pkgs-unstable,
   ...
@@ -35,6 +36,12 @@ let
       effortLevel = "high";
       enabledPlugins = {
         "gopls-lsp@claude-plugins-official" = true;
+        "shared@notes" = true;
+      };
+      # Private skills live in the notes repo; projects enable their own plugins.
+      extraKnownMarketplaces.notes.source = {
+        source = "directory";
+        path = "${config.home.homeDirectory}/repos/notes/claude-plugins";
       };
       alwaysThinkingEnabled = true;
       tui = "default";
@@ -135,8 +142,6 @@ in
       text = claudeInstructions;
       force = true;
     };
-    file.".claude-personal/skills/zettelkasten".source = ./skills/zettelkasten;
-    file.".claude-work/skills/zettelkasten".source = ./skills/zettelkasten;
 
     file.".pi/agent/settings.json".text =
       builtins.toJSON {
