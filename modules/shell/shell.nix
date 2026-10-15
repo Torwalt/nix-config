@@ -14,6 +14,14 @@ let
     ];
     text = nvimSocketContract.shell + builtins.readFile ./scripts/nvim-session.sh;
   };
+  branchPicker = pkgs.writeShellApplication {
+    name = "gb";
+    runtimeInputs = [
+      pkgs.git
+      pkgs.fzf
+    ];
+    text = builtins.readFile ./scripts/gb.sh;
+  };
 in
 {
   # In order for .profile being updated.
@@ -25,6 +33,7 @@ in
     packages = with pkgs; [
       nix-zsh-completions
       nvimSession
+      branchPicker
     ];
     shell.enableZshIntegration = true;
   };
@@ -76,26 +85,8 @@ in
     initContent = ''
       source ${./.p10k.zsh}
 
+      # oh-my-zsh's git plugin aliases gb to git branch.
       unalias gb 2>/dev/null
-      gb() {
-        local branch
-        branch=$(
-          git for-each-ref \
-            --sort=-committerdate \
-            --format='%(refname:short)' \
-            refs/heads refs/remotes |
-            command grep -v '/HEAD$' |
-            fzf --preview 'git log --oneline --decorate --color=always -10 {}'
-        ) || return
-
-        [[ -n "$branch" ]] || return
-
-        if git show-ref --verify --quiet "refs/heads/$branch"; then
-          git switch "$branch"
-        else
-          git switch --track "$branch"
-        fi
-      }
     '';
   };
 }
