@@ -74,13 +74,24 @@
     rootless = {
       enable = true;
       setSocketVariable = true;
+      daemon.settings.cgroup-parent = "containers.slice";
     };
   };
 
-  # Make sure docker is killed first if some container has a memory leak.
-  systemd.services.docker = {
-    # The higher the value (max 1000) the higher prio for killing.
-    serviceConfig.OOMScoreAdjust = 999;
+  # Stricter than -.slice, so oomd kills a dev container first.
+  systemd.user.slices.containers.sliceConfig = {
+    ManagedOOMMemoryPressure = "kill";
+    ManagedOOMMemoryPressureLimit = "30%";
+    ManagedOOMMemoryPressureDurationSec = "10s";
+  };
+
+  # Kills the cgroup with the most swap once RAM and swap both pass 90 %.
+  # Kills the cgroup with the most reclaim after 20 s at 60 % memory stall.
+  systemd.oomd.enableRootSlice = true;
+  systemd.slices."-".sliceConfig = {
+    ManagedOOMSwap = "kill";
+    ManagedOOMMemoryPressureLimit = "60%";
+    ManagedOOMMemoryPressureDurationSec = "20s";
   };
 
   environment.systemPackages = with pkgs; [
