@@ -1,5 +1,8 @@
 local api = vim.api
 
+vim.filetype.add({ extension = { bend = "bend" } })
+vim.treesitter.language.register("bend2", "bend")
+
 local function ts_disable(lang, bufnr)
     local disabled_langs = { "yaml", "json" }
     local line_count_exceeds = api.nvim_buf_line_count(bufnr) > 5000
@@ -29,7 +32,8 @@ api.nvim_create_autocmd("FileType", {
             return
         end
 
-        pcall(vim.treesitter.start, ev.buf, ft)
+        local lang = vim.treesitter.language.get_lang(ft) or ft
+        pcall(vim.treesitter.start, ev.buf, lang)
     end,
 })
 

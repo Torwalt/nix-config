@@ -35,6 +35,11 @@
       flake = false;
     };
 
+    tree-sitter-bend2 = {
+      url = "github:nicolas-abril/tree-sitter-bend2";
+      flake = false;
+    };
+
     vrv = {
       url = "github:Torwalt/vrv";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -96,6 +96,12 @@
     plugins =
       let
         unstableTreesitter = pkgs-unstable.vimPlugins.nvim-treesitter;
+        bendGrammar = pkgs-unstable.tree-sitter.buildGrammar {
+          language = "bend2";
+          version =
+            (builtins.fromJSON (builtins.readFile "${inputs.tree-sitter-bend2}/package.json")).version;
+          src = inputs.tree-sitter-bend2;
+        };
       in
       with pkgs.vimPlugins;
       [
@@ -149,6 +155,7 @@
 
         unstableTreesitter
         unstableTreesitter.withAllGrammars
+        (pkgs-unstable.neovimUtils.grammarToPlugin bendGrammar)
         nvim-treesitter-textobjects
         nvim-treesitter-textobjects
 

@@ -22,6 +22,15 @@ let
     ];
     text = builtins.readFile ./scripts/gb.sh;
   };
+  repoPicker = pkgs.writeShellApplication {
+    name = "repo-pick";
+    runtimeInputs = [
+      pkgs.git
+      pkgs.fd
+      pkgs.fzf
+    ];
+    text = builtins.readFile ./scripts/repo-pick.sh;
+  };
 in
 {
   # In order for .profile being updated.
@@ -34,6 +43,7 @@ in
       nix-zsh-completions
       nvimSession
       branchPicker
+      repoPicker
     ];
     shell.enableZshIntegration = true;
   };
@@ -87,6 +97,11 @@ in
 
       # oh-my-zsh's git plugin aliases gb to git branch.
       unalias gb 2>/dev/null
+
+      rf() {
+        local dir
+        dir="$(repo-pick "$@")" && [[ -n "$dir" ]] && cd "$dir"
+      }
     '';
   };
 }

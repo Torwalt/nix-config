@@ -510,6 +510,7 @@
         "sops-nix": "sops-nix",
         "spool": "spool",
         "stylix": "stylix",
+        "tree-sitter-bend2": "tree-sitter-bend2",
         "vrv": "vrv"
       }
     },
@@ -694,6 +695,22 @@
       "original": {
         "owner": "tinted-theming",
         "repo": "base16-zed",
+        "type": "github"
+      }
+    },
+    "tree-sitter-bend2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789685253,
+        "narHash": "sha256-A8eeratcAiejgeQdPvzpyuqi1sO3LeW/GpgZWW8RKTU=",
+        "owner": "nicolas-abril",
+        "repo": "tree-sitter-bend2",
+        "rev": "def3000feae44b0c51fabff9683b03870d28eece",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nicolas-abril",
+        "repo": "tree-sitter-bend2",
         "type": "github"
       }
     },
