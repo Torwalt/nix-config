@@ -90,6 +90,7 @@ in
     firefox = true;
     chromium = true;
   };
+  wm.hyprland.tailscale.enable = true;
 
   home = {
     username = "ada";

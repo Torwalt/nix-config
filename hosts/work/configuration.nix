@@ -64,6 +64,21 @@
     useRoutingFeatures = "client";
   };
 
+  # Joining the tailnet hands every DNS lookup to the company resolver, so the
+  # daemon only runs when started from the desktop.
+  systemd.services.tailscaled.wantedBy = lib.mkForce [ ];
+
+  security.polkit.extraConfig = ''
+    polkit.addRule(function (action, subject) {
+      if (action.id == "org.freedesktop.systemd1.manage-units" &&
+          action.lookup("unit") == "tailscaled.service" &&
+          (action.lookup("verb") == "start" || action.lookup("verb") == "stop") &&
+          subject.user == "ada") {
+        return polkit.Result.YES;
+      }
+    });
+  '';
+
   networking.firewall = {
     enable = true;
 

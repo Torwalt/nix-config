@@ -86,6 +86,7 @@ in
     ./waybar.nix
     ./swaylock.nix
     ./gammastep.nix
+    ./tailscale.nix
   ];
 
   options.wm.hyprland = {
@@ -118,6 +119,8 @@ in
       firefox = lib.mkEnableOption "Firefox after the desktop portals are ready";
       chromium = lib.mkEnableOption "Chromium after the desktop portals are ready";
     };
+
+    tailscale.enable = lib.mkEnableOption "a Waybar widget and Alt+Shift+T to start and stop tailscaled";
   };
 
   config = {
