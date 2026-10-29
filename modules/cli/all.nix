@@ -1,7 +1,16 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  gitBase = pkgs.writeShellApplication {
+    name = "git-base";
+    runtimeInputs = [ pkgs.git ];
+    text = builtins.readFile ./scripts/git-base.sh;
+  };
+in
+{
   home.packages = [
     pkgs.godiff
     pkgs.spool
+    gitBase
   ];
 
   programs.git = {
@@ -14,9 +23,9 @@
       };
 
       alias = {
-        gls = "!f(){ git rev-list --reverse \${1:-master}..HEAD | head -n1; }; f";
-        glsr = ''!f(){ base="$(git merge-base --fork-point "''${1:-master}" HEAD || git merge-base "''${1:-master}" HEAD)"; [ -n "$base" ] && git rebase -i "''${base}"; }; f'';
-        glsl = ''!f(){ base="$(git merge-base --fork-point "''${1:-master}" HEAD || git merge-base "''${1:-master}" HEAD)"; git log "''${base}..HEAD" --reverse --pretty=format:"## %s%n%n%b%n"; }; f'';
+        gls = ''!f(){ base="$(git base "$@")" && git rev-list --reverse "$base..HEAD" | head -n1; }; f'';
+        glsr = ''!f(){ base="$(git base "$@")" && git rebase -i "$base"; }; f'';
+        glsl = ''!f(){ base="$(git base "$@")" && git log --reverse --pretty=format:"## %s%n%n%b%n" "$base..HEAD"; }; f'';
       };
 
       url."ssh://git@github.com/".insteadOf = "https://github.com/";
