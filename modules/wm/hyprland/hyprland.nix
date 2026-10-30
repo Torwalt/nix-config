@@ -232,4 +232,17 @@ in
       ];
     };
   };
+
+  # $XDG_RUNTIME_DIR/away marks 20 minutes without input; ploopy's shutdown
+  # watcher only powers off while it exists.
+  services.hypridle = {
+    enable = true;
+    settings.listener = [
+      {
+        timeout = 1200;
+        on-timeout = "${pkgs.coreutils}/bin/touch \"$XDG_RUNTIME_DIR/away\"";
+        on-resume = "${pkgs.coreutils}/bin/rm -f \"$XDG_RUNTIME_DIR/away\"";
+      }
+    ];
+  };
 }
