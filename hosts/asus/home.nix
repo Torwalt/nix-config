@@ -45,6 +45,7 @@ in
     ++ unstable;
 
   wm.hyprland.notification.monitor = "HDMI-A-1";
+  wm.hyprland.agentQueue.terminalWorkspace = "1";
 
   wayland.windowManager.hyprland.settings.bindle = [
     ", F3, exec, ${pkgs.brightnessctl}/bin/brightnessctl --device='*::kbd_backlight' set 1-"

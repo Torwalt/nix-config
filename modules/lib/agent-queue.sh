@@ -7,9 +7,16 @@
 # in this file; notifications merely announce it. `pick` uses the rofi on
 # PATH so it shares the desktop's rofi theme.
 
+# Set by the Nix wrapper when the terminal lives on a fixed workspace.
+terminal_workspace="${terminal_workspace:-}"
+
 state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/agent-queue"
 queue="$state_dir/queue"
 waybar_signal=10
+
+# Waybar and Hyprland run outside the login shell, so they miss the
+# TMUX_TMPDIR that home-manager exports there; derive the same socket dir.
+export TMUX_TMPDIR="${TMUX_TMPDIR:-${XDG_RUNTIME_DIR:-/run/user/$(id -u)}}"
 
 mkdir -p "$state_dir"
 touch "$queue"
@@ -42,11 +49,13 @@ live_panes() {
 }
 
 # Pane ids only mean something within one tmux server: a new server hands
-# out %0, %1, … again. The queue belongs to the server that started at
-# server_start; a different server starts it empty.
+# out %0, %1, … again. The queue belongs to the server whose pid is stored;
+# a different server starts it empty. An unreachable server says nothing
+# about the queue, so it stays as it is.
 check_server() {
   local current stored=""
-  current="$(tmux list-sessions -F '#{start_time}' 2>/dev/null | head -n 1 || true)"
+  current="$(tmux display-message -p '#{pid}' 2>/dev/null || true)"
+  [ -n "$current" ] || return 1
   [ -f "$state_dir/server" ] && stored="$(<"$state_dir/server")"
   if [ "$current" != "$stored" ]; then
     : >"$queue"
@@ -54,11 +63,13 @@ check_server() {
   fi
 }
 
-# Rewrite the queue without panes that tmux no longer knows.
+# Rewrite the queue without panes that tmux no longer knows. Without a
+# reachable server nothing is known to be gone.
 prune() {
   local live tmp
-  check_server
+  check_server || return 0
   live="$(live_panes)"
+  [ -n "$live" ] || return 0
   tmp="$(mktemp "$state_dir/queue.XXXXXX")"
   awk -F '\t' -v live="$live" '
     BEGIN { n = split(live, ids, "\n"); for (i = 1; i <= n; i++) alive[ids[i]] = 1 }
@@ -98,11 +109,15 @@ position() {
   ' "$queue"
 }
 
-# The Hyprland window that hosts a tmux client: walk up from the client's
-# pid until a process owns a window.
+# Bring the terminal that hosts a tmux client to the front: switch to the
+# configured workspace, then walk up from the client's pid until a process
+# owns a window and focus it.
 focus_terminal() {
   local pid="$1" windows address
   command -v hyprctl >/dev/null || return 0
+  if [ -n "$terminal_workspace" ]; then
+    hyprctl dispatch workspace "$terminal_workspace" >/dev/null || true
+  fi
   windows="$(hyprctl clients -j 2>/dev/null)" || return 0
   while [ -n "$pid" ] && [ "$pid" -gt 1 ]; do
     address="$(jq -r --argjson pid "$pid" \
@@ -111,7 +126,9 @@ focus_terminal() {
       hyprctl dispatch focuswindow "address:$address" >/dev/null
       return 0
     fi
-    pid="$(awk '{ print $4 }' "/proc/$pid/stat" 2>/dev/null || true)"
+    # Not /proc/PID/stat: the tmux client's name ("tmux: client") holds a
+    # space and shifts its fields.
+    pid="$(ps -o ppid= -p "$pid" 2>/dev/null | tr -d ' ' || true)"
   done
 }
 
@@ -123,7 +140,7 @@ cmd_push() {
   app="${app//[$'\t\n']/ }"
 
   with_lock
-  check_server
+  check_server || true
   if awk -F '\t' -v pane="$pane" '$2 == pane { found = 1 } END { exit !found }' "$queue"; then
     # Keep the original place; show the latest reason.
     local tmp
