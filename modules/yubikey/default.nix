@@ -30,6 +30,7 @@ let
       findutils
       jq
       keepassxc
+      python3
       udisks
       util-linux
       yubikey-manager

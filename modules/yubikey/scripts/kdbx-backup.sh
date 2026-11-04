@@ -2,20 +2,30 @@
 #
 # Each backup is checked against its source by checksum and, if you want, by
 # opening it from the drive with your password (plus a YubiKey when one is
-# connected). Drives this script mounted itself are unmounted and powered off
+# connected).
+#
+# With --password-only, each database that needs a YubiKey also gets a second
+# backup that opens with the password alone, as a fallback for when every key
+# and the paper secret are gone. keepassxc-cli cannot remove a YubiKey from a
+# database, so that copy is rebuilt: exported to XML and imported into a new
+# database with the same password. The XML holds every secret in plain text,
+# so it only ever exists in $XDG_RUNTIME_DIR (RAM) and is deleted right after.
+# The rebuilt database is exported again and must match the original export. Drives this script mounted itself are unmounted and powered off
 # at the end, so they can be pulled out right away.
 
 SLOT=2
 
 usage() {
   cat <<EOF
-Usage: kdbx-backup [--to DIR] [--keep N] DATABASE.kdbx...
+Usage: kdbx-backup [--to DIR] [--keep N] [--password-only] DATABASE.kdbx...
 
 Copies each DATABASE to DIR/kdbx-backup/NAME.YYYYMMDD-HHMMSS.kdbx on a thumb
 drive. Without --to, it picks a plugged-in USB drive and mounts it if needed.
 
-  --to DIR   back up into DIR instead of looking for a drive
-  --keep N   keep only the newest N backups of each database on the drive
+  --to DIR         back up into DIR instead of looking for a drive
+  --keep N         keep only the newest N backups of each kind per database
+  --password-only  also write NAME.YYYYMMDD-HHMMSS.password-only.kdbx, which
+                   opens with the master password alone, no YubiKey
 EOF
 }
 
@@ -36,6 +46,7 @@ pause() {
 
 target_dir=
 keep=
+password_only=false
 dbs=()
 while (($#)); do
   case $1 in
@@ -50,6 +61,7 @@ while (($#)); do
       keep=$2
       shift
       ;;
+    --password-only) password_only=true ;;
     -h | --help)
       usage
       exit 0
@@ -135,32 +147,95 @@ finish_drive() {
 }
 
 password=
-trap 'password=' EXIT
+workdir=
+trap 'password=; [[ -z $workdir ]] || rm -rf "$workdir"' EXIT
 
-# Opens a backup with the password, using a connected YubiKey when there is
-# one. Prints how it opened.
-check_opens() {
-  local file=$1 serial
+if $password_only; then
+  # Plain-text exports must never touch a disk; /tmp is not RAM on NixOS.
+  [[ -n ${XDG_RUNTIME_DIR:-} && -d $XDG_RUNTIME_DIR ]] ||
+    die "--password-only needs \$XDG_RUNTIME_DIR (RAM) for the plain-text export"
+  workdir=$(umask 077 && mktemp -d "$XDG_RUNTIME_DIR/kdbx-backup.XXXXXX")
+fi
+
+# Exports FILE as XML to OUT, trying a connected YubiKey first and then the
+# password alone. Sets `used_key` to the serial that opened it, or empty.
+used_key=
+export_db() {
+  local file=$1 out=$2 serial
   serial=$(ykman list --serials 2>/dev/null | head -n1 || true)
   if [[ -n $serial ]]; then
     echo "  Touch YubiKey $serial if it blinks."
-    if printf '%s\n' "$password" | keepassxc-cli db-info -q -y "$SLOT:$serial" "$file" >/dev/null 2>&1; then
-      echo "  ok: opens with the password and YubiKey $serial."
+    if printf '%s\n' "$password" |
+      keepassxc-cli export -q -y "$SLOT:$serial" "$file" >"$out" 2>/dev/null; then
+      used_key=$serial
       return
     fi
   fi
-  if printf '%s\n' "$password" | keepassxc-cli db-info -q "$file" >/dev/null 2>&1; then
-    echo "  ok: opens with the password alone."
-    return
-  fi
-  return 1
+  used_key=
+  printf '%s\n' "$password" | keepassxc-cli export -q "$file" >"$out" 2>/dev/null
+}
+
+# Compares two XML exports, ignoring the random padding KeePassXC adds to
+# every database. Prints the number of entries when they match. Never prints
+# any content, since the exports hold every secret.
+same_export() {
+  python3 -I - "$1" "$2" <<'EOF'
+import sys
+import xml.etree.ElementTree as ET
+
+def load(path):
+    root = ET.parse(path).getroot()
+    for custom in root.iter("CustomData"):
+        for item in list(custom.findall("Item")):
+            if item.findtext("Key") == "KPXC_RANDOM_SLUG":
+                custom.remove(item)
+    # Indentation is not content, and removing the padding shifts it.
+    for element in root.iter():
+        if element.text is not None and not element.text.strip():
+            element.text = None
+        if element.tail is not None and not element.tail.strip():
+            element.tail = None
+    return root
+
+a, b = load(sys.argv[1]), load(sys.argv[2])
+if ET.tostring(a) != ET.tostring(b):
+    sys.exit(1)
+print(sum(len(group.findall("Entry")) for group in a.iter("Group")))
+EOF
+}
+
+# Copies SRC to DEST under a temporary name first, so a pulled drive never
+# leaves a half-written file that looks like a backup. Fails if the copy on
+# the drive differs.
+copy_to_drive() {
+  local src=$1 dest=$2
+  cp "$src" "$dest.tmp"
+  sync -f "$dest.tmp"
+  mv -f "$dest.tmp" "$dest"
+  [[ $(sha256sum <"$src") == "$(sha256sum <"$dest")" ]]
+}
+
+# Rebuilds the database exported to XML as a password-only database at DEST
+# and checks that it holds exactly what the export holds.
+write_password_only() {
+  local xml=$1 dest=$2 rebuilt="$workdir/rebuilt.kdbx" entries
+  rm -f "$rebuilt"
+  printf '%s\n%s\n' "$password" "$password" |
+    keepassxc-cli import -q -p "$xml" "$rebuilt" >/dev/null 2>&1 ||
+    return 1
+  printf '%s\n' "$password" | keepassxc-cli export -q "$rebuilt" >"$workdir/rebuilt.xml" 2>/dev/null ||
+    return 1
+  entries=$(same_export "$xml" "$workdir/rebuilt.xml") || return 1
+  copy_to_drive "$rebuilt" "$dest" || return 1
+  rm -f "$workdir/rebuilt.xml" "$rebuilt"
+  echo "  ok: password-only copy at $dest ($entries entries, matches the original)."
 }
 
 prune() {
-  local dir=$1 stem=$2
+  local dir=$1 pattern=$2
   local -a old
   [[ -n $keep ]] || return 0
-  mapfile -t old < <(find "$dir" -maxdepth 1 -name "$stem.*.kdbx" -printf '%f\n' | sort -r | tail -n +"$((keep + 1))")
+  mapfile -t old < <(find "$dir" -maxdepth 1 -name "$pattern" -printf '%f\n' | sort -r | tail -n +"$((keep + 1))")
   for f in "${old[@]}"; do
     rm -f -- "${dir:?}/$f"
     echo "  removed old backup $f"
@@ -177,8 +252,8 @@ backup_dir="$target_dir/kdbx-backup"
 mkdir -p "$backup_dir"
 stamp=$(date +%Y%m%d-%H%M%S)
 
-verify=false
-if ask "Check that each backup opens from the drive (asks for the master password)?"; then
+verify=$password_only
+if ! $verify && ask "Check that each backup opens from the drive (asks for the master password)?"; then
   verify=true
 fi
 
@@ -189,13 +264,7 @@ for db in "${dbs[@]}"; do
   echo
   echo "$db"
 
-  # Copy under a temporary name first, so a pulled drive never leaves a
-  # half-written file that looks like a backup.
-  cp "$db" "$target.tmp"
-  sync -f "$target.tmp"
-  mv -f "$target.tmp" "$target"
-
-  if [[ $(sha256sum <"$db") != "$(sha256sum <"$target")" ]]; then
+  if ! copy_to_drive "$db" "$target"; then
     echo "  FAILED: the copy on the drive differs from the source."
     failed=1
     continue
@@ -205,14 +274,36 @@ for db in "${dbs[@]}"; do
   if $verify; then
     read -r -s -p "  Master password of $stem: " password
     echo
-    if ! check_opens "$target"; then
+    xml=/dev/null
+    [[ -z $workdir ]] || xml="$workdir/export.xml"
+
+    # Opening the drive copy checks the backup and, for --password-only,
+    # produces the export to rebuild from.
+    opened=true
+    if ! export_db "$target" "$xml"; then
+      opened=false
       echo "  FAILED: the backup did not open with that password (and connected YubiKey)."
       failed=1
+    elif [[ -n $used_key ]]; then
+      echo "  ok: opens with the password and YubiKey $used_key."
+    else
+      echo "  ok: opens with the password alone."
     fi
+
+    if $password_only && $opened; then
+      if [[ -z $used_key ]]; then
+        echo "  skipped password-only copy: this database needs no YubiKey anyway."
+      elif ! write_password_only "$xml" "$backup_dir/$stem.$stamp.password-only.kdbx"; then
+        echo "  FAILED: could not write a matching password-only copy."
+        failed=1
+      fi
+    fi
+    [[ $xml == /dev/null ]] || rm -f "$xml"
     password=
   fi
 
-  prune "$backup_dir" "$stem"
+  prune "$backup_dir" "$stem.????????-??????.kdbx"
+  prune "$backup_dir" "$stem.????????-??????.password-only.kdbx"
 done
 
 echo
@@ -233,6 +324,7 @@ fi
 cat <<EOF
 
 To restore you need the backup, the master password, and a YubiKey or the
-paper secret (yubikey-setup, choice 2). Keep the drive somewhere other than
-the paper secret.
+paper secret (yubikey-setup, choice 2). A .password-only.kdbx backup needs
+just the master password. Keep the drive somewhere other than the paper
+secret.
 EOF
