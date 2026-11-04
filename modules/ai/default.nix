@@ -120,7 +120,7 @@ in
   home = {
     packages = with pkgs; [
       aider-chat
-      claude-code
+      pkgs-unstable.claude-code
       pi-coding-agent
       # Recorder fallback for Claude Code /voice.
       sox

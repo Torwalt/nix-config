@@ -7,3 +7,4 @@ vanta.env
 
 /.cache
 .env
+.claude
