@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
-  imports = [ ./core.nix ];
+  imports = [
+    ./core.nix
+    ./yubikey.nix
+  ];
 
   services.xserver.xkb.options = "caps:escape";
 

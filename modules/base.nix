@@ -1,5 +1,8 @@
 { pkgs, ... }: {
-  imports = [ ./firefox-tab-guard/default.nix ];
+  imports = [
+    ./firefox-tab-guard/default.nix
+    ./yubikey/default.nix
+  ];
 
   home = {
     packages = with pkgs; [
