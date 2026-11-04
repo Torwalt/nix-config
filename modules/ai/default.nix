@@ -9,6 +9,10 @@ let
     inherit pkgs;
     tmux = pkgs-unstable.tmux;
   };
+  agentQueue = import ../lib/agent-queue.nix {
+    inherit pkgs;
+    tmux = pkgs-unstable.tmux;
+  };
 
   claudeStatusLine = pkgs.writeShellApplication {
     name = "claude-status-line";
@@ -97,6 +101,27 @@ let
               {
                 type = "command";
                 command = "${codingAgentNotify}/bin/coding-agent-notify 'Claude Code' 'Task finished'";
+              }
+            ];
+          }
+        ];
+        # Claude works again: the pane leaves the attention queue.
+        UserPromptSubmit = [
+          {
+            hooks = [
+              {
+                type = "command";
+                command = "${agentQueue}/bin/agent-queue drop";
+              }
+            ];
+          }
+        ];
+        PostToolUse = [
+          {
+            hooks = [
+              {
+                type = "command";
+                command = "${agentQueue}/bin/agent-queue drop";
               }
             ];
           }

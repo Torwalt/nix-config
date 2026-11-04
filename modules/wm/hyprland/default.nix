@@ -87,6 +87,7 @@ in
     ./swaylock.nix
     ./gammastep.nix
     ./tailscale.nix
+    ./agent-queue.nix
   ];
 
   options.wm.hyprland = {
