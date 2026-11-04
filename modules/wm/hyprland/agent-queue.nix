@@ -19,6 +19,7 @@ in
 
   wayland.windowManager.hyprland.settings.bind = [
     "$mainMod, A, exec, ${bin} next"
+    "$mainMod SHIFT, A, exec, ${bin} pick"
   ];
 
   programs.tmux.extraConfig = ''
@@ -35,6 +36,7 @@ in
       interval = 30;
       signal = 10;
       on-click = "${bin} next";
+      on-click-middle = "${bin} pick";
       on-click-right = "${bin} clear";
     };
   };

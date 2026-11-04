@@ -3,7 +3,9 @@
 # One line per pane: <epoch>\t<pane id>\t<app>\t<message>. A pane holds its
 # place while it stays queued, so the agent that has waited longest is next.
 # Labels (session:window) are read from tmux on display, and panes that no
-# longer exist are dropped whenever the queue is read.
+# longer exist are dropped whenever the queue is read. The order lives only
+# in this file; notifications merely announce it. `pick` uses the rofi on
+# PATH so it shares the desktop's rofi theme.
 
 state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/agent-queue"
 queue="$state_dir/queue"
@@ -18,6 +20,7 @@ usage: agent-queue <command>
   push APP MESSAGE  queue $TMUX_PANE (keeps its place if already queued)
   drop [PANE]       remove PANE (default $TMUX_PANE) from the queue
   next              jump to the oldest waiting pane and remove it
+  pick              choose a waiting pane with rofi and jump to it
   position [PANE]   print "N/TOTAL" for PANE (default $TMUX_PANE)
   list              print the queue, oldest first
   waybar            print the queue as waybar JSON
@@ -38,9 +41,23 @@ live_panes() {
   tmux list-panes -a -F '#{pane_id}' 2>/dev/null || true
 }
 
+# Pane ids only mean something within one tmux server: a new server hands
+# out %0, %1, … again. The queue belongs to the server that started at
+# server_start; a different server starts it empty.
+check_server() {
+  local current stored=""
+  current="$(tmux list-sessions -F '#{start_time}' 2>/dev/null | head -n 1 || true)"
+  [ -f "$state_dir/server" ] && stored="$(<"$state_dir/server")"
+  if [ "$current" != "$stored" ]; then
+    : >"$queue"
+    printf '%s\n' "$current" >"$state_dir/server"
+  fi
+}
+
 # Rewrite the queue without panes that tmux no longer knows.
 prune() {
   local live tmp
+  check_server
   live="$(live_panes)"
   tmp="$(mktemp "$state_dir/queue.XXXXXX")"
   awk -F '\t' -v live="$live" '
@@ -106,6 +123,7 @@ cmd_push() {
   app="${app//[$'\t\n']/ }"
 
   with_lock
+  check_server
   if awk -F '\t' -v pane="$pane" '$2 == pane { found = 1 } END { exit !found }' "$queue"; then
     # Keep the original place; show the latest reason.
     local tmp
@@ -140,8 +158,33 @@ cmd_next() {
     return 0
   fi
 
-  local pane
-  pane="$(cut -f 2 <<<"$line")"
+  jump_to "$(cut -f 2 <<<"$line")"
+}
+
+# Pick any queued pane with rofi, oldest on top.
+cmd_pick() {
+  local entries choice pane
+  entries="$(snapshot)"
+  if [ -z "$entries" ]; then
+    notify-send --app-name=agent-queue --expire-time=2000 "Agent queue" "Nothing is waiting"
+    return 0
+  fi
+  choice="$(format_entries <<<"$entries" |
+    rofi -dmenu -i -format i -no-custom -p "agent queue")" || return 0
+  [ -n "$choice" ] || return 0
+
+  # Resolve the choice against what rofi showed, not the live queue, which
+  # may have changed meanwhile.
+  pane="$(awk -F '\t' -v n="$((choice + 1))" 'NR == n { print $2 }' <<<"$entries")"
+  [ -n "$pane" ] || return 0
+  with_lock
+  jump_to "$pane"
+}
+
+# Remove PANE from the queue, then show it in the most recent tmux client
+# and focus the terminal around that client. Expects the lock to be held.
+jump_to() {
+  local pane="$1"
   remove_pane "$pane"
   refresh_waybar
 
@@ -162,27 +205,42 @@ cmd_next() {
   fi
 }
 
-cmd_list() {
-  with_lock
-  prune
+# The pruned queue as raw lines; the lock is held only inside the subshell.
+snapshot() {
+  (
+    with_lock
+    prune
+    cat "$queue"
+  )
+}
+
+# Raw queue lines on stdin, one readable line each on stdout.
+format_entries() {
   local n=0 epoch pane app message
   while IFS=$'\t' read -r epoch pane app message; do
+    [ -n "$pane" ] || continue
     n=$((n + 1))
     printf '%d. %s  %s — %s (%s ago)\n' "$n" "$(label "$pane")" "$app" "$message" "$(age "$epoch")"
-  done <"$queue"
+  done
+}
+
+cmd_list() {
+  snapshot | format_entries
 }
 
 cmd_waybar() {
-  local listing count oldest="" epoch pane app message
-  listing="$(cmd_list)"
-  count="$(wc -l <"$queue")"
-  if ((count == 0)); then
+  local entries oldest epoch pane app message
+  entries="$(snapshot)"
+  if [ -z "$entries" ]; then
     printf '{"text":"","tooltip":"No agent is waiting","class":"empty"}\n'
     return 0
   fi
-  IFS=$'\t' read -r epoch pane app message <"$queue"
+  local count
+  count="$(wc -l <<<"$entries")"
+  IFS=$'\t' read -r epoch pane app message <<<"$entries"
   oldest="$(label "$pane" | cut -d ' ' -f 1)"
-  jq -cn --arg text "󰂚 $count · $oldest $(age "$epoch")" --arg tooltip "$listing" \
+  jq -cn --arg text "󰂚 $count · $oldest $(age "$epoch")" \
+    --arg tooltip "$(format_entries <<<"$entries")" \
     '{text: $text, tooltip: $tooltip, class: "waiting"}'
 }
 
@@ -198,6 +256,7 @@ case "$command" in
   push) cmd_push "$@" ;;
   drop) cmd_drop "$@" ;;
   next) cmd_next ;;
+  pick) cmd_pick ;;
   position) position "${1:-${TMUX_PANE:-}}" ;;
   list) cmd_list ;;
   waybar) cmd_waybar ;;
