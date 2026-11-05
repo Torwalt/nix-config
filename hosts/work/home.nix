@@ -163,6 +163,8 @@ in
     homeConfiguration = "workHome";
   };
 
+  programs.diskgc.enable = true;
+
   colorScheme = inputs.nix-colors.colorSchemes.tokyo-city-dark;
   wm.hyprland.waybar.disk.mountPoint = "/";
 
