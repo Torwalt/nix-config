@@ -1,11 +1,6 @@
 { lib, pkgs, ... }:
 
-let
-  fastFontOverlay = import ../../modules/fastfonts/overlay.nix;
-in
 {
-  nixpkgs.overlays = [ fastFontOverlay ];
-
   environment.systemPackages = with pkgs; [
     fira-code
     fira-code-symbols
@@ -20,7 +15,6 @@ in
     nerd-fonts.fira-code
     nerd-fonts.hack
     nerd-fonts.jetbrains-mono
-    fast-font
   ];
 
   fonts = {
@@ -38,7 +32,6 @@ in
       nerd-fonts.fira-code
       nerd-fonts.hack
       nerd-fonts.jetbrains-mono
-      fast-font
     ];
   };
 
