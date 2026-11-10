@@ -100,7 +100,10 @@ in
 
       rf() {
         local dir
-        dir="$(repo-pick "$@")" && [[ -n "$dir" ]] && cd "$dir"
+        dir="$(repo-pick "$@")" && [[ -n "$dir" ]] && cd "$dir" || return
+        if [[ -n "$TMUX" ]]; then
+          tmux rename-window -t "$TMUX_PANE" -- "''${dir:t}"
+        fi
       }
     '';
   };
