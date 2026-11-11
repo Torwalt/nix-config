@@ -935,11 +935,11 @@
         "ploopy": "ploopy"
       },
       "locked": {
-        "lastModified": 1794395196,
-        "narHash": "sha256-UIRS5BSsJjSSztnioJAvb1+EtTkFVs9I+snTKZZG7Aw=",
+        "lastModified": 1794395375,
+        "narHash": "sha256-yWxepGmhDiOXKzSLs2sVwbHnto2dLkQQZgBGWOnAjZw=",
         "owner": "Torwalt",
         "repo": "turncost",
-        "rev": "aa896862d7a3d42a5fb9b31fb42191e4e3a3fb6b",
+        "rev": "bb586ad79d6bb6b34d350f4a82902932a7dfdcd0",
         "type": "github"
       },
       "original": {
