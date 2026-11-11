@@ -26,6 +26,7 @@ in
         gls = ''!f(){ base="$(git base "$@")" && git rev-list --reverse "$base..HEAD" | head -n1; }; f'';
         glsr = ''!f(){ base="$(git base "$@")" && git rebase -i "$base"; }; f'';
         glsl = ''!f(){ base="$(git base "$@")" && git log --reverse --pretty=format:"## %s%n%n%b%n" "$base..HEAD"; }; f'';
+        cb = ''!f(){ { git branch --show-current; git for-each-ref --points-at HEAD --format="%(refname:short)" refs/heads; } | grep -m1 . | tr -d "\n"; }; f'';
       };
 
       url."ssh://git@github.com/".insteadOf = "https://github.com/";
