@@ -69,6 +69,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    turncost = {
+      url = "github:Torwalt/turncost";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.git-hooks.follows = "pre-commit-hooks";
+    };
+
     pre-commit-hooks = {
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";

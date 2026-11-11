@@ -41,11 +41,17 @@ let
       enabledPlugins = {
         "gopls-lsp@claude-plugins-official" = true;
         "shared@notes" = true;
+        "turncost@turncost" = true;
       };
       # Private skills live in the notes repo; projects enable their own plugins.
       extraKnownMarketplaces.notes.source = {
         source = "directory";
         path = "${config.home.homeDirectory}/repos/notes/claude-plugins";
+      };
+      # /handover and /takeover, and the hook that warns before a cold handover.
+      extraKnownMarketplaces.turncost.source = {
+        source = "github";
+        repo = "Torwalt/turncost";
       };
       alwaysThinkingEnabled = true;
       tui = "default";
@@ -60,7 +66,7 @@ let
       attribution.commit = "";
       statusLine = {
         type = "command";
-        command = "${claudeStatusLine}/bin/claude-status-line";
+        command = "${pkgs.turncost}/bin/turncost statusline -- ${claudeStatusLine}/bin/claude-status-line";
       };
 
       hooks = {
@@ -147,6 +153,8 @@ in
       aider-chat
       pkgs-unstable.claude-code
       pi-coding-agent
+      # The turncost plugin's hook calls it from PATH.
+      turncost
       # Recorder fallback for Claude Code /voice.
       sox
     ];
