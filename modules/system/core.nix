@@ -65,6 +65,16 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     wireplumber.enable = true;
+    # Spotify sets its stream volume itself on every track; a master volume
+    # WirePlumber remembered for it stays hidden from pavucontrol and keeps it quiet.
+    wireplumber.extraConfig."50-spotify-no-restore" = {
+      "stream.rules" = [
+        {
+          matches = [ { "application.name" = "spotify"; } ];
+          actions.update-props."state.restore-props" = false;
+        }
+      ];
+    };
   };
 
   networking.firewall = {
