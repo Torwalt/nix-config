@@ -6,9 +6,13 @@
   terminalWorkspace ? null,
 }:
 
+let
+  agentHook = import ./agent-hook.nix { inherit pkgs; };
+in
 pkgs.writeShellApplication {
   name = "agent-queue";
   runtimeInputs = with pkgs; [
+    agentHook
     coreutils
     gawk
     gnugrep

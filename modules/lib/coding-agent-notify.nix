@@ -2,10 +2,12 @@
 
 let
   agentQueue = import ./agent-queue.nix { inherit pkgs tmux; };
+  agentHook = import ./agent-hook.nix { inherit pkgs; };
 in
 pkgs.writeShellApplication {
   name = "coding-agent-notify";
   runtimeInputs = [
+    agentHook
     agentQueue
     pkgs.libnotify
     tmux
@@ -14,6 +16,13 @@ pkgs.writeShellApplication {
     app_name="''${1:-Coding agent}"
     message="''${2:-Task finished}"
     summary="$app_name"
+
+    # The one gate for both the queue and the notification. Background work
+    # wakes the session again, and the turn that ends with nothing left in
+    # flight is the one that notifies.
+    if agent-hook paused_for_background; then
+      exit 0
+    fi
 
     if [ -n "''${TMUX:-}" ] && [ -n "''${TMUX_PANE:-}" ]; then
       agent-queue push "$app_name" "$message"

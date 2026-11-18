@@ -159,6 +159,12 @@ cmd_drop() {
   [ -n "$pane" ] || return 0
   # Fast path: hooks call this on every prompt and tool call.
   grep -qF "	$pane	" "$queue" || return 0
+  # A subagent at work says nothing about the main thread, which may be
+  # waiting on the user meanwhile. The price: a subagent's own permission
+  # request stays queued until the main thread works again.
+  if agent-hook from_subagent; then
+    return 0
+  fi
   with_lock
   remove_pane "$pane"
   refresh_waybar
