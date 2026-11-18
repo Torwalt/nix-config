@@ -34,6 +34,31 @@ let
     '';
   };
 
+  # Fuzzy-picks a past prompt, newest first, and starts a new session with it.
+  # Arguments go to claude.
+  claudeHistoryPicker = pkgs.writeShellApplication {
+    name = "cfz";
+    runtimeInputs = [
+      pkgs.coreutils
+      pkgs.jq
+      pkgs.gawk
+      pkgs.fzf
+    ];
+    text = ''
+      history="''${CLAUDE_CONFIG_DIR:-$HOME/.claude}/history.jsonl"
+
+      selection="$(
+        tac "$history" |
+          jq -j 'select(.display | startswith("/") | not) | .display + "\u0000"' |
+          awk -v RS='\0' -v ORS='\0' '!seen[$0]++' |
+          fzf --read0 --scheme=history --layout=reverse --height=70% \
+            --preview 'printf "%s" {}' --preview-window=down,40%,wrap
+      )" || exit 0
+
+      exec claude "$@" "$selection"
+    '';
+  };
+
   claudeSettings =
     builtins.toJSON {
       "$schema" = "https://json.schemastore.org/claude-code-settings.json";
@@ -153,6 +178,7 @@ in
     packages = with pkgs; [
       aider-chat
       pkgs-unstable.claude-code
+      claudeHistoryPicker
       pi-coding-agent
       # The turncost plugin's hook calls it from PATH.
       turncost
