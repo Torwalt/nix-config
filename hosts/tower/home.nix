@@ -129,6 +129,8 @@ in
     };
   };
 
+  programs.diskgc.enable = true;
+
   programs.nixup = {
     enable = true;
     systemConfiguration = "towerSys";
